@@ -1,27 +1,30 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>サイトマップ -  プロジェクトアーカイブ</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+  <title>サイトマップ - プロジェクトアーカイブ</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
   <link rel="stylesheet" href="../css/style.css">
 </head>
+
 <body>
   <button class="hamburger" aria-label="メニュー">
     <span></span><span></span><span></span>
   </button>
 
   <div class="page-wrapper">
-  <aside class="sidebar" data-nav-level="docs"></aside>
+    <aside class="sidebar" data-nav-level="docs"></aside>
 
     <main class="main-content">
       <header class="doc-header">
         <div class="doc-category">DOCUMENT 04</div>
         <h1 class="doc-title">サイトマップ</h1>
         <div class="doc-meta">
-          <span><span class="material-symbols-outlined icon-sm">calendar_today</span> 作成日：2026-XX-XX</span>
-          <span><span class="material-symbols-outlined icon-sm">person</span> 作成者：（氏名を入力）</span>
+          <span><span class="material-symbols-outlined icon-sm">calendar_today</span> 作成日：2026-04-20</span>
+          <span><span class="material-symbols-outlined icon-sm">person</span> 作成者：吹田道代</span>
           <span><span class="material-symbols-outlined icon-sm">push_pin</span> Ver 1.0</span>
         </div>
       </header>
@@ -38,7 +41,8 @@
           </div>
           <div class="external-link-input">
             <input type="text" placeholder="https://docs.google.com/spreadsheets/d/xxxxx" id="external-link-04">
-            <a href="#" class="link-btn" onclick="window.open(document.getElementById('external-link-04').value || 'https://docs.google.com', '_blank'); return false;">
+            <a href="#" class="link-btn"
+              onclick="window.open(document.getElementById('external-link-04').value || 'https://docs.google.com', '_blank'); return false;">
               <span class="material-symbols-outlined">open_in_new</span>
               開く
             </a>
@@ -58,20 +62,87 @@
         <section class="section" id="sec1">
           <h2 class="section-title"><span class="section-icon">1</span> サイト構造図</h2>
 
-        <div class="fill-block">
-          <div class="fill-label">Webサイト構造図 <span class="required">必須</span></div>
-          <div class="fill-hint">トップページから下層ページまでの階層構造をツリー形式で記載</div>
-          <div class="fill-content">
-            <p>（ツリー形式のサイト構造図を記載）</p>
+          <div class="fill-block">
+            <div class="fill-label">Webサイト構造図 <span class="required">必須</span></div>
+            <div class="fill-hint">トップページから下層ページまでの階層構造をツリー形式で記載</div>
+            <div class="fill-content">
+              <pre>inimu.jp（トップページ）
+├── WORKSHOP｜ワークショップ・体験
+│   ├── 体験の流れ（セクション内）
+│   ├── プラン・料金・開催日（土日祝のみ）
+│   ├── FAQ
+│   ├── お客様の声
+│   └── 予約フォーム ※F2（6/1実装）
+│       └── 予約完了・サンクスページ
+│           ├── LINE公式アカウント登録CTA
+│           └── Googleマップ口コミ依頼
+├── PRODUCTS｜商品
+│   ├── wano（入門）
+│   │   └── 商品詳細ページ
+│   ├── 破天荒（象徴・看板商品）
+│   │   └── 商品詳細ページ
+│   └── PERFUMERS（探究）
+│       └── 商品詳細ページ
+├── STORY｜ブランドストーリー
+│   ├── inimuとKARA INNOVATEについて
+│   ├── 日本素材MAP（ヒノキ・ゆず・伽羅等）
+│   ├── OEM・協業実績
+│   └── WANOWA植樹活動
+├── ONLINE｜オンラインショップ（EC）
+│   ├── 商品一覧
+│   ├── ギフトセット特集
+│   └── 「体験した香りをもう一度」再購入セクション
+├── VISIT｜アクセス・店舗案内
+│   ├── Googleマップ埋め込み
+│   ├── 営業日カレンダー（土日祝のみ）
+│   └── Googleマップ口コミ誘導ボタン
+└── CONTACT｜お問い合わせ ※F2（6/1実装）
+    ├── 一般問い合わせフォーム
+    └── 法人・OEM相談フォーム</pre>
+            </div>
           </div>
-        </div>
-        <div class="fill-block">
-          <div class="fill-label">Webアプリケーション構造図 <span class="required">必須</span></div>
-          <div class="fill-hint">Spring Bootアプリケーションの画面構造をツリー形式で記載</div>
-          <div class="fill-content">
-            <p>（ツリー形式のアプリ構造図を記載）</p>
+          <div class="fill-block">
+            <div class="fill-label">Webアプリケーション構造図 <span class="required">必須</span></div>
+            <div class="fill-hint">Spring Bootアプリケーションの画面構造をツリー形式で記載</div>
+            <div class="fill-content">
+              <pre>/admin/login｜ログイン画面
+├── メールアドレス入力
+├── パスワード入力
+├── ログインボタン
+└── /admin/login/error｜ログインエラー画面
+
+/admin/dashboard｜ダッシュボード
+├── 本日の予約件数
+├── 今月のWS売上
+├── 未対応問い合わせ件数
+├── 直近7日間の予約カレンダープレビュー
+├── /admin/reservations｜予約管理
+│   ├── /admin/reservations｜予約一覧
+│   ├── /admin/reservations/{id}｜予約詳細
+│   ├── /admin/reservations/new｜新規予約登録
+│   └── /admin/reservations/calendar｜予約カレンダー
+├── /admin/customers｜顧客管理
+│   ├── /admin/customers｜顧客一覧
+│   ├── /admin/customers/{id}｜顧客詳細
+│   └── /admin/customers/new｜顧客新規登録
+├── /admin/products｜商品管理
+│   ├── /admin/products｜商品一覧
+│   ├── /admin/products/{id}/edit｜商品編集
+│   └── /admin/products/new｜商品新規登録
+├── /admin/inquiries｜問い合わせ管理
+│   ├── /admin/inquiries｜問い合わせ一覧
+│   └── /admin/inquiries/{id}｜問い合わせ詳細
+├── /admin/reports｜売上・レポート
+│   ├── /admin/reports/sales｜売上レポート
+│   └── /admin/reports/workshop｜WS実績サマリー
+├── /admin/settings｜設定
+│   ├── /admin/settings/calendar｜予約カレンダー設定
+│   ├── /admin/settings/plans｜WSプラン設定
+│   ├── /admin/settings/users｜ユーザー管理
+│   └── /admin/settings/mail｜メール設定
+└── /admin/logout｜ログアウト</pre>
+            </div>
           </div>
-        </div>
 
         </section>
 
@@ -80,29 +151,155 @@
 
           <div class="fill-block">
             <div class="fill-label">Webサイト ページ一覧 <span class="required">必須</span></div>
-        <table class="doc-table">
-          <thead><tr><th>No.</th><th>ページ名</th><th>ページの目的</th><th>主要コンテンツ</th></tr></thead>
-          <tbody>
-          <tr class="template-row"><td>1</td><td>（トップページ）</td><td>（サービスの魅力を伝え、各ページへ誘導）</td><td>（ヒーロー、サービス紹介、CTA等）</td></tr>
-          <tr class="template-row"><td>2</td><td>（ページ名）</td><td>（目的を記載）</td><td>（コンテンツを記載）</td></tr>
-          <tr class="template-row"><td>3</td><td>（ページ名）</td><td>（目的を記載）</td><td>（コンテンツを記載）</td></tr>
-          <tr class="template-row"><td>…</td><td>…</td><td>…</td><td>…</td></tr>
-          </tbody>
-        </table>
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>ページ名</th>
+                  <th>ページの目的</th>
+                  <th>主要コンテンツ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>TOP｜トップページ（HOME）</td>
+                  <td>来店前に「行く理由」を3秒で形成し、各導線へ誘導する</td>
+                  <td>ヒーロービジュアル、ブランドコピー、来店目的別CTA、新着情報、Instagram、アクセス案内</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>WORKSHOP｜ワークショップ体験ページ</td>
+                  <td>自社HP予約への移行を促す主軸ページ</td>
+                  <td>大型ビジュアル、体験の流れ、プラン説明、FAQ、参加者の声、予約ボタン、撮影スポット紹介</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>PRODUCTS｜商品ページ</td>
+                  <td>失敗しない香り選びを支援し、来店前後の購買導線をつくる</td>
+                  <td>商品カテゴリナビ、商品カード、商品詳細、破天荒特集、ギフトセット提案、EC購入ボタン</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>STORY｜ブランドストーリー・日本素材ページ</td>
+                  <td>ブランドの根拠を伝え、共感と信頼を形成する</td>
+                  <td>日本素材ビジュアル、ブランドの歴史・想い、日本素材MAP、OEM協業実績、WANOWA植樹活動</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>VISIT｜アクセス・店舗案内ページ</td>
+                  <td>来店直前の最終接点として迷わず来店できる状態をつくる</td>
+                  <td>外観・内装写真、Googleマップ、営業日カレンダー、営業時間・住所、徒歩ルート、口コミハイライト</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>ONLINE｜オンラインショップ（EC）ページ</td>
+                  <td>WS体験後の再購入と遠方ファンの購買導線を設計する</td>
+                  <td>EC商品一覧、再購入セクション、浅草限定特集、ギフトラッピング案内、LINE登録CTA</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>RESERVE｜予約フォーム（WS専用）</td>
+                  <td>空き枠確認から予約完了までを最短化する</td>
+                  <td>カレンダー型空き枠表示、プラン・人数選択、顧客情報入力、確認メール、LINE登録CTA、じゃらんリンク</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td>CONTACT｜お問い合わせページ</td>
+                  <td>一般問い合わせと法人・OEM相談の受け口になる</td>
+                  <td>カテゴリ選択、入力フォーム、自動返信メール、法人・OEM実績紹介</td>
+                </tr>
+              </tbody>
+            </table>
 
           </div>
 
           <div class="fill-block">
             <div class="fill-label">Webアプリ 画面一覧 <span class="required">必須</span></div>
-        <table class="doc-table">
-          <thead><tr><th>No.</th><th>画面名</th><th>画面の目的</th><th>主要機能</th></tr></thead>
-          <tbody>
-          <tr class="template-row"><td>1</td><td>（ログイン画面）</td><td>（ユーザー認証）</td><td>（メールアドレス/パスワード入力）</td></tr>
-          <tr class="template-row"><td>2</td><td>（一覧画面）</td><td>（データの一覧表示）</td><td>（検索・ソート・ページネーション）</td></tr>
-          <tr class="template-row"><td>3</td><td>（登録画面）</td><td>（新規データ登録）</td><td>（入力フォーム・バリデーション）</td></tr>
-          <tr class="template-row"><td>…</td><td>…</td><td>…</td><td>…</td></tr>
-          </tbody>
-        </table>
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>画面名</th>
+                  <th>画面の目的</th>
+                  <th>主要機能</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>ログイン画面</td>
+                  <td>管理アプリへの認証</td>
+                  <td>メールアドレス入力、パスワード入力、ログイン処理</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>ログインエラー画面</td>
+                  <td>認証失敗時の再入力支援</td>
+                  <td>エラーメッセージ表示、再ログイン導線</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>ダッシュボード</td>
+                  <td>主要KPIと各管理画面への導線を集約する</td>
+                  <td>本日の予約件数、今月のWS売上、未対応問い合わせ件数、予約カレンダープレビュー</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>予約一覧</td>
+                  <td>予約データを一覧管理する</td>
+                  <td>検索、絞り込み、ステータスフィルター、CSV出力</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>予約詳細・編集</td>
+                  <td>予約内容確認と状態更新を行う</td>
+                  <td>予約者情報表示、予約内容表示、ステータス変更、スタッフメモ入力</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>予約カレンダー</td>
+                  <td>予約枠の稼働状況を可視化する</td>
+                  <td>月次・週次切り替え、土日祝枠表示、空き枠色分け</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>顧客一覧</td>
+                  <td>顧客情報を横断管理する</td>
+                  <td>氏名・メール・電話検索、LINE登録済み/リピーターフィルター、CSV出力</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td>顧客詳細</td>
+                  <td>顧客の履歴と対応情報を確認する</td>
+                  <td>基本情報、予約履歴、購入履歴、LINE登録ステータス、スタッフメモ</td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td>商品一覧・編集</td>
+                  <td>商品情報と表示状態を管理する</td>
+                  <td>カテゴリ絞り込み、在庫表示、表示/非表示切り替え、商品編集、画像アップロード</td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td>問い合わせ一覧・詳細</td>
+                  <td>問い合わせ対応状況を管理する</td>
+                  <td>ステータス絞り込み、カテゴリ絞り込み、対応メモ入力、ステータス更新</td>
+                </tr>
+                <tr>
+                  <td>11</td>
+                  <td>売上レポート</td>
+                  <td>売上・予約実績を分析する</td>
+                  <td>期間指定、売上内訳グラフ、月別推移、国籍別・人数別集計、CSV/PDF出力</td>
+                </tr>
+                <tr>
+                  <td>12</td>
+                  <td>設定画面</td>
+                  <td>営業・運用設定を管理する</td>
+                  <td>カレンダー設定、プラン設定、ユーザー管理、メールテンプレート編集</td>
+                </tr>
+              </tbody>
+            </table>
 
           </div>
         </section>
@@ -110,20 +307,42 @@
         <section class="section" id="sec3">
           <h2 class="section-title"><span class="section-icon">3</span> ユーザーフロー</h2>
 
-        <div class="fill-block">
-          <div class="fill-label">メインシナリオ <span class="required">必須</span></div>
-          <div class="fill-hint">ペルソナがサイトに訪問してから目的を達成するまでの動線（メインの行動パターン）</div>
-          <div class="fill-content">
-            <p>（メインのユーザーフローを記載）</p>
+          <div class="fill-block">
+            <div class="fill-label">メインシナリオ <span class="required">必須</span></div>
+            <div class="fill-hint">ペルソナがサイトに訪問してから目的を達成するまでの動線（メインの行動パターン）</div>
+            <div class="fill-content">
+              <p>ペルソナ「田村 沙希（34歳）」が、Instagramで inimu を認知し、ブランド理解を深めながらワークショップ予約・来店・体験後の再購入まで進むメインフロー。</p>
+              <ol>
+                <li>Instagramで「#浅草体験」「#浅草ワークショップ」を検索し、inimu の体験投稿を発見する。</li>
+                <li>TOPページで世界観、キャッチコピー、「体験を予約する」CTA、OEM実績バッジを確認する。</li>
+                <li>WORKSHOPページで体験ステップ、料金、開催日（土日祝のみ）、レビューを確認する。</li>
+                <li>FAQで「初心者OK」「手ぶらOK」などの不安を解消する。</li>
+                <li>PRODUCTSページで 3層の商品構造と「破天荒」の訴求を確認する。</li>
+                <li>STORYページで日本素材MAP、OEM実績、WANOWA植樹活動を読み、ブランドへの信頼を強化する。</li>
+                <li>RESERVEページで空き枠確認、2名選択、氏名・メール・電話番号入力を行い予約を完了する。</li>
+                <li>VISITページでGoogleマップ、徒歩ルート、営業日カレンダー、口コミ4.8pt・181件を確認する。</li>
+                <li>実店舗でワークショップを体験し、SNS投稿まで行う。</li>
+                <li>サンクスページのQRから ONLINE（EC）へ遷移し、「体験した香りをもう一度」導線で再購入・LINE継続へ進む。</li>
+              </ol>
+            </div>
           </div>
-        </div>
-        <div class="fill-block">
-          <div class="fill-label">サブシナリオ <span class="optional">任意</span></div>
-          <div class="fill-hint">その他の行動パターン（1〜2パターン）</div>
-          <div class="fill-content">
-            <p>（サブシナリオを記載）</p>
+          <div class="fill-block">
+            <div class="fill-label">サブシナリオ <span class="optional">任意</span></div>
+            <div class="fill-hint">その他の行動パターン（1〜2パターン）</div>
+            <div class="fill-content">
+              <p>浅草観光中に店頭看板を見つけ、その場でGoogleマップとスマホ閲覧だけで即日予約・来店まで完了する当日来店シナリオ。</p>
+              <ol>
+                <li>店頭看板を見て興味を持ち、Googleマップで「inimu 浅草」を検索する。</li>
+                <li>Googleマップ上で口コミ4.8pt・181件、写真、レビュー内容を見て信頼を確認する。</li>
+                <li>TOPページを30秒以内で流し読みし、「体験を予約する」CTAと土日祝営業を確認する。</li>
+                <li>WORKSHOPページで料金、所要時間90分、当日予約可否を優先確認する。</li>
+                <li>FAQで「当日予約OK」「手ぶらOK」だけを確認し、RESERVEページに進む。</li>
+                <li>スマホで当日の空き枠を見て2名で即予約し、完了後にLINE登録を行う。</li>
+                <li>VISITページで現在地からのルートを確認して来店し、そのままワークショップを体験する。</li>
+                <li>体験後はサンクスページ経由でEC再購入と口コミ投稿につなげる。</li>
+              </ol>
+            </div>
           </div>
-        </div>
 
         </section>
 
@@ -132,19 +351,258 @@
 
           <div class="fill-block">
             <div class="fill-label">URL一覧 <span class="required">必須</span></div>
-        <table class="doc-table">
-          <thead><tr><th>URL</th><th>HTTPメソッド</th><th>画面/機能</th><th>説明</th></tr></thead>
-          <tbody>
-          <tr class="template-row"><td>/</td><td>GET</td><td>トップページ</td><td>Webサイトのトップ</td></tr>
-          <tr class="template-row"><td>/about</td><td>GET</td><td>概要ページ</td><td>サービスの概要</td></tr>
-          <tr class="template-row"><td>/app/login</td><td>GET</td><td>ログイン画面</td><td>ログインフォーム表示</td></tr>
-          <tr class="template-row"><td>/app/login</td><td>POST</td><td>ログイン処理</td><td>認証処理</td></tr>
-          <tr class="template-row"><td>/app/items</td><td>GET</td><td>一覧画面</td><td>データ一覧表示</td></tr>
-          <tr class="template-row"><td>/app/items/new</td><td>GET</td><td>新規登録画面</td><td>登録フォーム表示</td></tr>
-          <tr class="template-row"><td>/app/items</td><td>POST</td><td>新規登録処理</td><td>データ保存</td></tr>
-          <tr class="template-row"><td>…</td><td>…</td><td>…</td><td>…</td></tr>
-          </tbody>
-        </table>
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>URL</th>
+                  <th>HTTPメソッド</th>
+                  <th>画面/機能</th>
+                  <th>説明</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>/</td>
+                  <td>GET</td>
+                  <td>TOP（HOME）</td>
+                  <td>トップページ。ヒーロービジュアル、CTA3点、商品プレビュー、Instagram、アクセス案内を掲載</td>
+                </tr>
+                <tr>
+                  <td>/workshop</td>
+                  <td>GET</td>
+                  <td>WORKSHOP</td>
+                  <td>ワークショップ体験ページ。体験ステップ、料金、FAQ、口コミ、予約CTAへの導線</td>
+                </tr>
+                <tr>
+                  <td>/workshop/reserve</td>
+                  <td>GET</td>
+                  <td>RESERVE（予約フォーム）</td>
+                  <td>WS予約フォーム。カレンダー型空き枠表示、人数選択、顧客情報入力</td>
+                </tr>
+                <tr>
+                  <td>/workshop/reserve</td>
+                  <td>POST</td>
+                  <td>予約フォーム送信</td>
+                  <td>顧客情報、日時、人数を受け取り予約を登録し、完了後にサンクスページへ遷移</td>
+                </tr>
+                <tr>
+                  <td>/workshop/reserve/complete</td>
+                  <td>GET</td>
+                  <td>予約完了・サンクスページ</td>
+                  <td>予約完了通知、LINE登録CTA、Googleマップ口コミ誘導、EC再購入導線を表示</td>
+                </tr>
+                <tr>
+                  <td>/products</td>
+                  <td>GET</td>
+                  <td>PRODUCTS（商品一覧）</td>
+                  <td>商品3層一覧、カテゴリナビ、ギフトセット提案</td>
+                </tr>
+                <tr>
+                  <td>/products/{productId}</td>
+                  <td>GET</td>
+                  <td>商品詳細ページ</td>
+                  <td>素材産地、ストーリー、使用シーン、TPO、EC購入ボタンを表示</td>
+                </tr>
+                <tr>
+                  <td>/story</td>
+                  <td>GET</td>
+                  <td>STORY</td>
+                  <td>ブランドの歴史、日本素材MAP、OEM協業実績、WANOWA植樹活動を掲載</td>
+                </tr>
+                <tr>
+                  <td>/visit</td>
+                  <td>GET</td>
+                  <td>VISIT</td>
+                  <td>Googleマップ埋め込み、営業日カレンダー、口コミハイライト、口コミ誘導ボタンを表示</td>
+                </tr>
+                <tr>
+                  <td>/online</td>
+                  <td>GET</td>
+                  <td>ONLINE（EC）</td>
+                  <td>EC商品一覧、再購入セクション、ギフト特集、LINE登録CTAを掲載</td>
+                </tr>
+                <tr>
+                  <td>/contact</td>
+                  <td>GET</td>
+                  <td>CONTACT</td>
+                  <td>カテゴリ選択、入力フォーム、法人・OEM相談導線を表示</td>
+                </tr>
+                <tr>
+                  <td>/contact</td>
+                  <td>POST</td>
+                  <td>お問い合わせフォーム送信</td>
+                  <td>問い合わせ内容を登録し、自動返信メール送信後に完了ページへ遷移</td>
+                </tr>
+                <tr>
+                  <td>/contact/complete</td>
+                  <td>GET</td>
+                  <td>お問い合わせ完了ページ</td>
+                  <td>送信完了通知と自動返信後の確認情報を表示</td>
+                </tr>
+                <tr>
+                  <td>/admin/login</td>
+                  <td>GET</td>
+                  <td>管理ログイン画面</td>
+                  <td>メールアドレス・パスワード入力フォームを表示</td>
+                </tr>
+                <tr>
+                  <td>/admin/login</td>
+                  <td>POST</td>
+                  <td>管理ログイン処理</td>
+                  <td>Spring Security による認証。成功時はダッシュボード、失敗時はエラー画面へ遷移</td>
+                </tr>
+                <tr>
+                  <td>/admin/login/error</td>
+                  <td>GET</td>
+                  <td>ログインエラー画面</td>
+                  <td>認証失敗・アカウントロック時のエラーメッセージを表示</td>
+                </tr>
+                <tr>
+                  <td>/admin/logout</td>
+                  <td>POST</td>
+                  <td>ログアウト処理</td>
+                  <td>セッション破棄後、ログイン画面へリダイレクト</td>
+                </tr>
+                <tr>
+                  <td>/admin/dashboard</td>
+                  <td>GET</td>
+                  <td>ダッシュボード</td>
+                  <td>本日の予約件数、今月売上速報、未対応問い合わせ件数、予約カレンダープレビューを表示</td>
+                </tr>
+                <tr>
+                  <td>/admin/reservations</td>
+                  <td>GET</td>
+                  <td>予約一覧</td>
+                  <td>日付・ステータス・氏名で検索、絞り込み、CSV出力に対応</td>
+                </tr>
+                <tr>
+                  <td>/admin/reservations/new</td>
+                  <td>GET</td>
+                  <td>予約新規登録フォーム</td>
+                  <td>当日飛び込み対応用の予約登録フォーム</td>
+                </tr>
+                <tr>
+                  <td>/admin/reservations</td>
+                  <td>POST</td>
+                  <td>予約新規登録処理</td>
+                  <td>フォームデータを受け取り予約を登録</td>
+                </tr>
+                <tr>
+                  <td>/admin/reservations/{id}</td>
+                  <td>GET</td>
+                  <td>予約詳細</td>
+                  <td>予約者情報、予約内容、ステータス、スタッフメモを表示</td>
+                </tr>
+                <tr>
+                  <td>/admin/reservations/{id}</td>
+                  <td>POST</td>
+                  <td>予約更新処理</td>
+                  <td>編集内容をDBへ反映</td>
+                </tr>
+                <tr>
+                  <td>/admin/reservations/{id}/cancel</td>
+                  <td>POST</td>
+                  <td>予約キャンセル処理</td>
+                  <td>対象予約のステータスをキャンセル済みに更新</td>
+                </tr>
+                <tr>
+                  <td>/admin/reservations/{id}/checkin</td>
+                  <td>POST</td>
+                  <td>入場処理</td>
+                  <td>対象予約のステータスを入場済みに更新</td>
+                </tr>
+                <tr>
+                  <td>/admin/reservations/calendar</td>
+                  <td>GET</td>
+                  <td>予約カレンダー</td>
+                  <td>月次・週次切り替えと空き枠色分け表示</td>
+                </tr>
+                <tr>
+                  <td>/admin/customers</td>
+                  <td>GET</td>
+                  <td>顧客一覧</td>
+                  <td>氏名・メール・電話検索、LINE登録済み・リピーターフィルター、CSV出力</td>
+                </tr>
+                <tr>
+                  <td>/admin/customers/{id}</td>
+                  <td>GET</td>
+                  <td>顧客詳細</td>
+                  <td>基本情報、予約履歴、購入履歴、LINE登録ステータス、スタッフメモを表示</td>
+                </tr>
+                <tr>
+                  <td>/admin/products</td>
+                  <td>GET</td>
+                  <td>商品一覧</td>
+                  <td>カテゴリ絞り込み、在庫、表示ステータス確認</td>
+                </tr>
+                <tr>
+                  <td>/admin/products/{id}/edit</td>
+                  <td>GET</td>
+                  <td>商品編集フォーム</td>
+                  <td>商品名・説明・価格・素材情報・画像・HP表示設定を編集</td>
+                </tr>
+                <tr>
+                  <td>/admin/inquiries</td>
+                  <td>GET</td>
+                  <td>問い合わせ一覧</td>
+                  <td>ステータスとカテゴリで絞り込み、対応状況を更新</td>
+                </tr>
+                <tr>
+                  <td>/admin/inquiries/{id}</td>
+                  <td>GET</td>
+                  <td>問い合わせ詳細</td>
+                  <td>問い合わせ内容、対応メモ、ステータス変更フォームを表示</td>
+                </tr>
+                <tr>
+                  <td>/admin/reports/sales</td>
+                  <td>GET</td>
+                  <td>売上レポート</td>
+                  <td>期間指定、WS売上・EC売上内訳、月別推移、国籍別・人数別構成比を表示</td>
+                </tr>
+                <tr>
+                  <td>/admin/reports/workshop</td>
+                  <td>GET</td>
+                  <td>WS実績サマリー</td>
+                  <td>予約件数、キャンセル率、曜日別分布、じゃらん vs 自社予約比率を表示</td>
+                </tr>
+                <tr>
+                  <td>/admin/settings/calendar</td>
+                  <td>GET</td>
+                  <td>予約カレンダー設定</td>
+                  <td>営業日、時間枠、定員数、臨時休業日を設定</td>
+                </tr>
+                <tr>
+                  <td>/admin/settings/users</td>
+                  <td>GET</td>
+                  <td>ユーザー管理</td>
+                  <td>スタッフアカウント一覧、権限表示。管理者のみアクセス可</td>
+                </tr>
+                <tr>
+                  <td>/api/v1/reservations/availability</td>
+                  <td>GET</td>
+                  <td>空き枠取得API</td>
+                  <td>指定日の予約可能枠数をJSONで返す</td>
+                </tr>
+                <tr>
+                  <td>/api/v1/reservations</td>
+                  <td>POST</td>
+                  <td>予約登録API</td>
+                  <td>Webフォームから送信された予約データをJSONで受け取りDBに登録</td>
+                </tr>
+                <tr>
+                  <td>/api/v1/contacts</td>
+                  <td>POST</td>
+                  <td>問い合わせ登録API</td>
+                  <td>お問い合わせフォームのデータをJSONで受け取りDBに登録</td>
+                </tr>
+                <tr>
+                  <td>/api/v1/products</td>
+                  <td>GET</td>
+                  <td>商品一覧取得API</td>
+                  <td>カテゴリ・在庫ステータスでフィルタリングした商品一覧を返す</td>
+                </tr>
+              </tbody>
+            </table>
 
           </div>
         </section>
@@ -155,4 +613,5 @@
 
   <script src="../js/main.js"></script>
 </body>
+
 </html>
