@@ -305,7 +305,7 @@ a:hover { color: var(--black); }
   min-height: 48px;
   font-size: 14px;
   line-height: 1.7;
-  color: var(--text-muted);
+  color: var(--text);
 }
 
 .fill-content p {
@@ -419,6 +419,7 @@ a:hover { color: var(--black); }
   padding: 14px 20px;
   border-bottom: 1px solid var(--border);
   vertical-align: top;
+  color: var(--text);
 }
 
 .doc-table tbody tr:last-child td {
