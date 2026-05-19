@@ -63,14 +63,36 @@
           <div class="fill-label">システムの目的 <span class="required">必須</span></div>
           <div class="fill-hint">このシステムが解決する課題と提供する価値</div>
           <div class="fill-content">
-            <p>（システムの目的を記載）</p>
+            <p>inimuの運営者・スタッフが利用し、予約・顧客・問い合わせ情報を一元管理できる管理システムである。店舗運営の効率化と対応品質の安定化を図り、来店体験の向上と継続的な集客につなげる価値を提供する。</p>
           </div>
         </div>
         <div class="fill-block">
           <div class="fill-label">システム構成図 <span class="required">必須</span></div>
           <div class="fill-hint">フロントエンド ↔ バックエンド ↔ データベースの関係を図示</div>
           <div class="fill-content">
-            <p>（システム構成図を記載）</p>
+            <pre>[ブラウザ]
+  HTML / CSS / JavaScript
+  + Thymeleaf
+        ↓ リクエスト送信
+[Spring Boot]
+  Controller
+        ↓
+  Service
+        ↓
+  Repository
+        ↓ SQL実行
+[データベース]
+  MySQL（本番）
+  H2（開発・テスト）
+        ↑ データ取得
+  Repository
+        ↑
+  Service
+        ↑
+  Controller
+        ↑ レスポンス返却
+[ブラウザ表示]
+  HTML描画 / 入力 / 一覧表示 / 登録結果表示</pre>
           </div>
         </div>
 
@@ -84,16 +106,20 @@
         <table class="doc-table">
           <thead><tr><th>No.</th><th>機能名</th><th>概要</th><th>対応画面</th><th>優先度</th></tr></thead>
           <tbody>
-          <tr class="template-row"><td>F-001</td><td>（ログイン）</td><td>（メール/パスワードで認証）</td><td>（ログイン画面）</td><td><span class="badge badge-must">Must</span></td></tr>
-          <tr class="template-row"><td>F-002</td><td>（一覧表示）</td><td>（データの一覧表示・ページネーション）</td><td>（一覧画面）</td><td><span class="badge badge-must">Must</span></td></tr>
-          <tr class="template-row"><td>F-003</td><td>（新規登録）</td><td>（フォームから新規データ登録）</td><td>（登録画面）</td><td><span class="badge badge-must">Must</span></td></tr>
-          <tr class="template-row"><td>F-004</td><td>（詳細表示）</td><td>（データの詳細情報表示）</td><td>（詳細画面）</td><td><span class="badge badge-must">Must</span></td></tr>
-          <tr class="template-row"><td>F-005</td><td>（編集）</td><td>（既存データの更新）</td><td>（編集画面）</td><td><span class="badge badge-must">Must</span></td></tr>
-          <tr class="template-row"><td>F-006</td><td>（削除）</td><td>（データの削除・確認ダイアログ）</td><td>（一覧画面）</td><td><span class="badge badge-must">Must</span></td></tr>
-          <tr class="template-row"><td>F-007</td><td>（検索）</td><td>（キーワード・条件検索）</td><td>（一覧画面）</td><td><span class="badge badge-should">Should</span></td></tr>
-          <tr class="template-row"><td>F-008</td><td>（ソート）</td><td>（カラムクリックでの並び替え）</td><td>（一覧画面）</td><td><span class="badge badge-should">Should</span></td></tr>
-          <tr class="template-row"><td>F-009</td><td>（CSV出力）</td><td>（データのCSVエクスポート）</td><td>（一覧画面）</td><td><span class="badge badge-could">Could</span></td></tr>
-          <tr class="template-row"><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr>
+          <tr><td>F-001</td><td>ログイン認証</td><td>管理者・一般ユーザーがメールアドレスとパスワードで認証し、管理画面へログインする</td><td>ログイン画面</td><td><span class="badge badge-must">Must</span></td></tr>
+          <tr><td>F-002</td><td>予約一覧表示</td><td>予約データを一覧で確認し、運営状況を把握できる</td><td>予約一覧画面</td><td><span class="badge badge-must">Must</span></td></tr>
+          <tr><td>F-003</td><td>予約新規登録</td><td>当日飛び込み対応を含め、フォームから予約を新規登録する</td><td>予約新規登録画面</td><td><span class="badge badge-must">Must</span></td></tr>
+          <tr><td>F-004</td><td>予約詳細表示</td><td>予約情報・顧客情報・スタッフメモを詳細表示する</td><td>予約詳細画面</td><td><span class="badge badge-must">Must</span></td></tr>
+          <tr><td>F-005</td><td>予約編集</td><td>既存予約の日時・人数・顧客情報・ステータスを更新する</td><td>予約編集画面</td><td><span class="badge badge-must">Must</span></td></tr>
+          <tr><td>F-006</td><td>問い合わせ管理</td><td>問い合わせ内容を一覧・詳細で確認し、対応状況を更新する</td><td>問い合わせ一覧 / 詳細画面</td><td><span class="badge badge-must">Must</span></td></tr>
+          <tr><td>F-007</td><td>顧客管理</td><td>顧客情報の一覧表示、詳細確認、登録・更新を行う</td><td>顧客一覧 / 詳細 / 新規登録画面</td><td><span class="badge badge-must">Must</span></td></tr>
+          <tr><td>F-008</td><td>バリデーション</td><td>必須入力や入力形式エラーを検知し、登録前にインライン表示する</td><td>ログイン / 登録 / 編集フォーム</td><td><span class="badge badge-must">Must</span></td></tr>
+          <tr><td>F-009</td><td>検索機能</td><td>日付、ステータス、氏名などの条件で対象データを検索する</td><td>予約一覧 / 顧客一覧 / 問い合わせ一覧画面</td><td><span class="badge badge-should">Should</span></td></tr>
+          <tr><td>F-010</td><td>ソート機能</td><td>一覧表の各カラムを基準に並び替えを行う</td><td>一覧画面</td><td><span class="badge badge-should">Should</span></td></tr>
+          <tr><td>F-011</td><td>ページネーション</td><td>件数が多い一覧データを複数ページに分けて表示する</td><td>一覧画面</td><td><span class="badge badge-should">Should</span></td></tr>
+          <tr><td>F-012</td><td>CSV出力</td><td>一覧データをCSV形式でダウンロードする</td><td>予約一覧 / 顧客一覧画面</td><td><span class="badge badge-could">Could</span></td></tr>
+          <tr><td>F-013</td><td>ファイルアップロード</td><td>商品画像などの関連ファイルをアップロードして管理する</td><td>商品管理画面</td><td><span class="badge badge-could">Could</span></td></tr>
+          <tr><td>F-014</td><td>メール通知</td><td>予約確認や問い合わせ受付の通知メールを送信する</td><td>予約登録 / 問い合わせ登録処理</td><td><span class="badge badge-could">Could</span></td></tr>
           </tbody>
         </table>
 
@@ -107,7 +133,67 @@
           <div class="fill-label">画面遷移図 <span class="required">必須</span></div>
           <div class="fill-hint">各画面間の遷移関係を図示</div>
           <div class="fill-content">
-            <p>（画面遷移図を記載）</p>
+            <pre>[ログイン画面]
+  ├─「ログインする」→ [ダッシュボード]
+  └─「認証失敗」→ [ログイン画面（エラーメッセージ表示）]
+
+[ダッシュボード]
+  ├─「予約管理メニュー」→ [予約一覧画面]
+  ├─「顧客管理メニュー」→ [顧客一覧画面]
+  ├─「問い合わせ管理メニュー」→ [問い合わせ一覧画面]
+  ├─「商品管理メニュー」→ [商品管理画面]
+  └─「ログアウト」→ [ログイン画面]
+
+[予約一覧画面]
+  ├─「+ 新規登録」→ [予約新規登録画面]
+  ├─「詳細」→ [予約詳細画面]
+  ├─「検索する」→ [予約一覧画面（検索結果表示）]
+  ├─「ソート」→ [予約一覧画面（並び替え結果表示）]
+  └─「ページ切替」→ [予約一覧画面（対象ページ表示）]
+
+[予約新規登録画面]
+  ├─「予約を登録する」→ [予約詳細画面]
+  └─「キャンセル」→ [予約一覧画面]
+
+[予約詳細画面]
+  ├─「編集」→ [予約編集画面]
+  ├─「一覧に戻る」→ [予約一覧画面]
+  ├─「入場済みにする」→ [予約詳細画面（ステータス更新）]
+  ├─「キャンセルする」→ [予約詳細画面（ステータス更新）]
+  └─「顧客名リンク」→ [顧客詳細画面]
+
+[予約編集画面]
+  ├─「変更を保存する」→ [予約詳細画面]
+  └─「詳細に戻る」→ [予約詳細画面]
+
+[顧客一覧画面]
+  ├─「新規登録」→ [顧客新規登録画面]
+  ├─「詳細」→ [顧客詳細画面]
+  ├─「検索する」→ [顧客一覧画面（検索結果表示）]
+  └─「CSV出力」→ [顧客一覧画面（CSVダウンロード）]
+
+[顧客新規登録画面]
+  ├─「登録する」→ [顧客詳細画面]
+  └─「キャンセル」→ [顧客一覧画面]
+
+[顧客詳細画面]
+  ├─「編集」→ [顧客詳細画面（編集モードまたは更新後表示）]
+  └─「一覧に戻る」→ [顧客一覧画面]
+
+[問い合わせ一覧画面]
+  ├─「詳細」→ [問い合わせ詳細画面]
+  ├─「検索する」→ [問い合わせ一覧画面（検索結果表示）]
+  └─「ステータス絞り込み」→ [問い合わせ一覧画面（絞り込み結果表示）]
+
+[問い合わせ詳細画面]
+  ├─「ステータス更新」→ [問い合わせ詳細画面（更新後表示）]
+  ├─「メモ保存」→ [問い合わせ詳細画面]
+  └─「一覧に戻る」→ [問い合わせ一覧画面]
+
+[商品管理画面]
+  ├─「商品編集」→ [商品管理画面（編集後表示）]
+  ├─「画像アップロード」→ [商品管理画面（更新後表示）]
+  └─「表示/非表示切替」→ [商品管理画面（更新後表示）]</pre>
           </div>
         </div>
 
@@ -118,27 +204,101 @@
 
 
           <div class="subsection">
-            <h3 class="subsection-title">機能仕様テンプレート（コピーして使用）</h3>
-
-        <div class="fill-block">
-          <div class="fill-label">機能名：（機能名を入力） <span class="required">必須</span></div>
-          <div class="fill-hint">機能ID：F-XXX</div>
-          <div class="fill-content">
-            <p>（機能の詳細仕様を記載）</p>
+            <h3 class="subsection-title">F-001 ログイン認証</h3>
+            <div class="fill-block"><div class="fill-label">画面レイアウト</div><div class="fill-content"><p>中央にロゴ、タイトル、メールアドレス入力、パスワード入力、エラーメッセージ、ログインボタンを配置する。</p></div></div>
+            <div class="fill-block"><div class="fill-label">入力項目一覧</div><table class="doc-table"><thead><tr><th>項目名</th><th>データ型</th><th>必須</th><th>バリデーション</th><th>備考</th></tr></thead><tbody><tr><td>メールアドレス</td><td>String</td><td>○</td><td>必須、メール形式</td><td>ログインID</td></tr><tr><td>パスワード</td><td>String</td><td>○</td><td>必須、8文字以上</td><td>マスク表示</td></tr></tbody></table></div>
+            <div class="fill-block"><div class="fill-label">処理フロー / 動作 / 遷移</div><div class="fill-content"><p>ユーザーが「ログインする」を押下すると、Spring Security が認証を行う。正常時はダッシュボードへ遷移する。入力不備時はインラインエラー、認証失敗時は「メールアドレスまたはパスワードが正しくありません」を表示する。システムエラー時は再試行メッセージを表示する。遷移先：ダッシュボード / 同画面。</p></div></div>
           </div>
-        </div>
 
-            <div class="fill-block">
-              <div class="fill-label">入力項目一覧 <span class="required">必須</span></div>
-        <table class="doc-table">
-          <thead><tr><th>項目名</th><th>データ型</th><th>必須</th><th>バリデーション</th><th>備考</th></tr></thead>
-          <tbody>
-          <tr class="template-row"><td>（項目名）</td><td>（String / Integer / Date 等）</td><td>（○ / —）</td><td>（必須チェック / 文字数制限 等）</td><td>（備考）</td></tr>
-          <tr class="template-row"><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr>
-          </tbody>
-        </table>
+          <div class="subsection">
+            <h3 class="subsection-title">F-002 予約一覧表示</h3>
+            <div class="fill-block"><div class="fill-label">画面レイアウト</div><div class="fill-content"><p>パンくず、ページタイトル、新規登録ボタン、検索条件、件数表示、CSVボタン、一覧テーブル、ページネーションを配置する。</p></div></div>
+            <div class="fill-block"><div class="fill-label">入力項目一覧</div><table class="doc-table"><thead><tr><th>項目名</th><th>データ型</th><th>必須</th><th>バリデーション</th><th>備考</th></tr></thead><tbody><tr><td>日付From</td><td>Date</td><td>—</td><td>日付形式</td><td>検索条件</td></tr><tr><td>日付To</td><td>Date</td><td>—</td><td>日付形式、From以降</td><td>検索条件</td></tr><tr><td>ステータス</td><td>Enum</td><td>—</td><td>選択値チェック</td><td>検索条件</td></tr><tr><td>氏名</td><td>String</td><td>—</td><td>部分一致、100文字以内</td><td>検索条件</td></tr></tbody></table></div>
+            <div class="fill-block"><div class="fill-label">処理フロー / 動作 / 遷移</div><div class="fill-content"><p>一覧画面表示時に予約データを取得して表示する。正常時はテーブルと件数を表示する。検索条件不正時は条件欄にエラーを表示する。システムエラー時は一覧取得失敗メッセージを表示する。遷移先：「詳細」で予約詳細、「+新規登録」で予約新規登録。</p></div></div>
+          </div>
 
-            </div>
+          <div class="subsection">
+            <h3 class="subsection-title">F-003 予約新規登録</h3>
+            <div class="fill-block"><div class="fill-label">画面レイアウト</div><div class="fill-content"><p>予約情報ブロック、お客様情報ブロック、確認メール送信選択、キャンセルボタン、登録ボタンを配置する。</p></div></div>
+            <div class="fill-block"><div class="fill-label">入力項目一覧</div><table class="doc-table"><thead><tr><th>項目名</th><th>データ型</th><th>必須</th><th>バリデーション</th><th>備考</th></tr></thead><tbody><tr><td>予約日</td><td>Date</td><td>○</td><td>必須、営業日チェック</td><td>土日祝のみ</td></tr><tr><td>時間帯</td><td>Enum</td><td>○</td><td>必須、空き枠チェック</td><td>11/13/15時帯</td></tr><tr><td>参加人数</td><td>Integer</td><td>○</td><td>必須、1〜上限定員</td><td>料金自動計算</td></tr><tr><td>氏名</td><td>String</td><td>○</td><td>必須、100文字以内</td><td>—</td></tr><tr><td>ふりがな</td><td>String</td><td>○</td><td>必須、ひらがな</td><td>—</td></tr><tr><td>メール</td><td>String</td><td>○</td><td>必須、メール形式</td><td>—</td></tr><tr><td>電話番号</td><td>String</td><td>○</td><td>必須、電話番号形式</td><td>—</td></tr><tr><td>備考</td><td>String</td><td>—</td><td>500文字以内</td><td>—</td></tr></tbody></table></div>
+            <div class="fill-block"><div class="fill-label">処理フロー / 動作 / 遷移</div><div class="fill-content"><p>入力後に「予約を登録する」を押下すると、空き枠確認、料金計算、予約登録、必要に応じて確認メール送信を行う。正常時は予約詳細へ遷移する。入力エラー時は各項目下に表示し、満席時は登録不可メッセージを出す。システムエラー時は登録失敗を通知する。遷移先：予約詳細 / 予約一覧。</p></div></div>
+          </div>
+
+          <div class="subsection">
+            <h3 class="subsection-title">F-004 予約詳細表示</h3>
+            <div class="fill-block"><div class="fill-label">画面レイアウト</div><div class="fill-content"><p>予約番号、編集ボタン、一覧に戻るボタン、ステータスバッジ、予約情報、お客様情報、スタッフメモ、ステータス変更ボタンを配置する。</p></div></div>
+            <div class="fill-block"><div class="fill-label">入力項目一覧</div><table class="doc-table"><thead><tr><th>項目名</th><th>データ型</th><th>必須</th><th>バリデーション</th><th>備考</th></tr></thead><tbody><tr><td>スタッフメモ</td><td>String</td><td>—</td><td>1000文字以内</td><td>保存可能</td></tr><tr><td>ステータス変更</td><td>Enum</td><td>—</td><td>状態遷移チェック</td><td>入場済み / キャンセル</td></tr></tbody></table></div>
+            <div class="fill-block"><div class="fill-label">処理フロー / 動作 / 遷移</div><div class="fill-content"><p>詳細表示時に予約情報と関連顧客情報を取得する。正常時は詳細情報を表示し、メモ保存やステータス変更を反映する。対象データ不存在時は一覧へ戻すかエラー表示する。システムエラー時は取得失敗を表示する。遷移先：予約編集 / 予約一覧 / 顧客詳細。</p></div></div>
+          </div>
+
+          <div class="subsection">
+            <h3 class="subsection-title">F-005 予約編集</h3>
+            <div class="fill-block"><div class="fill-label">画面レイアウト</div><div class="fill-content"><p>注意メッセージ、予約情報編集ブロック、お客様情報編集ブロック、確認メール再送選択、戻るボタン、保存ボタンを配置する。</p></div></div>
+            <div class="fill-block"><div class="fill-label">入力項目一覧</div><table class="doc-table"><thead><tr><th>項目名</th><th>データ型</th><th>必須</th><th>バリデーション</th><th>備考</th></tr></thead><tbody><tr><td>予約日</td><td>Date</td><td>○</td><td>必須、営業日チェック</td><td>—</td></tr><tr><td>時間帯</td><td>Enum</td><td>○</td><td>必須、空き枠チェック</td><td>—</td></tr><tr><td>参加人数</td><td>Integer</td><td>○</td><td>必須、定員以内</td><td>料金再計算</td></tr><tr><td>氏名/ふりがな/メール/電話</td><td>String</td><td>○</td><td>形式チェック</td><td>現在値初期表示</td></tr><tr><td>備考</td><td>String</td><td>—</td><td>500文字以内</td><td>—</td></tr><tr><td>ステータス</td><td>Enum</td><td>—</td><td>選択値チェック</td><td>—</td></tr></tbody></table></div>
+            <div class="fill-block"><div class="fill-label">処理フロー / 動作 / 遷移</div><div class="fill-content"><p>編集内容入力後に「変更を保存する」を押下すると、入力検証、空き枠再確認、更新、必要に応じて確認メール再送を行う。正常時は予約詳細へ戻る。入力エラー時は項目ごとに表示する。システムエラー時は更新失敗を通知する。遷移先：予約詳細。</p></div></div>
+          </div>
+
+          <div class="subsection">
+            <h3 class="subsection-title">F-006 問い合わせ管理</h3>
+            <div class="fill-block"><div class="fill-label">画面レイアウト</div><div class="fill-content"><p>問い合わせ一覧では検索条件、ステータス絞り込み、一覧テーブルを配置し、詳細では内容、対応メモ、ステータス更新操作を配置する。</p></div></div>
+            <div class="fill-block"><div class="fill-label">入力項目一覧</div><table class="doc-table"><thead><tr><th>項目名</th><th>データ型</th><th>必須</th><th>バリデーション</th><th>備考</th></tr></thead><tbody><tr><td>カテゴリ</td><td>Enum</td><td>—</td><td>選択値チェック</td><td>一覧絞り込み</td></tr><tr><td>ステータス</td><td>Enum</td><td>—</td><td>選択値チェック</td><td>未対応 / 対応中 / 完了</td></tr><tr><td>対応メモ</td><td>String</td><td>—</td><td>1000文字以内</td><td>詳細画面</td></tr></tbody></table></div>
+            <div class="fill-block"><div class="fill-label">処理フロー / 動作 / 遷移</div><div class="fill-content"><p>一覧表示、絞り込み、詳細表示、対応メモ保存、ステータス更新を行う。正常時は更新内容を即時反映する。入力エラー時はメモ欄や選択値にエラーを表示する。システムエラー時は取得・更新失敗を通知する。遷移先：問い合わせ一覧 / 問い合わせ詳細。</p></div></div>
+          </div>
+
+          <div class="subsection">
+            <h3 class="subsection-title">F-007 顧客管理</h3>
+            <div class="fill-block"><div class="fill-label">画面レイアウト</div><div class="fill-content"><p>顧客一覧、詳細、新規登録で構成し、一覧には検索、CSV、詳細導線を、詳細には基本情報と履歴を配置する。</p></div></div>
+            <div class="fill-block"><div class="fill-label">入力項目一覧</div><table class="doc-table"><thead><tr><th>項目名</th><th>データ型</th><th>必須</th><th>バリデーション</th><th>備考</th></tr></thead><tbody><tr><td>氏名</td><td>String</td><td>○</td><td>必須、100文字以内</td><td>—</td></tr><tr><td>ふりがな</td><td>String</td><td>○</td><td>必須、ひらがな</td><td>—</td></tr><tr><td>メール</td><td>String</td><td>○</td><td>必須、メール形式</td><td>—</td></tr><tr><td>電話番号</td><td>String</td><td>○</td><td>必須、電話番号形式</td><td>—</td></tr><tr><td>メモ</td><td>String</td><td>—</td><td>500文字以内</td><td>—</td></tr></tbody></table></div>
+            <div class="fill-block"><div class="fill-label">処理フロー / 動作 / 遷移</div><div class="fill-content"><p>一覧取得、顧客詳細表示、新規登録、更新を行う。正常時は一覧または詳細へ反映する。入力エラー時は必須・形式エラーを表示する。システムエラー時は保存失敗や取得失敗を通知する。遷移先：顧客一覧 / 顧客詳細 / 顧客新規登録。</p></div></div>
+          </div>
+
+          <div class="subsection">
+            <h3 class="subsection-title">F-008 バリデーション</h3>
+            <div class="fill-block"><div class="fill-label">画面レイアウト</div><div class="fill-content"><p>各フォーム項目の直下にエラーメッセージ表示領域を持ち、ラベル右に必須マークを表示する。</p></div></div>
+            <div class="fill-block"><div class="fill-label">入力項目一覧</div><table class="doc-table"><thead><tr><th>項目名</th><th>データ型</th><th>必須</th><th>バリデーション</th><th>備考</th></tr></thead><tbody><tr><td>全フォーム共通</td><td>—</td><td>項目依存</td><td>必須、形式、文字数、選択値、日付整合</td><td>フォーカスアウト時表示</td></tr></tbody></table></div>
+            <div class="fill-block"><div class="fill-label">処理フロー / 動作 / 遷移</div><div class="fill-content"><p>入力時または送信時に検証を行い、正常時のみ保存処理へ進む。バリデーションエラー時は該当項目にインライン表示し、送信を中断する。システムエラー時は共通エラーメッセージを表示する。遷移先：同画面。</p></div></div>
+          </div>
+
+          <div class="subsection">
+            <h3 class="subsection-title">F-009 検索機能</h3>
+            <div class="fill-block"><div class="fill-label">画面レイアウト</div><div class="fill-content"><p>一覧画面上部に日付、ステータス、氏名、カテゴリなどの検索条件欄と検索・クリアボタンを配置する。</p></div></div>
+            <div class="fill-block"><div class="fill-label">入力項目一覧</div><table class="doc-table"><thead><tr><th>項目名</th><th>データ型</th><th>必須</th><th>バリデーション</th><th>備考</th></tr></thead><tbody><tr><td>検索キーワード</td><td>String</td><td>—</td><td>100文字以内</td><td>部分一致</td></tr><tr><td>日付条件</td><td>Date</td><td>—</td><td>From/To整合</td><td>—</td></tr><tr><td>絞り込み条件</td><td>Enum</td><td>—</td><td>選択値チェック</td><td>—</td></tr></tbody></table></div>
+            <div class="fill-block"><div class="fill-label">処理フロー / 動作 / 遷移</div><div class="fill-content"><p>条件入力後に「検索する」で再取得し、該当結果を一覧へ反映する。正常時は条件に応じた件数と結果を表示する。条件不正時は検索欄にエラーを表示する。システムエラー時は検索失敗を通知する。遷移先：同一覧画面。</p></div></div>
+          </div>
+
+          <div class="subsection">
+            <h3 class="subsection-title">F-010 ソート機能</h3>
+            <div class="fill-block"><div class="fill-label">画面レイアウト</div><div class="fill-content"><p>一覧テーブルの各カラム見出しにソート矢印を表示し、クリック可能にする。</p></div></div>
+            <div class="fill-block"><div class="fill-label">入力項目一覧</div><table class="doc-table"><thead><tr><th>項目名</th><th>データ型</th><th>必須</th><th>バリデーション</th><th>備考</th></tr></thead><tbody><tr><td>ソート対象</td><td>String</td><td>—</td><td>許可カラムのみ</td><td>日時、氏名、人数等</td></tr><tr><td>ソート順</td><td>Enum</td><td>—</td><td>asc / desc</td><td>—</td></tr></tbody></table></div>
+            <div class="fill-block"><div class="fill-label">処理フロー / 動作 / 遷移</div><div class="fill-content"><p>ユーザーが見出しをクリックすると対象カラムと順序で再取得する。正常時は並び替え結果を表示する。許可外パラメータ時は既定順へ戻す。システムエラー時は一覧取得失敗を表示する。遷移先：同一覧画面。</p></div></div>
+          </div>
+
+          <div class="subsection">
+            <h3 class="subsection-title">F-011 ページネーション</h3>
+            <div class="fill-block"><div class="fill-label">画面レイアウト</div><div class="fill-content"><p>一覧テーブル下部にページ番号、前後移動、表示件数切替（10/25/50件）を配置する。</p></div></div>
+            <div class="fill-block"><div class="fill-label">入力項目一覧</div><table class="doc-table"><thead><tr><th>項目名</th><th>データ型</th><th>必須</th><th>バリデーション</th><th>備考</th></tr></thead><tbody><tr><td>ページ番号</td><td>Integer</td><td>—</td><td>1以上</td><td>—</td></tr><tr><td>表示件数</td><td>Integer</td><td>—</td><td>10/25/50のみ</td><td>—</td></tr></tbody></table></div>
+            <div class="fill-block"><div class="fill-label">処理フロー / 動作 / 遷移</div><div class="fill-content"><p>ページ番号や表示件数変更時に対象ページ分のデータを再取得する。正常時は該当ページを表示する。範囲外ページ指定時は最終または先頭へ補正する。システムエラー時は取得失敗を表示する。遷移先：同一覧画面。</p></div></div>
+          </div>
+
+          <div class="subsection">
+            <h3 class="subsection-title">F-012 CSV出力</h3>
+            <div class="fill-block"><div class="fill-label">画面レイアウト</div><div class="fill-content"><p>一覧画面の件数表示付近にCSVダウンロードボタンを配置する。</p></div></div>
+            <div class="fill-block"><div class="fill-label">入力項目一覧</div><table class="doc-table"><thead><tr><th>項目名</th><th>データ型</th><th>必須</th><th>バリデーション</th><th>備考</th></tr></thead><tbody><tr><td>出力対象条件</td><td>—</td><td>—</td><td>現在の検索条件を引き継ぐ</td><td>予約 / 顧客</td></tr></tbody></table></div>
+            <div class="fill-block"><div class="fill-label">処理フロー / 動作 / 遷移</div><div class="fill-content"><p>CSVボタン押下で現在条件のデータをCSV形式へ変換しダウンロードする。正常時はファイル保存が始まる。データ不存在時は対象なしメッセージを表示する。システムエラー時は出力失敗を通知する。遷移先：同一覧画面。</p></div></div>
+          </div>
+
+          <div class="subsection">
+            <h3 class="subsection-title">F-013 ファイルアップロード</h3>
+            <div class="fill-block"><div class="fill-label">画面レイアウト</div><div class="fill-content"><p>商品管理画面に画像選択欄、プレビュー、アップロード実行ボタンを配置する。</p></div></div>
+            <div class="fill-block"><div class="fill-label">入力項目一覧</div><table class="doc-table"><thead><tr><th>項目名</th><th>データ型</th><th>必須</th><th>バリデーション</th><th>備考</th></tr></thead><tbody><tr><td>画像ファイル</td><td>File</td><td>○</td><td>拡張子jpg/png、サイズ上限、MIMEチェック</td><td>商品画像</td></tr></tbody></table></div>
+            <div class="fill-block"><div class="fill-label">処理フロー / 動作 / 遷移</div><div class="fill-content"><p>ファイル選択後にアップロードを実行し、保存先へ登録して商品情報へ紐付ける。正常時は更新後画像を表示する。形式不正や容量超過時はその場でエラーを表示する。システムエラー時は保存失敗を通知する。遷移先：商品管理画面。</p></div></div>
+          </div>
+
+          <div class="subsection">
+            <h3 class="subsection-title">F-014 メール通知</h3>
+            <div class="fill-block"><div class="fill-label">画面レイアウト</div><div class="fill-content"><p>予約登録・予約編集・問い合わせ受付時に、送信有無オプションやテンプレート設定画面と連動する。</p></div></div>
+            <div class="fill-block"><div class="fill-label">入力項目一覧</div><table class="doc-table"><thead><tr><th>項目名</th><th>データ型</th><th>必須</th><th>バリデーション</th><th>備考</th></tr></thead><tbody><tr><td>送信先メール</td><td>String</td><td>○</td><td>メール形式</td><td>顧客宛</td></tr><tr><td>件名</td><td>String</td><td>○</td><td>100文字以内</td><td>テンプレート利用</td></tr><tr><td>本文</td><td>String</td><td>○</td><td>5000文字以内</td><td>テンプレート利用</td></tr></tbody></table></div>
+            <div class="fill-block"><div class="fill-label">処理フロー / 動作 / 遷移</div><div class="fill-content"><p>予約登録や問い合わせ受付完了後にテンプレートを適用しメール送信する。正常時は送信完了として処理終了する。メールアドレス不正時は送信せず画面へ警告を出す。システムエラー時は送信失敗をログ記録し、必要に応じて再送対象とする。遷移先：予約詳細 / 問い合わせ完了相当処理。</p></div></div>
           </div>
         </section>
 
@@ -149,16 +309,24 @@
           <div class="fill-label">セキュリティ要件 <span class="required">必須</span></div>
           <div class="fill-hint">認証・認可・データ保護に関する要件</div>
           <div class="fill-content">
-            <p>（セキュリティ要件を記載）</p>
+            <table class="doc-table">
+              <thead><tr><th>項目</th><th>要件</th></tr></thead>
+              <tbody>
+                <tr><td>認証方式</td><td>Spring Security を用いたフォームログイン認証を採用し、未認証ユーザーは `/admin/login` へリダイレクトする。</td></tr>
+                <tr><td>パスワードの暗号化方式</td><td>パスワードは平文保存せず、`BCryptPasswordEncoder` によりハッシュ化して保存する。</td></tr>
+                <tr><td>CSRF対策</td><td>Spring Security の CSRF 保護を有効化し、状態変更を伴う POST/更新系リクエストに CSRF トークンを必須とする。</td></tr>
+                <tr><td>XSS対策</td><td>Thymeleaf の自動エスケープを基本とし、入力値表示時は HTML エスケープを行う。危険なスクリプト文字列はそのまま出力しない。</td></tr>
+                <tr><td>SQLインジェクション対策</td><td>Repository / ORM / パラメータバインドを用いて SQL を組み立て、文字列連結による生SQL埋め込みを避ける。</td></tr>
+                <tr><td>セッション管理</td><td>ログイン後はサーバー側セッションで認証状態を管理し、ログアウト時にセッションを破棄する。セッションタイムアウトも設定する。</td></tr>
+              </tbody>
+            </table>
           </div>
         </div>
         <div class="fill-block">
           <div class="fill-label">対応環境 <span class="required">必須</span></div>
           <div class="fill-hint">対応ブラウザ・デバイス</div>
           <div class="fill-content">
-            <p>・対応ブラウザ：Chrome（最新版）/ Firefox（最新版）/ Edge（最新版）
-・対応デバイス：PC / タブレット / スマートフォン
-（自分の実際の対応範囲に合わせて編集してください）</p>
+            <p>・対応ブラウザ：Chrome（最新版）/ Firefox（最新版）/ Edge（最新版）<br>・対応デバイス：PC / タブレット / スマートフォン<br>・推奨画面幅：PC 1440px基準 / Tablet 768〜1139px / Mobile 〜767px</p>
           </div>
         </div>
 
