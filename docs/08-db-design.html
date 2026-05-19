@@ -62,7 +62,90 @@
           <div class="fill-label">ER図 <span class="required">必須</span></div>
           <div class="fill-hint">テーブル間のリレーション図（テキストベースまたは画像で記載）</div>
           <div class="fill-content">
-            <p>（ER図を記載）</p>
+            <pre>[users] 1 ──── * [reservations]
+  id (PK)            id (PK)
+  name               customer_id (FK)
+  email              user_id (FK)
+  password_hash      workshop_plan_id (FK)
+  role               reservation_date
+  status             time_slot
+  created_at         participants
+                     total_price
+                     status
+                     source
+                     notes
+                     created_at
+
+[customers] 1 ──── * [reservations]
+  id (PK)            id (PK)
+  name               customer_id (FK)
+  kana               ...
+  email
+  phone
+  line_status
+  memo
+  created_at
+
+[customers] 1 ──── * [contacts]
+  id (PK)            id (PK)
+  name               customer_id (FK)
+  ...                category
+                     company_name
+                     subject
+                     message
+                     status
+                     response_memo
+                     created_at
+
+[workshop_plans] 1 ──── * [reservations]
+  id (PK)                 id (PK)
+  plan_name               workshop_plan_id (FK)
+  price                   ...
+  duration_minutes
+  capacity
+  is_active
+
+[calendar_settings] 1 ──── * [workshop_slots]
+  id (PK)                     id (PK)
+  business_date               calendar_setting_id (FK)
+  is_open                     slot_time
+  open_note                   remaining_capacity
+                               is_available
+
+[products] 1 ──── * [product_images]
+  id (PK)                 id (PK)
+  series                  product_id (FK)
+  product_name            image_path
+  slug                    sort_order
+  description             created_at
+  price
+  material_origin
+  usage_scene
+  is_visible
+  created_at
+
+[email_templates] 1 ──── * [mail_logs]
+  id (PK)                    id (PK)
+  template_name              template_id (FK)
+  subject                    reservation_id (FK, nullable)
+  body                       contact_id (FK, nullable)
+  is_active                  recipient_email
+                             sent_at
+                             send_status
+
+主要リレーション
+- customers 1 : N reservations
+- users 1 : N reservations
+- customers 1 : N contacts
+- workshop_plans 1 : N reservations
+- calendar_settings 1 : N workshop_slots
+- products 1 : N product_images
+- email_templates 1 : N mail_logs
+
+補足
+- reservations と contacts は mail_logs と関連し、通知メール送信履歴を管理する
+- products はシリーズ（破天荒 / PERFUMERS / WANOWA）単位と個別商品情報を管理する
+- 多対多の主要要件は現時点で想定せず、基本は 1対多 構成とする</pre>
           </div>
         </div>
 
@@ -71,20 +154,70 @@
         <section class="section" id="sec2">
           <h2 class="section-title"><span class="section-icon">2</span> テーブル定義</h2>
 
+          <div class="fill-block">
+            <div class="fill-label">テーブル名：users <span class="required">必須</span></div>
+            <div class="fill-hint">管理者・一般ユーザーの認証情報と権限を管理する</div>
+            <table class="doc-table"><thead><tr><th>カラム名</th><th>データ型</th><th>NULL許可</th><th>デフォルト値</th><th>制約</th><th>説明</th></tr></thead><tbody><tr><td>id</td><td>BIGINT</td><td>NO</td><td>AUTO_INCREMENT</td><td>PK</td><td>主キー</td></tr><tr><td>name</td><td>VARCHAR(100)</td><td>NO</td><td>—</td><td>NOT NULL</td><td>ユーザー名</td></tr><tr><td>email</td><td>VARCHAR(255)</td><td>NO</td><td>—</td><td>UNIQUE, NOT NULL</td><td>ログインID</td></tr><tr><td>password_hash</td><td>VARCHAR(255)</td><td>NO</td><td>—</td><td>NOT NULL</td><td>BCryptハッシュ化済みパスワード</td></tr><tr><td>role</td><td>VARCHAR(20)</td><td>NO</td><td>'staff'</td><td>NOT NULL</td><td>admin / staff</td></tr><tr><td>status</td><td>VARCHAR(20)</td><td>NO</td><td>'active'</td><td>NOT NULL</td><td>アカウント状態</td></tr><tr><td>created_at</td><td>DATETIME</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>NOT NULL</td><td>作成日時</td></tr><tr><td>updated_at</td><td>DATETIME</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>NOT NULL</td><td>更新日時</td></tr></tbody></table>
+          </div>
 
           <div class="fill-block">
-            <div class="fill-label">テーブル名：（テーブル名を入力） <span class="required">必須</span></div>
-            <div class="fill-hint">テーブルの目的：（このテーブルが管理するデータの説明）</div>
-        <table class="doc-table">
-          <thead><tr><th>カラム名</th><th>データ型</th><th>NULL</th><th>デフォルト</th><th>制約</th><th>説明</th></tr></thead>
-          <tbody>
-          <tr class="template-row"><td>id</td><td>BIGINT</td><td>NO</td><td>AUTO_INCREMENT</td><td>PK</td><td>主キー</td></tr>
-          <tr class="template-row"><td>（カラム名）</td><td>（VARCHAR(255) 等）</td><td>（YES/NO）</td><td>（デフォルト値）</td><td>（PK/FK/UNIQUE/NOT NULL）</td><td>（説明）</td></tr>
-          <tr class="template-row"><td>created_at</td><td>DATETIME</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>NOT NULL</td><td>作成日時</td></tr>
-          <tr class="template-row"><td>updated_at</td><td>DATETIME</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>NOT NULL</td><td>更新日時</td></tr>
-          </tbody>
-        </table>
+            <div class="fill-label">テーブル名：customers <span class="required">必須</span></div>
+            <div class="fill-hint">顧客基本情報と接客メモを管理する</div>
+            <table class="doc-table"><thead><tr><th>カラム名</th><th>データ型</th><th>NULL許可</th><th>デフォルト値</th><th>制約</th><th>説明</th></tr></thead><tbody><tr><td>id</td><td>BIGINT</td><td>NO</td><td>AUTO_INCREMENT</td><td>PK</td><td>主キー</td></tr><tr><td>name</td><td>VARCHAR(100)</td><td>NO</td><td>—</td><td>NOT NULL</td><td>氏名</td></tr><tr><td>kana</td><td>VARCHAR(100)</td><td>NO</td><td>—</td><td>NOT NULL</td><td>ふりがな</td></tr><tr><td>email</td><td>VARCHAR(255)</td><td>NO</td><td>—</td><td>NOT NULL</td><td>メールアドレス</td></tr><tr><td>phone</td><td>VARCHAR(20)</td><td>NO</td><td>—</td><td>NOT NULL</td><td>電話番号</td></tr><tr><td>line_status</td><td>VARCHAR(20)</td><td>YES</td><td>NULL</td><td>—</td><td>LINE登録状態</td></tr><tr><td>memo</td><td>TEXT</td><td>YES</td><td>NULL</td><td>—</td><td>顧客メモ</td></tr><tr><td>deleted_at</td><td>DATETIME</td><td>YES</td><td>NULL</td><td>—</td><td>論理削除日時</td></tr><tr><td>created_at</td><td>DATETIME</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>NOT NULL</td><td>作成日時</td></tr><tr><td>updated_at</td><td>DATETIME</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>NOT NULL</td><td>更新日時</td></tr></tbody></table>
+          </div>
 
+          <div class="fill-block">
+            <div class="fill-label">テーブル名：workshop_plans <span class="required">必須</span></div>
+            <div class="fill-hint">ワークショップの料金、所要時間、定員を管理する</div>
+            <table class="doc-table"><thead><tr><th>カラム名</th><th>データ型</th><th>NULL許可</th><th>デフォルト値</th><th>制約</th><th>説明</th></tr></thead><tbody><tr><td>id</td><td>BIGINT</td><td>NO</td><td>AUTO_INCREMENT</td><td>PK</td><td>主キー</td></tr><tr><td>plan_name</td><td>VARCHAR(100)</td><td>NO</td><td>—</td><td>NOT NULL</td><td>プラン名</td></tr><tr><td>price</td><td>INT</td><td>NO</td><td>0</td><td>NOT NULL</td><td>料金</td></tr><tr><td>duration_minutes</td><td>INT</td><td>NO</td><td>60</td><td>NOT NULL</td><td>所要時間</td></tr><tr><td>capacity</td><td>INT</td><td>NO</td><td>2</td><td>NOT NULL</td><td>定員</td></tr><tr><td>is_active</td><td>BOOLEAN</td><td>NO</td><td>TRUE</td><td>NOT NULL</td><td>有効フラグ</td></tr><tr><td>created_at</td><td>DATETIME</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>NOT NULL</td><td>作成日時</td></tr><tr><td>updated_at</td><td>DATETIME</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>NOT NULL</td><td>更新日時</td></tr></tbody></table>
+          </div>
+
+          <div class="fill-block">
+            <div class="fill-label">テーブル名：reservations <span class="required">必須</span></div>
+            <div class="fill-hint">予約情報の登録・更新・状態管理を行う</div>
+            <table class="doc-table"><thead><tr><th>カラム名</th><th>データ型</th><th>NULL許可</th><th>デフォルト値</th><th>制約</th><th>説明</th></tr></thead><tbody><tr><td>id</td><td>BIGINT</td><td>NO</td><td>AUTO_INCREMENT</td><td>PK</td><td>主キー</td></tr><tr><td>customer_id</td><td>BIGINT</td><td>NO</td><td>—</td><td>FK, NOT NULL → customers.id</td><td>顧客ID</td></tr><tr><td>user_id</td><td>BIGINT</td><td>YES</td><td>NULL</td><td>FK → users.id</td><td>登録担当者</td></tr><tr><td>workshop_plan_id</td><td>BIGINT</td><td>NO</td><td>—</td><td>FK, NOT NULL → workshop_plans.id</td><td>プランID</td></tr><tr><td>reservation_date</td><td>DATE</td><td>NO</td><td>—</td><td>NOT NULL</td><td>予約日</td></tr><tr><td>time_slot</td><td>VARCHAR(20)</td><td>NO</td><td>—</td><td>NOT NULL</td><td>時間帯</td></tr><tr><td>participants</td><td>INT</td><td>NO</td><td>1</td><td>NOT NULL</td><td>参加人数</td></tr><tr><td>total_price</td><td>INT</td><td>NO</td><td>0</td><td>NOT NULL</td><td>合計金額</td></tr><tr><td>status</td><td>VARCHAR(20)</td><td>NO</td><td>'confirmed'</td><td>NOT NULL</td><td>予約状態</td></tr><tr><td>source</td><td>VARCHAR(20)</td><td>NO</td><td>'website'</td><td>NOT NULL</td><td>受付経路</td></tr><tr><td>notes</td><td>TEXT</td><td>YES</td><td>NULL</td><td>—</td><td>備考</td></tr><tr><td>deleted_at</td><td>DATETIME</td><td>YES</td><td>NULL</td><td>—</td><td>論理削除日時</td></tr><tr><td>created_at</td><td>DATETIME</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>NOT NULL</td><td>作成日時</td></tr><tr><td>updated_at</td><td>DATETIME</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>NOT NULL</td><td>更新日時</td></tr></tbody></table>
+          </div>
+
+          <div class="fill-block">
+            <div class="fill-label">テーブル名：contacts <span class="required">必須</span></div>
+            <div class="fill-hint">問い合わせ情報と対応状況を管理する</div>
+            <table class="doc-table"><thead><tr><th>カラム名</th><th>データ型</th><th>NULL許可</th><th>デフォルト値</th><th>制約</th><th>説明</th></tr></thead><tbody><tr><td>id</td><td>BIGINT</td><td>NO</td><td>AUTO_INCREMENT</td><td>PK</td><td>主キー</td></tr><tr><td>customer_id</td><td>BIGINT</td><td>YES</td><td>NULL</td><td>FK → customers.id</td><td>顧客ID</td></tr><tr><td>category</td><td>VARCHAR(50)</td><td>NO</td><td>—</td><td>NOT NULL</td><td>問い合わせ種別</td></tr><tr><td>company_name</td><td>VARCHAR(255)</td><td>YES</td><td>NULL</td><td>—</td><td>会社名</td></tr><tr><td>subject</td><td>VARCHAR(255)</td><td>NO</td><td>—</td><td>NOT NULL</td><td>件名</td></tr><tr><td>message</td><td>TEXT</td><td>NO</td><td>—</td><td>NOT NULL</td><td>本文</td></tr><tr><td>status</td><td>VARCHAR(20)</td><td>NO</td><td>'unprocessed'</td><td>NOT NULL</td><td>対応状態</td></tr><tr><td>response_memo</td><td>TEXT</td><td>YES</td><td>NULL</td><td>—</td><td>対応メモ</td></tr><tr><td>deleted_at</td><td>DATETIME</td><td>YES</td><td>NULL</td><td>—</td><td>論理削除日時</td></tr><tr><td>created_at</td><td>DATETIME</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>NOT NULL</td><td>作成日時</td></tr><tr><td>updated_at</td><td>DATETIME</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>NOT NULL</td><td>更新日時</td></tr></tbody></table>
+          </div>
+
+          <div class="fill-block">
+            <div class="fill-label">テーブル名：calendar_settings <span class="required">必須</span></div>
+            <div class="fill-hint">営業日設定を管理する</div>
+            <table class="doc-table"><thead><tr><th>カラム名</th><th>データ型</th><th>NULL許可</th><th>デフォルト値</th><th>制約</th><th>説明</th></tr></thead><tbody><tr><td>id</td><td>BIGINT</td><td>NO</td><td>AUTO_INCREMENT</td><td>PK</td><td>営業日設定ID</td></tr><tr><td>business_date</td><td>DATE</td><td>NO</td><td>—</td><td>UNIQUE, NOT NULL</td><td>営業日</td></tr><tr><td>is_open</td><td>BOOLEAN</td><td>NO</td><td>TRUE</td><td>NOT NULL</td><td>営業可否</td></tr><tr><td>open_note</td><td>VARCHAR(255)</td><td>YES</td><td>NULL</td><td>—</td><td>補足</td></tr><tr><td>created_at</td><td>DATETIME</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>NOT NULL</td><td>作成日時</td></tr><tr><td>updated_at</td><td>DATETIME</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>NOT NULL</td><td>更新日時</td></tr></tbody></table>
+          </div>
+
+          <div class="fill-block">
+            <div class="fill-label">テーブル名：workshop_slots <span class="required">必須</span></div>
+            <div class="fill-hint">営業日ごとの時間帯別空き枠を管理する</div>
+            <table class="doc-table"><thead><tr><th>カラム名</th><th>データ型</th><th>NULL許可</th><th>デフォルト値</th><th>制約</th><th>説明</th></tr></thead><tbody><tr><td>id</td><td>BIGINT</td><td>NO</td><td>AUTO_INCREMENT</td><td>PK</td><td>空き枠ID</td></tr><tr><td>calendar_setting_id</td><td>BIGINT</td><td>NO</td><td>—</td><td>FK, NOT NULL → calendar_settings.id</td><td>営業日設定ID</td></tr><tr><td>slot_time</td><td>VARCHAR(20)</td><td>NO</td><td>—</td><td>NOT NULL</td><td>時間帯</td></tr><tr><td>remaining_capacity</td><td>INT</td><td>NO</td><td>0</td><td>NOT NULL</td><td>残席数</td></tr><tr><td>is_available</td><td>BOOLEAN</td><td>NO</td><td>TRUE</td><td>NOT NULL</td><td>予約可否</td></tr><tr><td>created_at</td><td>DATETIME</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>NOT NULL</td><td>作成日時</td></tr><tr><td>updated_at</td><td>DATETIME</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>NOT NULL</td><td>更新日時</td></tr></tbody></table>
+          </div>
+
+          <div class="fill-block">
+            <div class="fill-label">テーブル名：products <span class="required">必須</span></div>
+            <div class="fill-hint">商品情報を管理する</div>
+            <table class="doc-table"><thead><tr><th>カラム名</th><th>データ型</th><th>NULL許可</th><th>デフォルト値</th><th>制約</th><th>説明</th></tr></thead><tbody><tr><td>id</td><td>BIGINT</td><td>NO</td><td>AUTO_INCREMENT</td><td>PK</td><td>商品ID</td></tr><tr><td>series</td><td>VARCHAR(50)</td><td>NO</td><td>—</td><td>NOT NULL</td><td>シリーズ名</td></tr><tr><td>product_name</td><td>VARCHAR(255)</td><td>NO</td><td>—</td><td>NOT NULL</td><td>商品名</td></tr><tr><td>slug</td><td>VARCHAR(255)</td><td>NO</td><td>—</td><td>UNIQUE, NOT NULL</td><td>URL識別子</td></tr><tr><td>description</td><td>TEXT</td><td>YES</td><td>NULL</td><td>—</td><td>説明文</td></tr><tr><td>price</td><td>INT</td><td>YES</td><td>NULL</td><td>—</td><td>価格</td></tr><tr><td>material_origin</td><td>VARCHAR(255)</td><td>YES</td><td>NULL</td><td>—</td><td>産地情報</td></tr><tr><td>usage_scene</td><td>VARCHAR(255)</td><td>YES</td><td>NULL</td><td>—</td><td>利用シーン</td></tr><tr><td>is_visible</td><td>BOOLEAN</td><td>NO</td><td>TRUE</td><td>NOT NULL</td><td>公開状態</td></tr><tr><td>deleted_at</td><td>DATETIME</td><td>YES</td><td>NULL</td><td>—</td><td>論理削除日時</td></tr><tr><td>created_at</td><td>DATETIME</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>NOT NULL</td><td>作成日時</td></tr><tr><td>updated_at</td><td>DATETIME</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>NOT NULL</td><td>更新日時</td></tr></tbody></table>
+          </div>
+
+          <div class="fill-block">
+            <div class="fill-label">テーブル名：product_images <span class="required">必須</span></div>
+            <div class="fill-hint">商品画像を管理する</div>
+            <table class="doc-table"><thead><tr><th>カラム名</th><th>データ型</th><th>NULL許可</th><th>デフォルト値</th><th>制約</th><th>説明</th></tr></thead><tbody><tr><td>id</td><td>BIGINT</td><td>NO</td><td>AUTO_INCREMENT</td><td>PK</td><td>画像ID</td></tr><tr><td>product_id</td><td>BIGINT</td><td>NO</td><td>—</td><td>FK, NOT NULL → products.id</td><td>商品ID</td></tr><tr><td>image_path</td><td>VARCHAR(255)</td><td>NO</td><td>—</td><td>NOT NULL</td><td>保存パス</td></tr><tr><td>sort_order</td><td>INT</td><td>NO</td><td>0</td><td>NOT NULL</td><td>表示順</td></tr><tr><td>created_at</td><td>DATETIME</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>NOT NULL</td><td>作成日時</td></tr><tr><td>updated_at</td><td>DATETIME</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>NOT NULL</td><td>更新日時</td></tr></tbody></table>
+          </div>
+
+          <div class="fill-block">
+            <div class="fill-label">テーブル名：email_templates <span class="required">必須</span></div>
+            <div class="fill-hint">メールテンプレートを管理する</div>
+            <table class="doc-table"><thead><tr><th>カラム名</th><th>データ型</th><th>NULL許可</th><th>デフォルト値</th><th>制約</th><th>説明</th></tr></thead><tbody><tr><td>id</td><td>BIGINT</td><td>NO</td><td>AUTO_INCREMENT</td><td>PK</td><td>テンプレートID</td></tr><tr><td>template_name</td><td>VARCHAR(100)</td><td>NO</td><td>—</td><td>UNIQUE, NOT NULL</td><td>テンプレート名</td></tr><tr><td>subject</td><td>VARCHAR(255)</td><td>NO</td><td>—</td><td>NOT NULL</td><td>件名</td></tr><tr><td>body</td><td>TEXT</td><td>NO</td><td>—</td><td>NOT NULL</td><td>本文</td></tr><tr><td>is_active</td><td>BOOLEAN</td><td>NO</td><td>TRUE</td><td>NOT NULL</td><td>有効状態</td></tr><tr><td>created_at</td><td>DATETIME</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>NOT NULL</td><td>作成日時</td></tr><tr><td>updated_at</td><td>DATETIME</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>NOT NULL</td><td>更新日時</td></tr></tbody></table>
+          </div>
+
+          <div class="fill-block">
+            <div class="fill-label">テーブル名：mail_logs <span class="required">必須</span></div>
+            <div class="fill-hint">メール送信履歴を管理する</div>
+            <table class="doc-table"><thead><tr><th>カラム名</th><th>データ型</th><th>NULL許可</th><th>デフォルト値</th><th>制約</th><th>説明</th></tr></thead><tbody><tr><td>id</td><td>BIGINT</td><td>NO</td><td>AUTO_INCREMENT</td><td>PK</td><td>送信履歴ID</td></tr><tr><td>template_id</td><td>BIGINT</td><td>NO</td><td>—</td><td>FK, NOT NULL → email_templates.id</td><td>テンプレートID</td></tr><tr><td>reservation_id</td><td>BIGINT</td><td>YES</td><td>NULL</td><td>FK → reservations.id</td><td>関連予約ID</td></tr><tr><td>contact_id</td><td>BIGINT</td><td>YES</td><td>NULL</td><td>FK → contacts.id</td><td>関連問い合わせID</td></tr><tr><td>recipient_email</td><td>VARCHAR(255)</td><td>NO</td><td>—</td><td>NOT NULL</td><td>送信先</td></tr><tr><td>sent_at</td><td>DATETIME</td><td>YES</td><td>NULL</td><td>—</td><td>送信日時</td></tr><tr><td>send_status</td><td>VARCHAR(20)</td><td>NO</td><td>'pending'</td><td>NOT NULL</td><td>送信状態</td></tr><tr><td>created_at</td><td>DATETIME</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>NOT NULL</td><td>作成日時</td></tr><tr><td>updated_at</td><td>DATETIME</td><td>NO</td><td>CURRENT_TIMESTAMP</td><td>NOT NULL</td><td>更新日時</td></tr></tbody></table>
           </div>
         </section>
 
@@ -96,8 +229,30 @@
         <table class="doc-table">
           <thead><tr><th>テーブル名</th><th>インデックス名</th><th>対象カラム</th><th>種類</th><th>設定理由</th></tr></thead>
           <tbody>
-          <tr class="template-row"><td>（テーブル名）</td><td>idx_（テーブル）_（カラム）</td><td>（カラム名）</td><td>（UNIQUE / INDEX）</td><td>（検索で頻繁に使用するため等）</td></tr>
-          <tr class="template-row"><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr>
+          <tr><td>users</td><td>uk_users_email</td><td>email</td><td>UNIQUE</td><td>ログインIDとして一意性が必要なため</td></tr>
+          <tr><td>customers</td><td>idx_customers_name</td><td>name</td><td>INDEX</td><td>氏名検索で頻繁に使用するため</td></tr>
+          <tr><td>customers</td><td>idx_customers_email</td><td>email</td><td>INDEX</td><td>メールアドレス検索に使用するため</td></tr>
+          <tr><td>customers</td><td>idx_customers_phone</td><td>phone</td><td>INDEX</td><td>電話番号検索に使用するため</td></tr>
+          <tr><td>reservations</td><td>idx_reservations_customer_id</td><td>customer_id</td><td>INDEX</td><td>外部キー結合と顧客別参照に使用するため</td></tr>
+          <tr><td>reservations</td><td>idx_reservations_user_id</td><td>user_id</td><td>INDEX</td><td>登録担当者別参照に使用するため</td></tr>
+          <tr><td>reservations</td><td>idx_reservations_plan_id</td><td>workshop_plan_id</td><td>INDEX</td><td>外部キー結合に使用するため</td></tr>
+          <tr><td>reservations</td><td>idx_reservations_date_status</td><td>reservation_date, status</td><td>INDEX</td><td>日付・状態での一覧検索と絞り込みに使用するため</td></tr>
+          <tr><td>reservations</td><td>idx_reservations_date_time</td><td>reservation_date, time_slot</td><td>INDEX</td><td>空き枠確認と時間帯別参照に使用するため</td></tr>
+          <tr><td>contacts</td><td>idx_contacts_customer_id</td><td>customer_id</td><td>INDEX</td><td>顧客との関連参照に使用するため</td></tr>
+          <tr><td>contacts</td><td>idx_contacts_category_status</td><td>category, status</td><td>INDEX</td><td>問い合わせ一覧の絞り込みに使用するため</td></tr>
+          <tr><td>workshop_plans</td><td>idx_workshop_plans_active</td><td>is_active</td><td>INDEX</td><td>有効プランのみ表示するため</td></tr>
+          <tr><td>calendar_settings</td><td>uk_calendar_settings_business_date</td><td>business_date</td><td>UNIQUE</td><td>営業日を一意に管理するため</td></tr>
+          <tr><td>workshop_slots</td><td>idx_workshop_slots_calendar_id</td><td>calendar_setting_id</td><td>INDEX</td><td>営業日単位の時間帯取得に使用するため</td></tr>
+          <tr><td>workshop_slots</td><td>idx_workshop_slots_calendar_time</td><td>calendar_setting_id, slot_time</td><td>UNIQUE</td><td>同一営業日に同一時間帯が重複しないようにするため</td></tr>
+          <tr><td>products</td><td>uk_products_slug</td><td>slug</td><td>UNIQUE</td><td>URL識別子として一意性が必要なため</td></tr>
+          <tr><td>products</td><td>idx_products_series_visible</td><td>series, is_visible</td><td>INDEX</td><td>シリーズ別・公開状態別の絞り込みに使用するため</td></tr>
+          <tr><td>product_images</td><td>idx_product_images_product_id</td><td>product_id</td><td>INDEX</td><td>商品ごとの画像取得に使用するため</td></tr>
+          <tr><td>product_images</td><td>idx_product_images_sort_order</td><td>product_id, sort_order</td><td>INDEX</td><td>表示順で画像を並べるため</td></tr>
+          <tr><td>email_templates</td><td>uk_email_templates_name</td><td>template_name</td><td>UNIQUE</td><td>テンプレート名の重複を防ぐため</td></tr>
+          <tr><td>mail_logs</td><td>idx_mail_logs_template_id</td><td>template_id</td><td>INDEX</td><td>テンプレート別送信履歴参照に使用するため</td></tr>
+          <tr><td>mail_logs</td><td>idx_mail_logs_reservation_id</td><td>reservation_id</td><td>INDEX</td><td>予約関連メールの履歴参照に使用するため</td></tr>
+          <tr><td>mail_logs</td><td>idx_mail_logs_contact_id</td><td>contact_id</td><td>INDEX</td><td>問い合わせ関連メールの履歴参照に使用するため</td></tr>
+          <tr><td>mail_logs</td><td>idx_mail_logs_sent_at</td><td>sent_at</td><td>INDEX</td><td>送信日時順の参照・監査に使用するため</td></tr>
           </tbody>
         </table>
 
@@ -111,7 +266,89 @@
           <div class="fill-label">マスタデータ・テストデータ <span class="required">必須</span></div>
           <div class="fill-hint">初期投入するデータ（カテゴリマスタ、管理者ユーザー等）</div>
           <div class="fill-content">
-            <p>（初期データのSQL INSERT文を記載）</p>
+            <pre>-- users: 管理者1件 + テスト用一般ユーザー2件
+INSERT INTO users (id, name, email, password_hash, role, status, created_at, updated_at) VALUES
+(1, '管理者ユーザー', 'admin@inimu.jp', '$2a$10$7EqJtq98hPqEX7fNZaFWoOHi6M9G8QfY9Yw0K6gQ1x9lWmYV0r3m2', 'admin', 'active', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(2, 'テストスタッフA', 'staff01@inimu.jp', '$2a$10$wH8K8VQJm1Yp0G7nZcQx2uQm8hL4Jk2PqR6sT8uV1wX3yZ5aBcDeF', 'staff', 'active', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(3, 'テストスタッフB', 'staff02@inimu.jp', '$2a$10$N9vK2pL4mQ7rS1tU8wX3yOaBcDeFgHiJkLmNoPqRsTuVwXyZaBcDe', 'staff', 'active', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+-- workshop_plans: カテゴリマスタ相当（5件程度）
+INSERT INTO workshop_plans (id, plan_name, price, duration_minutes, capacity, is_active, created_at, updated_at) VALUES
+(1, 'ベーシック調香体験', 5500, 60, 2, TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(2, 'ペア調香体験', 11000, 60, 2, TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(3, '3名グループ体験', 16500, 60, 3, TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(4, 'ギフト向け体験プラン', 6600, 60, 2, TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(5, 'OEM相談予約枠', 0, 30, 1, TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+-- customers: テスト用サンプルデータ
+INSERT INTO customers (id, name, kana, email, phone, line_status, memo, deleted_at, created_at, updated_at) VALUES
+(1, '田村 沙希', 'たむら さき', 'tamura@example.com', '090-1111-2222', 'registered', 'Instagram経由', NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(2, '山田 太郎', 'やまだ たろう', 'yamada@example.com', '090-2222-3333', 'unregistered', 'ペア予約希望', NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(3, '佐藤 花子', 'さとう はなこ', 'sato@example.com', '090-3333-4444', 'registered', 'ギフト相談あり', NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(4, '鈴木 一郎', 'すずき いちろう', 'suzuki@example.com', '090-4444-5555', 'unregistered', '法人問い合わせ予定', NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(5, '高橋 美咲', 'たかはし みさき', 'takahashi@example.com', '090-5555-6666', 'registered', 'リピーター', NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+-- reservations: テスト用サンプルデータ
+INSERT INTO reservations (id, customer_id, user_id, workshop_plan_id, reservation_date, time_slot, participants, total_price, status, source, notes, deleted_at, created_at, updated_at) VALUES
+(1, 1, 2, 2, '2026-05-02', '11:00-12:00', 2, 11000, 'confirmed', 'website', 'アレルギーなし', NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(2, 2, 2, 3, '2026-05-02', '13:00-14:00', 3, 16500, 'confirmed', 'website', '友人グループ', NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(3, 3, 3, 1, '2026-05-03', '11:00-12:00', 2, 11000, 'cancelled', 'website', '日程変更予定', NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(4, 4, 2, 1, '2026-05-04', '15:00-16:00', 1, 5500, 'checked_in', 'admin', '当日飛び込み', NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(5, 5, 3, 4, '2026-05-05', '11:00-12:00', 2, 13200, 'confirmed', 'website', 'ギフト用途', NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+-- contacts: テスト用サンプルデータ
+INSERT INTO contacts (id, customer_id, category, company_name, subject, message, status, response_memo, deleted_at, created_at, updated_at) VALUES
+(1, 1, 'general', NULL, '営業時間について', '週末の空き状況を知りたいです。', 'unprocessed', NULL, NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(2, 3, 'gift', NULL, 'ギフト相談', '母の日向けの提案を希望します。', 'processing', 'メール返信済み', NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(3, 4, 'oem', 'Sample Hotel', 'OEM相談', 'ホテルアメニティ開発を相談したいです。', 'completed', '打ち合わせ日程調整済み', NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(4, 2, 'workshop', NULL, '当日予約可否', '本日予約できますか。', 'completed', '空き枠案内済み', NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(5, 5, 'corporate', 'ABC Corp', '法人ギフト', '法人向けノベルティの相談です。', 'unprocessed', NULL, NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+-- calendar_settings
+INSERT INTO calendar_settings (id, business_date, is_open, open_note, created_at, updated_at) VALUES
+(1, '2026-05-02', TRUE, '通常営業', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(2, '2026-05-03', TRUE, '通常営業', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(3, '2026-05-04', TRUE, '祝日営業', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(4, '2026-05-05', TRUE, '通常営業', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(5, '2026-05-06', FALSE, '休業日', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+-- workshop_slots
+INSERT INTO workshop_slots (id, calendar_setting_id, slot_time, remaining_capacity, is_available, created_at, updated_at) VALUES
+(1, 1, '11:00-12:00', 1, TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(2, 1, '13:00-14:00', 0, FALSE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(3, 2, '11:00-12:00', 2, TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(4, 3, '15:00-16:00', 1, TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(5, 4, '11:00-12:00', 2, TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+-- products
+INSERT INTO products (id, series, product_name, slug, description, price, material_origin, usage_scene, is_visible, deleted_at, created_at, updated_at) VALUES
+(1, 'HATENKOU', '花火', 'hanabi', '破天荒シリーズの代表的な香り。', 5500, '日本', 'ギフト・自宅用', TRUE, NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(2, 'PERFUMERS', 'TeaParty', 'teaparty', '紅茶をイメージした香り。', 5500, '日本', '日常使い', TRUE, NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(3, 'WANOWA', '国造ゆず', 'kokuzo-yuzu', '石川県能美市のゆずを使用。', 2200, '石川県 能美市 国造地区', 'ハンドケア', TRUE, NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(4, 'WANOWA', '加子母ひのき', 'kakihara-hinoki', '岐阜県中津川市加子母のひのき。', 2200, '岐阜県 中津川市 加子母', 'ハンドケア', TRUE, NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(5, 'WANOWA', '和束茶', 'wazuka-cha', '京都府和束町の茶葉を活かした香り。', 2200, '京都府 和束町', 'ハンドケア', TRUE, NULL, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+-- product_images
+INSERT INTO product_images (id, product_id, image_path, sort_order, created_at, updated_at) VALUES
+(1, 1, '/images/products/hanabi_main.jpg', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(2, 2, '/images/products/teaparty_main.jpg', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(3, 3, '/images/products/kokuzo_yuzu_main.jpg', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(4, 4, '/images/products/kakihara_hinoki_main.jpg', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(5, 5, '/images/products/wazuka_cha_main.jpg', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+-- email_templates
+INSERT INTO email_templates (id, template_name, subject, body, is_active, created_at, updated_at) VALUES
+(1, 'reservation_confirmation', 'ご予約ありがとうございます', 'ご予約内容をお知らせします。', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(2, 'reservation_update', 'ご予約内容変更のお知らせ', 'ご予約内容が変更されました。', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(3, 'contact_auto_reply', 'お問い合わせありがとうございます', 'お問い合わせを受け付けました。', TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+-- mail_logs
+INSERT INTO mail_logs (id, template_id, reservation_id, contact_id, recipient_email, sent_at, send_status, created_at, updated_at) VALUES
+(1, 1, 1, NULL, 'tamura@example.com', CURRENT_TIMESTAMP, 'sent', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(2, 1, 2, NULL, 'yamada@example.com', CURRENT_TIMESTAMP, 'sent', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(3, 3, NULL, 2, 'sato@example.com', CURRENT_TIMESTAMP, 'sent', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(4, 3, NULL, 3, 'suzuki@example.com', CURRENT_TIMESTAMP, 'sent', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(5, 2, 3, NULL, 'sato@example.com', CURRENT_TIMESTAMP, 'sent', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);</pre>
           </div>
         </div>
 
