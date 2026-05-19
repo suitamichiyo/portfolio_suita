@@ -63,7 +63,9 @@
           <div class="fill-label">デザインキーワード <span class="required">必須</span></div>
           <div class="fill-hint">デザインの方向性を表すキーワード3つとその説明</div>
           <div class="fill-content">
-            <p>（デザインキーワード3つとその説明を記載）</p>
+            <p><strong>1. モノトーンの静けさ</strong><br>`#1A1A1A` と `#F7F7F5` を基調に、アクセントカラーを使わず整えることで、香りや素材の世界観を邪魔しない静かな上質さをつくる。</p>
+            <p><strong>2. 物語性と手仕事感</strong><br>見出しやナラティブ本文にセリフ体を使い、散文中心のライティングと組み合わせることで、ブランド背景や素材のストーリーが伝わる設計にする。</p>
+            <p><strong>3. 情報のメリハリ</strong><br>通常カード、強調カード、黒背景セクションを使い分け、破天荒やOEM実績など見せたい情報にだけ強いコントラストを与える。</p>
           </div>
         </div>
 
@@ -77,16 +79,27 @@
             <div class="fill-hint">各色のHEXコード・使用場面を記載し、実際の色見本も表示してください</div>
 
         <table class="doc-table">
-          <thead><tr><th>色の種類</th><th>カラーコード</th><th>色見本</th><th>使用場面</th></tr></thead>
+          <thead><tr><th>用途</th><th>カラー名</th><th>HEX</th><th>色見本</th><th>使用箇所</th></tr></thead>
           <tbody>
-          <tr class="template-row"><td>メインカラー</td><td>#（コードを入力）</td><td>（CSSで色見本を表示）</td><td>ヘッダー、ボタン、見出し</td></tr>
-          <tr class="template-row"><td>サブカラー</td><td>#（コードを入力）</td><td>（CSSで色見本を表示）</td><td>背景、カード、セクション区切り</td></tr>
-          <tr class="template-row"><td>アクセントカラー</td><td>#（コードを入力）</td><td>（CSSで色見本を表示）</td><td>CTA、リンク、強調</td></tr>
-          <tr class="template-row"><td>背景色</td><td>#（コードを入力）</td><td>（CSSで色見本を表示）</td><td>ページ背景</td></tr>
-          <tr class="template-row"><td>テキスト色</td><td>#（コードを入力）</td><td>（CSSで色見本を表示）</td><td>本文テキスト</td></tr>
-          <tr class="template-row"><td>テキスト色（薄）</td><td>#（コードを入力）</td><td>（CSSで色見本を表示）</td><td>補助テキスト、注釈</td></tr>
+          <tr><td>Primary / Text</td><td>Black</td><td><code>#1A1A1A</code></td><td><div style="width:48px;height:24px;background:#1A1A1A;border:1px solid #ccc;"></div></td><td>テキスト全般・ボタン・フッター背景・破天荒セクション</td></tr>
+          <tr><td>Background Warm</td><td>Warm White</td><td><code>#F7F7F5</code></td><td><div style="width:48px;height:24px;background:#F7F7F5;border:1px solid #ccc;"></div></td><td>ページ背景・カード背景</td></tr>
+          <tr><td>Background Beige</td><td>Beige</td><td><code>#F2EFE8</code></td><td><div style="width:48px;height:24px;background:#F2EFE8;border:1px solid #ccc;"></div></td><td>セクション区切り背景（WORKSHOP・VISIT・料金表等）</td></tr>
+          <tr><td>Background Amber</td><td>Amber</td><td><code>#FAEEDA</code></td><td><div style="width:48px;height:24px;background:#FAEEDA;border:1px solid #ccc;"></div></td><td>社会性商品セクションのみ</td></tr>
+          <tr><td>Secondary Text</td><td>Gray</td><td><code>#888888</code></td><td><div style="width:48px;height:24px;background:#888888;border:1px solid #ccc;"></div></td><td>サブテキスト・キャプション</td></tr>
+          <tr><td>Tertiary Text</td><td>Light Gray</td><td><code>#AAAAAA</code></td><td><div style="width:48px;height:24px;background:#AAAAAA;border:1px solid #ccc;"></div></td><td>注釈・プレースホルダー・セクションラベル</td></tr>
+          <tr><td>Border Standard</td><td>—</td><td><code>#E0E0E0</code></td><td><div style="width:48px;height:24px;background:#E0E0E0;border:1px solid #ccc;"></div></td><td>カード・セクション区切り線（0.5px）</td></tr>
+          <tr><td>Border Emphasis</td><td>Warm Dark Gray</td><td><code>#3D3D3A</code></td><td><div style="width:48px;height:24px;background:#3D3D3A;border:1px solid #ccc;"></div></td><td>強調カード（看板商品・選択中）（2px）</td></tr>
+          <tr><td>White</td><td>White</td><td><code>#FFFFFF</code></td><td><div style="width:48px;height:24px;background:#FFFFFF;border:1px solid #ccc;"></div></td><td>カード背景・モーダル・入力フォーム</td></tr>
           </tbody>
         </table>
+
+        <div class="fill-content" style="margin-top:16px;">
+          <p><strong>カラー使用の原則</strong></p>
+          <p>アクセントカラーは使わず、`#1A1A1A` と `#F7F7F5` のモノトーンで統一する。</p>
+          <p>破天荒専用セクションは `#1A1A1A` 背景・`#FFFFFF` テキストで別格感を演出する。</p>
+          <p>社会性商品セクションのみ `#FAEEDA` を背景に使用し、エリアを視覚的に区別する。</p>
+          <p>強調カードのボーダーは純黒ではなく `#3D3D3A` を使い、柔らかさを保つ。</p>
+        </div>
 
           </div>
         </section>
@@ -97,16 +110,27 @@
           <div class="fill-block">
             <div class="fill-label">フォント設定 <span class="required">必須</span></div>
         <table class="doc-table">
-          <thead><tr><th>要素</th><th>フォント名</th><th>サイズ</th><th>太さ</th><th>行間</th><th>用途</th></tr></thead>
+          <thead><tr><th>用途</th><th>フォント</th><th>サイズ（PC）</th><th>サイズ（SP）</th><th>ウェイト</th><th>備考</th></tr></thead>
           <tbody>
-          <tr class="template-row"><td>h1（大見出し）</td><td>（フォント名）</td><td>（px）</td><td>（bold等）</td><td>（倍率）</td><td>ページタイトル</td></tr>
-          <tr class="template-row"><td>h2（中見出し）</td><td>（フォント名）</td><td>（px）</td><td>（bold等）</td><td>（倍率）</td><td>セクション見出し</td></tr>
-          <tr class="template-row"><td>h3（小見出し）</td><td>（フォント名）</td><td>（px）</td><td>（bold等）</td><td>（倍率）</td><td>サブセクション</td></tr>
-          <tr class="template-row"><td>本文</td><td>（フォント名）</td><td>（px）</td><td>（regular等）</td><td>（倍率）</td><td>通常テキスト</td></tr>
-          <tr class="template-row"><td>キャプション</td><td>（フォント名）</td><td>（px）</td><td>（regular等）</td><td>（倍率）</td><td>画像の説明等</td></tr>
-          <tr class="template-row"><td>ボタン</td><td>（フォント名）</td><td>（px）</td><td>（bold等）</td><td>—</td><td>ボタンテキスト</td></tr>
+          <tr><td>ページタイトル（H1）</td><td>Noto Serif JP / Cormorant Garamond</td><td>36〜42px</td><td>24〜28px</td><td>500</td><td>ヒーローコピー</td></tr>
+          <tr><td>セクション見出し（H2）</td><td>Noto Serif JP / Cormorant Garamond</td><td>24〜28px</td><td>20〜22px</td><td>500</td><td>—</td></tr>
+          <tr><td>カード見出し（H3）</td><td>Noto Serif JP</td><td>16〜20px</td><td>14〜16px</td><td>500</td><td>—</td></tr>
+          <tr><td>ナラティブ本文</td><td>Noto Serif JP</td><td>13〜14px</td><td>13px</td><td>400</td><td>行間 2.0</td></tr>
+          <tr><td>UI本文（情報・説明）</td><td>Noto Sans JP</td><td>11〜13px</td><td>11〜12px</td><td>400</td><td>行間 1.7</td></tr>
+          <tr><td>キッカー（英語小見出し）</td><td>Cormorant Garamond</td><td>10〜11px</td><td>10px</td><td>400</td><td>letter-spacing: 0.1em・大文字</td></tr>
+          <tr><td>ボタン</td><td>Noto Sans JP / Inter</td><td>12〜14px</td><td>12px</td><td>500</td><td>—</td></tr>
+          <tr><td>注釈・キャプション</td><td>Noto Sans JP</td><td>9〜11px</td><td>9〜10px</td><td>400</td><td>color: #AAAAAA</td></tr>
           </tbody>
         </table>
+
+        <div class="fill-content" style="margin-top:16px;">
+          <p><strong>フォントファミリー</strong></p>
+          <p>和文 見出し・ナラティブ: Noto Serif JP / 英文 見出し・キッカー: Cormorant Garamond / 和文 UI・ボタン・ラベル: Noto Sans JP / 英文 UI・ボタン・数値: Inter</p>
+          <p><strong>タイポグラフィの原則</strong></p>
+          <p>見出し・ナラティブ本文はセリフ体で物語性と手仕事感を演出し、UI操作系はサンセリフ体で視認性を確保する。</p>
+          <p>キッカーは英語大文字・letter-spacing 0.1em で統一し、ナラティブ本文は箇条書きではなく散文で記述する。</p>
+          <p>最後の1文は体言止め、またはイタリックで余韻を残す構成を基本とする。</p>
+        </div>
 
           </div>
         </section>
@@ -119,21 +143,55 @@
           <div class="fill-label">ボタン <span class="required">必須</span></div>
           <div class="fill-hint">プライマリ・セカンダリ・デンジャーの3種類のボタンスタイル（実物のHTMLサンプル付き）</div>
           <div class="fill-content">
-            <p>（ここにボタンの実物サンプルとCSSコードを記載）</p>
+            <table class="doc-table">
+              <thead><tr><th>種別</th><th>背景</th><th>テキスト</th><th>ボーダー</th><th>用途</th></tr></thead>
+              <tbody>
+                <tr><td>Primary</td><td><code>#1A1A1A</code></td><td><code>#FFFFFF</code></td><td>なし</td><td>予約する・購入する等の主要CTA</td></tr>
+                <tr><td>Secondary</td><td><code>#FFFFFF</code></td><td><code>#1A1A1A</code></td><td>0.5px <code>#E0E0E0</code></td><td>サブアクション・詳しく見る</td></tr>
+                <tr><td>Ghost</td><td>透明</td><td><code>#888888</code></td><td>0.5px <code>#CCCCCC</code></td><td>じゃらん併記・補助リンク</td></tr>
+              </tbody>
+            </table>
           </div>
         </div>
         <div class="fill-block">
           <div class="fill-label">フォーム要素 <span class="required">必須</span></div>
           <div class="fill-hint">テキスト入力・セレクト・テキストエリア・チェックボックス・ラジオボタン（実物のHTMLサンプル付き）</div>
           <div class="fill-content">
-            <p>（ここにフォーム要素の実物サンプルとCSSコードを記載）</p>
+            <table class="doc-table">
+              <thead><tr><th>要素</th><th>スタイル</th></tr></thead>
+              <tbody>
+                <tr><td>入力フィールド</td><td>背景 <code>#FFFFFF</code>・ボーダー 0.5px <code>#CCCCCC</code>・角丸 4px・padding 8px 10px</td></tr>
+                <tr><td>フォーカス時</td><td>ボーダー 1px <code>#1A1A1A</code></td></tr>
+                <tr><td>エラー時</td><td>ボーダー 1px <code>#CC4444</code>・エラーテキスト <code>#CC4444</code></td></tr>
+                <tr><td>必須マーク</td><td><code>*</code>（アスタリスク）・color <code>#CC4444</code></td></tr>
+              </tbody>
+            </table>
           </div>
         </div>
         <div class="fill-block">
           <div class="fill-label">カード・テーブル・その他 <span class="required">必須</span></div>
           <div class="fill-hint">カードコンポーネント・テーブルスタイル・アラート等（実物のHTMLサンプル付き）</div>
           <div class="fill-content">
-            <p>（ここにコンポーネントの実物サンプルとCSSコードを記載）</p>
+            <p><strong>カード</strong></p>
+            <table class="doc-table">
+              <thead><tr><th>種別</th><th>背景</th><th>ボーダー</th><th>用途</th></tr></thead>
+              <tbody>
+                <tr><td>Standard</td><td><code>#F7F7F5</code></td><td>0.5px <code>#E0E0E0</code></td><td>商品カード・FAQカード・レビューカード</td></tr>
+                <tr><td>Featured</td><td><code>#FFFFFF</code></td><td>2px <code>#3D3D3A</code></td><td>看板商品・強調商品（破天荒等）</td></tr>
+                <tr><td>Dark</td><td><code>#1A1A1A</code></td><td>なし</td><td>破天荒特集・フッター・黒背景CTA</td></tr>
+              </tbody>
+            </table>
+            <p><strong>バッジ</strong></p>
+            <table class="doc-table">
+              <thead><tr><th>種別</th><th>背景</th><th>テキスト</th><th>ボーダー</th><th>用途</th></tr></thead>
+              <tbody>
+                <tr><td>Dark</td><td><code>#1A1A1A</code></td><td><code>#FFFFFF</code></td><td>なし</td><td>看板商品ラベル</td></tr>
+                <tr><td>Light</td><td><code>#F7F7F5</code></td><td><code>#555555</code></td><td>0.5px <code>#CCCCCC</code></td><td>TPO・使用シーンタグ</td></tr>
+                <tr><td>Accent</td><td><code>#EEEDFE</code></td><td><code>#3C3489</code></td><td>なし</td><td>浅草限定・WS限定</td></tr>
+                <tr><td>Amber</td><td><code>#FAEEDA</code></td><td><code>#633806</code></td><td>なし</td><td>自立支援・廃棄資源活用</td></tr>
+                <tr><td>Teal</td><td><code>#E1F5EE</code></td><td><code>#085041</code></td><td>なし</td><td>廃棄資源活用（MUSUBI）</td></tr>
+              </tbody>
+            </table>
           </div>
         </div>
 
@@ -146,7 +204,72 @@
           <div class="fill-label">レイアウト基本ルール <span class="required">必須</span></div>
           <div class="fill-hint">グリッド・余白・角丸・シャドウ等の数値ルール</div>
           <div class="fill-content">
-            <p>（レイアウトルールを記載）</p>
+            <table class="doc-table">
+              <thead><tr><th>項目</th><th>PC（1440px基準）</th><th>SP（〜767px）</th></tr></thead>
+              <tbody>
+                <tr><td>ページ最大幅</td><td>1440px</td><td>100%</td></tr>
+                <tr><td>コンテンツ左右余白</td><td>160px</td><td>20px</td></tr>
+                <tr><td>セクション上下余白</td><td>80〜120px</td><td>48〜64px</td></tr>
+                <tr><td>カード間ギャップ</td><td>10〜12px</td><td>8〜10px</td></tr>
+                <tr><td>カード内パディング</td><td>16〜20px</td><td>14〜16px</td></tr>
+                <tr><td>ボーダー太さ（標準）</td><td>0.5px</td><td>0.5px</td></tr>
+                <tr><td>ボーダー太さ（強調）</td><td>2px</td><td>2px</td></tr>
+                <tr><td>角丸（カード）</td><td>4px</td><td>4px</td></tr>
+                <tr><td>角丸（ボタン）</td><td>2px</td><td>2px</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="fill-block">
+          <div class="fill-label">写真・画像トーン <span class="required">必須</span></div>
+          <div class="fill-hint">写真トーンとビジュアル運用ルール</div>
+          <div class="fill-content">
+            <table class="doc-table">
+              <thead><tr><th>用途</th><th>トーン指針</th></tr></thead>
+              <tbody>
+                <tr><td>ヒーロービジュアル</td><td>暗めのオーバーレイ（opacity 0.20〜0.30）で文字可読性を確保</td></tr>
+                <tr><td>商品写真（WANOWA・一般）</td><td>白〜ウォームグレー背景。自然光・余白多め</td></tr>
+                <tr><td>破天荒商品写真</td><td>黒背景推奨。高コントラスト・ミニマル構図</td></tr>
+                <tr><td>素材・産地写真</td><td>自然光。産地の空気感・季節感を重視</td></tr>
+                <tr><td>代表者プロフィール写真</td><td>縦長ポートレート。左全高配置（STORYページ）</td></tr>
+                <tr><td>プレースホルダー</td><td>背景 <code>#E8E5DF</code>・対角線（X）でワイヤーフレーム上に表示</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="fill-block">
+          <div class="fill-label">レスポンシブとページ別方針 <span class="required">必須</span></div>
+          <div class="fill-hint">ブレークポイント、固定CTA、ページ別の背景・特記事項</div>
+          <div class="fill-content">
+            <p><strong>レスポンシブブレークポイント</strong></p>
+            <table class="doc-table">
+              <thead><tr><th>デバイス</th><th>幅</th><th>主な変更点</th></tr></thead>
+              <tbody>
+                <tr><td>Desktop</td><td>1440px〜</td><td>ワイヤーフレーム設計どおり</td></tr>
+                <tr><td>Tablet</td><td>768px〜1139px</td><td>3カラム→2カラム / 2カラム→1カラム切り替え</td></tr>
+                <tr><td>Mobile</td><td>〜767px</td><td>全セクション1カラム化・フォントサイズ縮小・フローティングCTA常時表示</td></tr>
+              </tbody>
+            </table>
+            <p>モバイル固定フローティングCTAは、全ページで常時表示し、「自分だけの香りを作る・体験は土日祝のみ・¥5,500（税込）」＋「体験を予約する」ボタンを置く。背景は <code>#FFFFFF</code>、上ボーダーは 0.5px <code>#E0E0E0</code>、高さは 64px、z-index は 100 とする。</p>
+            <p><strong>ページ別設計方針サマリー</strong></p>
+            <table class="doc-table">
+              <thead><tr><th>ページ</th><th>背景トーン</th><th>特記事項</th></tr></thead>
+              <tbody>
+                <tr><td>TOP</td><td>ダーク（HEROのみ）+ ウォーム</td><td>3CTA並列・Instagram埋め込み</td></tr>
+                <tr><td>WORKSHOP</td><td>ウォームベージュ</td><td>土日祝のみを複数箇所で明示。WS時間帯：11:00〜12:00 / 13:00〜14:00 / 15:00〜16:00</td></tr>
+                <tr><td>PRODUCTS</td><td>ホワイト + ダーク（破天荒特集）</td><td>看板商品は2pxボーダー + 2バッジで強調</td></tr>
+                <tr><td>STORY</td><td>ダーク（OEM実績）+ ウォーム</td><td>ナラティブ型。代表者写真は縦長左配置</td></tr>
+                <tr><td>VISIT</td><td>ウォームベージュ</td><td>営業日：火〜日（月曜祝日の場合は火曜定休）</td></tr>
+                <tr><td>ONLINE</td><td>ホワイト + ダーク（LINE CTA）</td><td>WS体験後の再購入導線（QR連携）</td></tr>
+                <tr><td>RESERVE</td><td>ホワイト + ウォームベージュ</td><td>カレンダー全日表示（土日祝のみ黒塗り）</td></tr>
+                <tr><td>CONTACT</td><td>ウォームベージュ + ダーク（OEM）</td><td>返信目安：3営業日（火〜日）以内</td></tr>
+                <tr><td>破天荒・PERFUMERS シリーズトップ</td><td>ダーク（黒背景）</td><td>購入は現行HPへリンク。WSへの誘導CTAなし</td></tr>
+                <tr><td>WANOWA シリーズトップ</td><td>ウォームベージュ</td><td>6香り一覧・植樹活動ナラティブ。WSへの誘導CTAなし</td></tr>
+                <tr><td>WANOWA 詳細（×6）</td><td>ホワイト + ウォームベージュ</td><td>産地ストーリー中心。購入は現行HPへリンク。WSへの誘導CTAなし</td></tr>
+              </tbody>
+            </table>
           </div>
         </div>
 
