@@ -529,6 +529,25 @@ a:hover { color: var(--black); }
   color: var(--gray-500);
 }
 
+/* Force specific headings/links in proposal docs to render in black */
+.external-link-box .external-link-box-title,
+.external-link-box .external-link-box-title .material-symbols-outlined,
+.section-title,
+.toc-list a[href="#sec5"],
+.toc-list a[href="#sec6"] {
+  color: var(--black) !important;
+}
+
+.toc-list a[href="#sec5"]::before,
+.toc-list a[href="#sec6"]::before {
+  color: var(--black) !important;
+}
+
+.doc-table .template-row td {
+  color: var(--black) !important;
+  font-style: normal;
+}
+
 .external-link-box .external-link-box-desc {
   font-size: 13px;
   color: var(--text-light);
@@ -543,7 +562,7 @@ a:hover { color: var(--black); }
 
 .external-link-box .external-link-input input {
   font-size: 13px;
-  color: var(--text-muted);
+  color: var(--black);
   font-family: var(--font-en);
   background: var(--gray-100);
   border: 1px solid var(--border);
