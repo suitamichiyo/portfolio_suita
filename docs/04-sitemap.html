@@ -66,39 +66,61 @@
             <div class="fill-label">Webサイト構造図 <span class="required">必須</span></div>
             <div class="fill-hint">トップページから下層ページまでの階層構造をツリー形式で記載</div>
             <div class="fill-content">
-              <pre>inimu.jp（トップページ）
-├── WORKSHOP｜ワークショップ・体験
-│   ├── 体験の流れ（セクション内）
-│   ├── プラン・料金・開催日（土日祝のみ）
-│   ├── FAQ
-│   ├── お客様の声
-│   └── 予約フォーム ※F2（6/1実装）
-│       └── 予約完了・サンクスページ
-│           ├── LINE公式アカウント登録CTA
-│           └── Googleマップ口コミ依頼
-├── PRODUCTS｜商品
-│   ├── wano（入門）
-│   │   └── 商品詳細ページ
-│   ├── 破天荒（象徴・看板商品）
-│   │   └── 商品詳細ページ
-│   └── PERFUMERS（探究）
-│       └── 商品詳細ページ
-├── STORY｜ブランドストーリー
-│   ├── inimuとKARA INNOVATEについて
-│   ├── 日本素材MAP（ヒノキ・ゆず・伽羅等）
-│   ├── OEM・協業実績
-│   └── WANOWA植樹活動
-├── ONLINE｜オンラインショップ（EC）
-│   ├── 商品一覧
-│   ├── ギフトセット特集
-│   └── 「体験した香りをもう一度」再購入セクション
-├── VISIT｜アクセス・店舗案内
-│   ├── Googleマップ埋め込み
-│   ├── 営業日カレンダー（土日祝のみ）
-│   └── Googleマップ口コミ誘導ボタン
-└── CONTACT｜お問い合わせ ※F2（6/1実装）
-    ├── 一般問い合わせフォーム
-    └── 法人・OEM相談フォーム</pre>
+              <pre>inimu.jp/
+│
+├── / ................................................... TOP｜トップページ
+│     来店目的を3秒で形成するファーストビュー
+│     ├── → /workshop ................................ 体験を予約する（CTA）
+│     ├── → /products ................................ 香水を選ぶ（CTA）
+│     └── → /products ................................ お土産を探す（CTA）
+│
+├── /workshop .......................................... WORKSHOP｜ワークショップ体験
+│     WSの内容・料金・FAQを掲載。自社予約への移行を促す
+│     └── /workshop/reserve .......................... RESERVE｜予約フォーム（F2）
+│           ├── カレンダー・時間帯・人数選択
+│           └── /workshop/reserve/complete ........... 予約完了・サンクスページ
+│
+├── /products .......................................... PRODUCTS｜商品一覧
+│     来店目的別に3層商品構造を再編集
+│     ├── /products/hatenko .......................... 破天荒｜シリーズトップ
+│     │     ブランド紹介の掴みのみ
+│     │     └── → inimu.jp（現行HP）................. 各香り個別ページ（外部リンク）
+│     │           花火 / 磯波 / おどろおどろ / 魁 /
+│     │           桜吹雪 / 歌舞伎町 / 日本橋 / 銀座
+│     │           ＋ディスカバリーセット（5ml×5本）
+│     │
+│     ├── /products/perfumers ........................ PERFUMERS｜シリーズトップ
+│     │     コレクション別ブランド紹介の掴みのみ
+│     │     └── → inimu.jp（現行HP）................. 各コレクション個別ページ（外部リンク）
+│     │           CHOCOLATE / TeaParty / Jewel / Fruit
+│     │
+│     └── /products/wanowa ........................... WANOWA｜シリーズトップ
+│           植樹活動ナラティブ＋6種ハンドクリーム一覧
+│           ├── /products/wanowa/kokuzo-yuzu ......... 国造ゆず｜詳細
+│           │     石川県 能美市 国造地区（有機栽培30年以上）
+│           ├── /products/wanowa/kakihara-hinoki ..... 加子母ひのき｜詳細
+│           │     岐阜県 中津川市 加子母
+│           ├── /products/wanowa/wazuka-cha .......... 和束茶｜詳細
+│           │     京都府 和束町
+│           ├── /products/wanowa/tosa-buntan ......... 土佐文旦｜詳細
+│           │     高知県
+│           ├── /products/wanowa/nakagawa-hakka ...... 中川町和薄荷｜詳細
+│           │     北海道 中川町
+│           └── /products/wanowa/yamato-tachibana .... 大和橘｜詳細
+│                 奈良県
+│
+├── /story ............................................. STORY｜ブランドストーリー
+│     なぜinimuか。日本素材・OEM実績・代表プロフィール
+│
+├── /visit ............................................. VISIT｜アクセス・店舗案内
+│     営業日カレンダー・Googleマップ・口コミ誘導
+│
+├── /online ............................................ ONLINE｜オンラインショップ
+│     WS体験後のEC再購入・遠方ファン向け購買導線
+│
+└── /contact ........................................... CONTACT｜お問い合わせ（F2）
+      一般 / WS / ギフト・法人 / OEM開発の4カテゴリ
+      └── /contact/complete .......................... 送信完了ページ</pre>
             </div>
           </div>
           <div class="fill-block">
@@ -150,68 +172,343 @@
           <h2 class="section-title"><span class="section-icon">2</span> ページ一覧</h2>
 
           <div class="fill-block">
-            <div class="fill-label">Webサイト ページ一覧 <span class="required">必須</span></div>
+            <div class="fill-label">階層別ページ数 <span class="required">必須</span></div>
             <table class="doc-table">
               <thead>
                 <tr>
-                  <th>No.</th>
+                  <th>階層</th>
+                  <th>ページ数</th>
+                  <th>内容</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>L1（ルート）</td>
+                  <td>1</td>
+                  <td>TOP</td>
+                </tr>
+                <tr>
+                  <td>L2（メインナビ）</td>
+                  <td>7</td>
+                  <td>WORKSHOP / PRODUCTS / STORY / VISIT / ONLINE / RESERVE / CONTACT</td>
+                </tr>
+                <tr>
+                  <td>L3（シリーズトップ）</td>
+                  <td>3</td>
+                  <td>破天荒 / PERFUMERS / WANOWA シリーズトップ</td>
+                </tr>
+                <tr>
+                  <td>L4（商品詳細）</td>
+                  <td>6</td>
+                  <td>WANOWA ハンドクリーム詳細 × 6</td>
+                </tr>
+                <tr>
+                  <td>サブページ</td>
+                  <td>2</td>
+                  <td>予約完了 / 問い合わせ完了</td>
+                </tr>
+                <tr>
+                  <td><strong>合計</strong></td>
+                  <td><strong>19ページ</strong></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+
+          <div class="fill-block">
+            <div class="fill-label">ナビゲーション構成 <span class="required">必須</span></div>
+            <div class="fill-hint">サイト全体で共通して使う主要ナビゲーションとCTA構成</div>
+            <div class="fill-content">
+              <p><strong>グローバルナビ（全ページ共通・固定ヘッダー）</strong></p>
+              <pre>inimu [ロゴ]　　　WORKSHOP　PRODUCTS　STORY　VISIT　ONLINE　　[予約する]</pre>
+              <p><strong>フッターナビ（全ページ共通）</strong></p>
+              <pre>WORKSHOP　PRODUCTS　STORY　VISIT　ONLINE　CONTACT</pre>
+              <p><strong>モバイル固定フローティングCTA（全ページ）</strong></p>
+              <pre>自分だけの香りを作る・体験は土日祝のみ・¥5,500（税込）　[体験を予約する]</pre>
+            </div>
+          </div>
+
+          <div class="fill-block">
+            <div class="fill-label">外部リンク一覧 <span class="required">必須</span></div>
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>リンク先</th>
+                  <th>用途</th>
+                  <th>設置ページ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>inimu.jp（現行HP）破天荒各香り</td>
+                  <td>個別商品購入</td>
+                  <td>破天荒シリーズトップ</td>
+                </tr>
+                <tr>
+                  <td>inimu.jp（現行HP）PERFUMERS各香り</td>
+                  <td>個別商品購入</td>
+                  <td>PERFUMERSシリーズトップ</td>
+                </tr>
+                <tr>
+                  <td>inimu.jp（現行HP）WANOWA各香り</td>
+                  <td>各香り購入</td>
+                  <td>WANOWA詳細 × 6</td>
+                </tr>
+                <tr>
+                  <td>じゃらんnet</td>
+                  <td>WS予約（移行期併記）</td>
+                  <td>WORKSHOPページ・RESERVEページ</td>
+                </tr>
+                <tr>
+                  <td>Googleマップ</td>
+                  <td>ルート検索・口コミ</td>
+                  <td>VISITページ</td>
+                </tr>
+                <tr>
+                  <td>Instagram @inimu_fragrance</td>
+                  <td>SNSフィード</td>
+                  <td>TOPページ</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="fill-block">
+            <div class="fill-label">設計上の重要ルール <span class="required">必須</span></div>
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>ルール</th>
+                  <th>内容</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>WSへの誘導CTA設置</td>
+                  <td>WORKSHOPページ・RESERVEページのみ</td>
+                </tr>
+                <tr>
+                  <td>WSへの誘導CTA非設置</td>
+                  <td>シリーズトップ・WANOWA詳細（WANOWAの香りはWSの調香材料と別物のため）</td>
+                </tr>
+                <tr>
+                  <td>破天荒・PERFUMERSの個別ページ</td>
+                  <td>新HPでは制作しない。現行inimu.jpへ外部リンク</td>
+                </tr>
+                <tr>
+                  <td>パンくず起点</td>
+                  <td>TOP &gt; カテゴリ &gt; シリーズ &gt; 商品名 の4階層</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="fill-block">
+            <div class="fill-label">メインページ一覧 <span class="required">必須</span></div>
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>#</th>
                   <th>ページ名</th>
-                  <th>ページの目的</th>
-                  <th>主要コンテンツ</th>
+                  <th>URL</th>
+                  <th>WFファイル</th>
+                  <th>フェーズ</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>1</td>
-                  <td>TOP｜トップページ（HOME）</td>
-                  <td>来店前に「行く理由」を3秒で形成し、各導線へ誘導する</td>
-                  <td>ヒーロービジュアル、ブランドコピー、来店目的別CTA、新着情報、Instagram、アクセス案内</td>
+                  <td>TOP｜トップページ</td>
+                  <td>/</td>
+                  <td>inimu_TOP_WF</td>
+                  <td>F1</td>
                 </tr>
                 <tr>
                   <td>2</td>
-                  <td>WORKSHOP｜ワークショップ体験ページ</td>
-                  <td>自社HP予約への移行を促す主軸ページ</td>
-                  <td>大型ビジュアル、体験の流れ、プラン説明、FAQ、参加者の声、予約ボタン、撮影スポット紹介</td>
+                  <td>WORKSHOP｜ワークショップ体験</td>
+                  <td>/workshop</td>
+                  <td>inimu_WORKSHOP_WF</td>
+                  <td>F1＋F2</td>
                 </tr>
                 <tr>
                   <td>3</td>
-                  <td>PRODUCTS｜商品ページ</td>
-                  <td>失敗しない香り選びを支援し、来店前後の購買導線をつくる</td>
-                  <td>商品カテゴリナビ、商品カード、商品詳細、破天荒特集、ギフトセット提案、EC購入ボタン</td>
+                  <td>PRODUCTS｜商品一覧</td>
+                  <td>/products</td>
+                  <td>inimu_PRODUCTS_WF</td>
+                  <td>F1</td>
                 </tr>
                 <tr>
                   <td>4</td>
-                  <td>STORY｜ブランドストーリー・日本素材ページ</td>
-                  <td>ブランドの根拠を伝え、共感と信頼を形成する</td>
-                  <td>日本素材ビジュアル、ブランドの歴史・想い、日本素材MAP、OEM協業実績、WANOWA植樹活動</td>
+                  <td>STORY｜ブランドストーリー</td>
+                  <td>/story</td>
+                  <td>inimu_STORY_WF</td>
+                  <td>F1</td>
                 </tr>
                 <tr>
                   <td>5</td>
-                  <td>VISIT｜アクセス・店舗案内ページ</td>
-                  <td>来店直前の最終接点として迷わず来店できる状態をつくる</td>
-                  <td>外観・内装写真、Googleマップ、営業日カレンダー、営業時間・住所、徒歩ルート、口コミハイライト</td>
+                  <td>VISIT｜アクセス・店舗案内</td>
+                  <td>/visit</td>
+                  <td>inimu_VISIT_WF</td>
+                  <td>F1</td>
                 </tr>
                 <tr>
                   <td>6</td>
-                  <td>ONLINE｜オンラインショップ（EC）ページ</td>
-                  <td>WS体験後の再購入と遠方ファンの購買導線を設計する</td>
-                  <td>EC商品一覧、再購入セクション、浅草限定特集、ギフトラッピング案内、LINE登録CTA</td>
+                  <td>ONLINE｜オンラインショップ</td>
+                  <td>/online</td>
+                  <td>inimu_ONLINE_WF</td>
+                  <td>F1</td>
                 </tr>
                 <tr>
                   <td>7</td>
-                  <td>RESERVE｜予約フォーム（WS専用）</td>
-                  <td>空き枠確認から予約完了までを最短化する</td>
-                  <td>カレンダー型空き枠表示、プラン・人数選択、顧客情報入力、確認メール、LINE登録CTA、じゃらんリンク</td>
+                  <td>RESERVE｜予約フォーム</td>
+                  <td>/workshop/reserve</td>
+                  <td>inimu_RESERVE_WF</td>
+                  <td>F2</td>
                 </tr>
                 <tr>
                   <td>8</td>
-                  <td>CONTACT｜お問い合わせページ</td>
-                  <td>一般問い合わせと法人・OEM相談の受け口になる</td>
-                  <td>カテゴリ選択、入力フォーム、自動返信メール、法人・OEM実績紹介</td>
+                  <td>CONTACT｜お問い合わせ</td>
+                  <td>/contact</td>
+                  <td>inimu_CONTACT_WF</td>
+                  <td>F2</td>
                 </tr>
               </tbody>
             </table>
+          </div>
 
+          <div class="fill-block">
+            <div class="fill-label">商品シリーズページ一覧 <span class="required">必須</span></div>
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>ページ名</th>
+                  <th>URL</th>
+                  <th>WFファイル</th>
+                  <th>フェーズ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>9</td>
+                  <td>破天荒 シリーズトップ</td>
+                  <td>/products/hatenko</td>
+                  <td>inimu_SERIES_TOP_WF1</td>
+                  <td>F1</td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td>PERFUMERS シリーズトップ</td>
+                  <td>/products/perfumers</td>
+                  <td>inimu_PERFUMERS_TOP_WF_1</td>
+                  <td>F1</td>
+                </tr>
+                <tr>
+                  <td>11</td>
+                  <td>WANOWA シリーズトップ</td>
+                  <td>/products/wanowa</td>
+                  <td>inimu_WANOWA_TOP_WF_1</td>
+                  <td>F1</td>
+                </tr>
+                <tr>
+                  <td>12〜17</td>
+                  <td>WANOWA ハンドクリーム詳細（×6）</td>
+                  <td>/products/wanowa/{scent}</td>
+                  <td>inimu_WANOWA_DETAIL_WF1</td>
+                  <td>F1</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="fill-block">
+            <div class="fill-label">WANOWA詳細ページ 対象6種 <span class="required">必須</span></div>
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>URL例</th>
+                  <th>香り名</th>
+                  <th>産地</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>/products/wanowa/kokuzo-yuzu</td>
+                  <td>国造ゆず</td>
+                  <td>石川県 能美市 国造地区（有機栽培30年以上）</td>
+                </tr>
+                <tr>
+                  <td>/products/wanowa/kakihara-hinoki</td>
+                  <td>加子母ひのき</td>
+                  <td>岐阜県 中津川市 加子母</td>
+                </tr>
+                <tr>
+                  <td>/products/wanowa/wazuka-cha</td>
+                  <td>和束茶</td>
+                  <td>京都府 和束町</td>
+                </tr>
+                <tr>
+                  <td>/products/wanowa/tosa-buntan</td>
+                  <td>土佐文旦</td>
+                  <td>高知県</td>
+                </tr>
+                <tr>
+                  <td>/products/wanowa/nakagawa-hakka</td>
+                  <td>中川町和薄荷</td>
+                  <td>北海道 中川町</td>
+                </tr>
+                <tr>
+                  <td>/products/wanowa/yamato-tachibana</td>
+                  <td>大和橘</td>
+                  <td>奈良県</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="fill-block">
+            <div class="fill-label">ページ別詳細 <span class="required">必須</span></div>
+            <div class="fill-hint">各ページの目的と主要コンテンツ概要</div>
+            <div class="fill-content">
+              <p><strong>1.
+                  TOP｜トップページ</strong><br>目的：来店前に「行く理由」を3秒で形成する唯一のファーストビュー。3つの来店目的（お土産／体験／香水）への入口を一画面で伝える。<br>主要コンテンツ：全画面ヒーロービジュアル、キャッチコピー、来店目的別CTA×3、商品3層プレビュー、信頼実績バッジ、Instagram最新フィード、アクセス・営業日案内。
+              </p>
+              <p><strong>2.
+                  WORKSHOP｜ワークショップ体験ページ</strong><br>目的：WS予約の主軸ページ。じゃらん依存から自社HP予約への移行を促す核。土日祝のみ運営を明記し事前計画予約を促す。<br>主要コンテンツ：大型ビジュアル、4STEP図解、プラン・料金、FAQ、お客様の声、予約CTA、自社サイト推奨＋じゃらん併記、SNS撮影スポット誘導。
+              </p>
+              <p><strong>3.
+                  PRODUCTS｜商品ページ</strong><br>目的：「失敗しない香り選び」ニーズに応える商品紹介ページ。3層商品構造を来店目的別に再編集し、EC購入・再購入導線として機能させる。<br>主要コンテンツ：3主力フレグランス、破天荒特集、アロマレコルト、社会性商品、ギフトセット提案、各シリーズトップページへの導線。
+              </p>
+              <p><strong>4.
+                  STORY｜ブランドストーリーページ</strong><br>目的：「なぜinimuか」の根拠を伝え、30代女性感度層・インバウンドの共感と信頼を形成する。<br>主要コンテンツ：日本素材写真、ブランドの歴史・想い、日本素材MAP、OEM協業実績、WANOWA植樹活動、代表プロフィール。
+              </p>
+              <p><strong>5.
+                  VISIT｜アクセス・店舗案内ページ</strong><br>目的：来店直前の最終接点。浅草観光中の動線と営業日を分かりやすく伝える。Googleマップ口コミ誘導で件数増加を仕組み化する。<br>主要コンテンツ：店舗外観・内装写真、Googleマップ埋め込み、営業日カレンダー、営業時間・定休日・住所、徒歩ルート、口コミ表示＋投稿ボタン。
+              </p>
+              <p><strong>6.
+                  ONLINE｜オンラインショップページ</strong><br>目的：WS体験後のEC再購入・遠方ファン向けの購買導線。体験→EC再購入の循環を設計する。<br>主要コンテンツ：EC商品一覧、再購入セクション、破天荒の強調、ギフトラッピング・熨斗対応案内、LINE登録CTA。
+              </p>
+              <p><strong>7.
+                  RESERVE｜予約フォームページ（F2）</strong><br>目的：じゃらん依存脱却の核機能。顧客データ取得・LINE連携・リピート設計の起点。<br>主要コンテンツ：カレンダー型空き枠表示、時間帯選択、プラン・人数選択、顧客情報入力フォーム、予約完了・サンクスページ、じゃらんリンク併記。
+              </p>
+              <p><strong>8.
+                  CONTACT｜お問い合わせページ（F2）</strong><br>目的：一般問い合わせ・法人・OEM相談の受け口。法人・ホテル向けBtoBリード獲得にも活用する。<br>主要コンテンツ：問い合わせカテゴリ選択、入力フォーム、自動返信メール、法人・OEM実績紹介、送信完了ページ。
+              </p>
+              <p><strong>9. 破天荒
+                  シリーズトップ</strong><br>目的：ブランド紹介の掴みのみ。個別商品は現行HPへリンク。WSへの誘導CTAなし。<br>主要コンテンツ：黒背景ヒーロービジュアル、ブランドコンセプト、全8香りカード一覧、ディスカバリーセット、公式ショップへのリンク。
+              </p>
+              <p><strong>10. PERFUMERS
+                  シリーズトップ</strong><br>目的：コレクション別ブランド紹介の掴みのみ。個別商品は現行HPへリンク。WSへの誘導CTAなし。<br>主要コンテンツ：コレクション別ヒーロービジュアル、ブランドコンセプト、コレクション別カード、公式ショップへのリンク。
+              </p>
+              <p><strong>11. WANOWA
+                  シリーズトップ</strong><br>目的：植樹活動のブランドストーリーと6種のハンドクリームを産地別ストーリーと共に紹介する。WSへの誘導CTAなし。<br>主要コンテンツ：日本産地・植樹活動ビジュアル、WANOWAブランドナラティブ、6種ハンドクリーム一覧、公式ショップへのリンク。
+              </p>
+              <p><strong>12〜17. WANOWA
+                  ハンドクリーム詳細（×6）</strong><br>目的：1ページ＝1香り。産地ストーリー中心の設計。購入は現行HPへリンク。WSへの誘導CTAなし。<br>主要コンテンツ：パンくず、商品ビジュアル＋基本情報、産地ストーリー、他のWANOWA香りラインナップ、公式ショップへのリンク。
+              </p>
+            </div>
           </div>
 
           <div class="fill-block">
@@ -335,7 +632,7 @@
                 <li>店頭看板を見て興味を持ち、Googleマップで「inimu 浅草」を検索する。</li>
                 <li>Googleマップ上で口コミ4.8pt・181件、写真、レビュー内容を見て信頼を確認する。</li>
                 <li>TOPページを30秒以内で流し読みし、「体験を予約する」CTAと土日祝営業を確認する。</li>
-                <li>WORKSHOPページで料金、所要時間90分、当日予約可否を優先確認する。</li>
+                <li>WORKSHOPページで料金、所要時間60分、当日予約可否を優先確認する。</li>
                 <li>FAQで「当日予約OK」「手ぶらOK」だけを確認し、RESERVEページに進む。</li>
                 <li>スマホで当日の空き枠を見て2名で即予約し、完了後にLINE登録を行う。</li>
                 <li>VISITページで現在地からのルートを確認して来店し、そのままワークショップを体験する。</li>
@@ -398,10 +695,28 @@
                   <td>商品3層一覧、カテゴリナビ、ギフトセット提案</td>
                 </tr>
                 <tr>
-                  <td>/products/{productId}</td>
+                  <td>/products/hatenko</td>
                   <td>GET</td>
-                  <td>商品詳細ページ</td>
-                  <td>素材産地、ストーリー、使用シーン、TPO、EC購入ボタンを表示</td>
+                  <td>破天荒 シリーズトップ</td>
+                  <td>破天荒シリーズのブランド紹介ページ。個別商品は現行HPへの外部リンクで案内する</td>
+                </tr>
+                <tr>
+                  <td>/products/perfumers</td>
+                  <td>GET</td>
+                  <td>PERFUMERS シリーズトップ</td>
+                  <td>PERFUMERSシリーズのブランド紹介ページ。個別商品は現行HPへの外部リンクで案内する</td>
+                </tr>
+                <tr>
+                  <td>/products/wanowa</td>
+                  <td>GET</td>
+                  <td>WANOWA シリーズトップ</td>
+                  <td>WANOWAブランド紹介と6種ハンドクリーム一覧を表示する</td>
+                </tr>
+                <tr>
+                  <td>/products/wanowa/{scent}</td>
+                  <td>GET</td>
+                  <td>WANOWA ハンドクリーム詳細</td>
+                  <td>各香りの産地ストーリー、商品情報、公式ショップリンクを表示する</td>
                 </tr>
                 <tr>
                   <td>/story</td>
@@ -524,6 +839,12 @@
                   <td>氏名・メール・電話検索、LINE登録済み・リピーターフィルター、CSV出力</td>
                 </tr>
                 <tr>
+                  <td>/admin/customers/new</td>
+                  <td>GET</td>
+                  <td>顧客新規登録フォーム</td>
+                  <td>顧客情報を新規登録するためのフォーム画面（Should）</td>
+                </tr>
+                <tr>
                   <td>/admin/customers/{id}</td>
                   <td>GET</td>
                   <td>顧客詳細</td>
@@ -572,13 +893,25 @@
                   <td>営業日、時間枠、定員数、臨時休業日を設定</td>
                 </tr>
                 <tr>
+                  <td>/admin/settings/plans</td>
+                  <td>GET</td>
+                  <td>WSプラン設定</td>
+                  <td>料金・時間帯・定員を設定する</td>
+                </tr>
+                <tr>
+                  <td>/admin/settings/emails</td>
+                  <td>GET</td>
+                  <td>メールテンプレート設定</td>
+                  <td>予約確認メールや自動返信メールのテンプレートを設定する（Should）</td>
+                </tr>
+                <tr>
                   <td>/admin/settings/users</td>
                   <td>GET</td>
                   <td>ユーザー管理</td>
                   <td>スタッフアカウント一覧、権限表示。管理者のみアクセス可</td>
                 </tr>
                 <tr>
-                  <td>/api/v1/reservations/availability</td>
+                  <td>/api/v1/reservations/slots</td>
                   <td>GET</td>
                   <td>空き枠取得API</td>
                   <td>指定日の予約可能枠数をJSONで返す</td>
@@ -590,16 +923,16 @@
                   <td>Webフォームから送信された予約データをJSONで受け取りDBに登録</td>
                 </tr>
                 <tr>
+                  <td>/api/v1/reservations/{id}</td>
+                  <td>GET</td>
+                  <td>予約詳細取得API</td>
+                  <td>予約IDを指定して予約詳細をJSONで返す</td>
+                </tr>
+                <tr>
                   <td>/api/v1/contacts</td>
                   <td>POST</td>
                   <td>問い合わせ登録API</td>
                   <td>お問い合わせフォームのデータをJSONで受け取りDBに登録</td>
-                </tr>
-                <tr>
-                  <td>/api/v1/products</td>
-                  <td>GET</td>
-                  <td>商品一覧取得API</td>
-                  <td>カテゴリ・在庫ステータスでフィルタリングした商品一覧を返す</td>
                 </tr>
               </tbody>
             </table>
