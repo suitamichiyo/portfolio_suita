@@ -50,61 +50,61 @@
                   <tr><th>メソッド名</th><th>HTTP</th><th>URL</th><th>引数</th><th>戻り値</th><th>処理概要</th></tr>
                 </thead>
                 <tbody>
-                  <tr class="template-row">
+                  <tr>
                     <td>list</td>
                     <td>GET</td>
                     <td>/tasks</td>
                     <td>Model model</td>
                     <td>String</td>
-                    <td>タスク一覧を取得してModelに追加、list.htmlを返却</td>
+                    <td>タスク一覧を取得して Model に設定し、一覧画面を表示する。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>show</td>
                     <td>GET</td>
                     <td>/tasks/{id}</td>
                     <td>@PathVariable Long id, Model model</td>
                     <td>String</td>
-                    <td>指定IDのタスクを取得、detail.htmlを返却</td>
+                    <td>指定IDのタスク詳細を取得して Model に設定し、詳細画面を表示する。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>createForm</td>
                     <td>GET</td>
                     <td>/tasks/new</td>
                     <td>Model model</td>
                     <td>String</td>
-                    <td>空のTaskFormをModelに追加、create.htmlを返却</td>
+                    <td>空の TaskForm を Model に設定し、新規作成フォーム画面を表示する。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>create</td>
                     <td>POST</td>
                     <td>/tasks</td>
                     <td>@Valid TaskForm form, BindingResult result</td>
                     <td>String</td>
-                    <td>バリデーション後、タスクを登録してリダイレクト</td>
+                    <td>入力値をバリデーションし、正常ならタスクを登録して一覧画面へリダイレクトする。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>editForm</td>
                     <td>GET</td>
                     <td>/tasks/{id}/edit</td>
                     <td>@PathVariable Long id, Model model</td>
                     <td>String</td>
-                    <td>既存タスクをFormに変換、edit.htmlを返却</td>
+                    <td>指定IDのタスクを取得して TaskForm に設定し、編集フォーム画面を表示する。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>update</td>
                     <td>POST</td>
                     <td>/tasks/{id}</td>
                     <td>@PathVariable Long id, @Valid TaskForm form, BindingResult result</td>
                     <td>String</td>
-                    <td>バリデーション後、タスクを更新してリダイレクト</td>
+                    <td>入力値をバリデーションし、正常なら指定IDのタスクを更新して一覧画面へリダイレクトする。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>delete</td>
                     <td>POST</td>
                     <td>/tasks/{id}/delete</td>
                     <td>@PathVariable Long id</td>
                     <td>String</td>
-                    <td>タスクを削除して一覧にリダイレクト</td>
+                    <td>指定IDのタスクを削除し、一覧画面へリダイレクトする。</td>
                   </tr>
                 </tbody>
               </table>
@@ -120,29 +120,29 @@
                   <tr><th>メソッド名</th><th>HTTP</th><th>URL</th><th>引数</th><th>戻り値</th><th>処理概要</th></tr>
                 </thead>
                 <tbody>
-                  <tr class="template-row">
+                  <tr>
                     <td>list</td>
                     <td>GET</td>
                     <td>/admin/users</td>
                     <td>Model model</td>
                     <td>String</td>
-                    <td>ユーザー一覧を取得（管理者のみ）</td>
+                    <td>ユーザー一覧を取得して Model に設定し、管理者向け一覧画面を表示する。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>profile</td>
                     <td>GET</td>
                     <td>/users/profile</td>
                     <td>@AuthenticationPrincipal User user, Model model</td>
                     <td>String</td>
-                    <td>ログインユーザーのプロフィール表示</td>
+                    <td>ログイン中のユーザー情報を取得して Model に設定し、プロフィール画面を表示する。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>updateProfile</td>
                     <td>POST</td>
                     <td>/users/profile</td>
                     <td>@Valid UserForm form, BindingResult result</td>
                     <td>String</td>
-                    <td>プロフィール更新</td>
+                    <td>入力値をバリデーションし、正常ならプロフィール情報を更新して画面を再表示またはリダイレクトする。</td>
                   </tr>
                 </tbody>
               </table>
@@ -159,64 +159,72 @@
             <div class="fill-content">
               <table class="doc-table">
                 <thead>
-                  <tr><th>メソッド名</th><th>引数</th><th>戻り値</th><th>処理概要</th><th>呼び出すRepository</th></tr>
+                  <tr><th>メソッド名</th><th>引数</th><th>戻り値</th><th>処理概要</th><th>呼び出すRepositoryメソッド</th><th>@Transactional</th></tr>
                 </thead>
                 <tbody>
-                  <tr class="template-row">
+                  <tr>
                     <td>findAll</td>
                     <td>なし</td>
                     <td>List&lt;Task&gt;</td>
-                    <td>全タスクを取得</td>
+                    <td>全タスクを取得して一覧表示用に返却する。</td>
                     <td>taskMapper.selectAll()</td>
+                    <td>不要</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>findById</td>
                     <td>Long id</td>
                     <td>Task</td>
-                    <td>ID指定でタスクを取得</td>
+                    <td>指定IDのタスク詳細を取得して返却する。</td>
                     <td>taskMapper.selectById(id)</td>
+                    <td>不要</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>findByUserId</td>
                     <td>Long userId</td>
                     <td>List&lt;Task&gt;</td>
-                    <td>ユーザー別タスク取得</td>
+                    <td>指定ユーザーに紐づくタスク一覧を取得して返却する。</td>
                     <td>taskMapper.selectByUserId(userId)</td>
+                    <td>不要</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>create</td>
                     <td>TaskForm form, Long userId</td>
                     <td>void</td>
-                    <td>FormからEntityに変換して登録</td>
+                    <td>TaskForm を Task エンティティへ変換し、新規タスクを登録する。</td>
                     <td>taskMapper.insert(task)</td>
+                    <td>必要</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>update</td>
                     <td>Long id, TaskForm form</td>
                     <td>void</td>
-                    <td>既存タスクを更新</td>
+                    <td>指定IDの既存タスクを取得し、TaskForm の内容を反映して更新する。</td>
                     <td>taskMapper.update(task)</td>
+                    <td>必要</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>delete</td>
                     <td>Long id</td>
                     <td>void</td>
-                    <td>タスクを削除</td>
+                    <td>指定IDのタスクを削除する。</td>
                     <td>taskMapper.delete(id)</td>
+                    <td>必要</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>search</td>
                     <td>String keyword</td>
                     <td>List&lt;Task&gt;</td>
-                    <td>キーワードでタスク検索</td>
+                    <td>キーワードに一致するタスクを検索して一覧で返却する。</td>
                     <td>taskMapper.search(keyword)</td>
+                    <td>不要</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>changeStatus</td>
                     <td>Long id, String status</td>
                     <td>void</td>
-                    <td>タスクのステータス変更</td>
+                    <td>指定IDのタスクの状態のみを変更する。</td>
                     <td>taskMapper.updateStatus(id, status)</td>
+                    <td>必要</td>
                   </tr>
                 </tbody>
               </table>
@@ -229,29 +237,32 @@
             <div class="fill-content">
               <table class="doc-table">
                 <thead>
-                  <tr><th>メソッド名</th><th>引数</th><th>戻り値</th><th>処理概要</th><th>呼び出すRepository</th></tr>
+                  <tr><th>メソッド名</th><th>引数</th><th>戻り値</th><th>処理概要</th><th>呼び出すRepositoryメソッド</th><th>@Transactional</th></tr>
                 </thead>
                 <tbody>
-                  <tr class="template-row">
+                  <tr>
                     <td>findByEmail</td>
                     <td>String email</td>
                     <td>User</td>
-                    <td>メールアドレスでユーザー取得</td>
+                    <td>メールアドレスを条件にユーザー情報を1件取得して返却する。</td>
                     <td>userMapper.selectByEmail(email)</td>
+                    <td>不要</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>register</td>
                     <td>UserForm form</td>
                     <td>void</td>
-                    <td>パスワードハッシュ化して登録</td>
+                    <td>UserForm を User エンティティへ変換し、パスワードをハッシュ化して新規登録する。</td>
                     <td>userMapper.insert(user)</td>
+                    <td>必要</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>updateProfile</td>
                     <td>Long id, UserForm form</td>
                     <td>void</td>
-                    <td>プロフィール情報更新</td>
+                    <td>指定IDのユーザー情報を取得し、プロフィール内容を更新する。</td>
                     <td>userMapper.update(user)</td>
+                    <td>必要</td>
                   </tr>
                 </tbody>
               </table>
@@ -271,68 +282,68 @@
                   <tr><th>メソッド名</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>備考</th></tr>
                 </thead>
                 <tbody>
-                  <tr class="template-row">
+                  <tr>
                     <td>selectAll</td>
                     <td>なし</td>
                     <td>List&lt;Task&gt;</td>
                     <td>SELECT</td>
-                    <td>全件取得、作成日時降順</td>
+                    <td>@Select を想定。created_at の降順で一覧取得する。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>selectById</td>
                     <td>Long id</td>
                     <td>Task</td>
                     <td>SELECT</td>
-                    <td>主キー検索</td>
+                    <td>@Select を想定。主キー id を条件に1件取得する。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>selectByUserId</td>
                     <td>Long userId</td>
                     <td>List&lt;Task&gt;</td>
                     <td>SELECT</td>
-                    <td>外部キー検索</td>
+                    <td>@Select を想定。user_id を条件に絞り込み、期限順または作成日時順で取得する。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>insert</td>
                     <td>Task task</td>
                     <td>void</td>
                     <td>INSERT</td>
-                    <td>@Options(useGeneratedKeys=true)</td>
+                    <td>@Insert を想定。@Options(useGeneratedKeys = true) で採番IDを取得する。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>update</td>
                     <td>Task task</td>
                     <td>void</td>
                     <td>UPDATE</td>
-                    <td>updated_atも更新</td>
+                    <td>@Update を想定。updated_at も同時に更新する。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>updateStatus</td>
                     <td>Long id, String status</td>
                     <td>void</td>
                     <td>UPDATE</td>
-                    <td>ステータスのみ更新</td>
+                    <td>@Update を想定。status のみ更新し、必要に応じて updated_at も更新する。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>delete</td>
                     <td>Long id</td>
                     <td>void</td>
                     <td>DELETE</td>
-                    <td>物理削除</td>
+                    <td>@Delete を想定。主キー id を条件に物理削除する。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>search</td>
                     <td>String keyword</td>
                     <td>List&lt;Task&gt;</td>
                     <td>SELECT</td>
-                    <td>LIKE検索（title, content）</td>
+                    <td>@Select を想定。title, content に対して LIKE 検索を行う。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>countByUserId</td>
                     <td>Long userId</td>
                     <td>int</td>
                     <td>SELECT</td>
-                    <td>ユーザー別件数取得</td>
+                    <td>@Select を想定。user_id ごとの登録件数を集計する。</td>
                   </tr>
                 </tbody>
               </table>
@@ -348,40 +359,40 @@
                   <tr><th>メソッド名</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>備考</th></tr>
                 </thead>
                 <tbody>
-                  <tr class="template-row">
+                  <tr>
                     <td>selectAll</td>
                     <td>なし</td>
                     <td>List&lt;User&gt;</td>
                     <td>SELECT</td>
-                    <td>管理者用一覧取得</td>
+                    <td>@Select を想定。管理者向けにユーザー一覧を取得する。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>selectById</td>
                     <td>Long id</td>
                     <td>User</td>
                     <td>SELECT</td>
-                    <td>主キー検索</td>
+                    <td>@Select を想定。主キー id を条件に1件取得する。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>selectByEmail</td>
                     <td>String email</td>
                     <td>User</td>
                     <td>SELECT</td>
-                    <td>ログイン認証用</td>
+                    <td>@Select を想定。email を条件に認証対象ユーザーを取得する。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>insert</td>
                     <td>User user</td>
                     <td>void</td>
                     <td>INSERT</td>
-                    <td>ユーザー登録</td>
+                    <td>@Insert を想定。ユーザー情報を新規登録する。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>update</td>
                     <td>User user</td>
                     <td>void</td>
                     <td>UPDATE</td>
-                    <td>プロフィール更新</td>
+                    <td>@Update を想定。プロフィール情報や更新日時を更新する。</td>
                   </tr>
                 </tbody>
               </table>
@@ -401,26 +412,33 @@
                   <tr><th>処理</th><th>使用クラス/メソッド</th><th>変換元</th><th>変換先</th><th>用途</th></tr>
                 </thead>
                 <tbody>
-                  <tr class="template-row">
+                  <tr>
                     <td>文字列→日付</td>
-                    <td>LocalDate.parse()</td>
+                    <td>LocalDate.parse() / @DateTimeFormat(pattern = "yyyy-MM-dd")</td>
                     <td>String "2026-01-15"</td>
                     <td>LocalDate</td>
-                    <td>フォーム入力値の変換</td>
+                    <td>フォーム入力値を LocalDate に変換する。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>日付→文字列</td>
-                    <td>DateTimeFormatter</td>
+                    <td>DateTimeFormatter.ofPattern("yyyy年M月d日")</td>
                     <td>LocalDate</td>
                     <td>String "2026年1月15日"</td>
-                    <td>画面表示用</td>
+                    <td>Java側で画面表示用文字列へ整形する。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
+                    <td>日付→文字列（Thymeleaf）</td>
+                    <td>#temporals.format(task.dueDate, 'yyyy/MM/dd')</td>
+                    <td>LocalDate</td>
+                    <td>String "2026/01/15"</td>
+                    <td>Thymeleaf テンプレート上で日付を表示フォーマットする。</td>
+                  </tr>
+                  <tr>
                     <td>現在日時取得</td>
                     <td>LocalDateTime.now()</td>
                     <td>-</td>
                     <td>LocalDateTime</td>
-                    <td>作成日時・更新日時</td>
+                    <td>作成日時・更新日時の初期設定や更新時刻の設定に使用する。</td>
                   </tr>
                 </tbody>
               </table>
@@ -436,41 +454,41 @@
                   <tr><th>アノテーション</th><th>対象フィールド</th><th>検証内容</th><th>エラーメッセージ</th></tr>
                 </thead>
                 <tbody>
-                  <tr class="template-row">
+                  <tr>
                     <td>@NotBlank</td>
                     <td>title</td>
-                    <td>空文字・null禁止</td>
-                    <td>タイトルは必須です</td>
+                    <td>null、空文字、空白のみ入力を禁止する。タスクタイトルの必須チェックに使用する。</td>
+                    <td>「タイトルは必須です」</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>@Size(max=100)</td>
                     <td>title</td>
-                    <td>最大100文字</td>
-                    <td>タイトルは100文字以内で入力してください</td>
+                    <td>タイトルの文字数を100文字以内に制限する。</td>
+                    <td>「タイトルは100文字以内で入力してください」</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>@Size(max=1000)</td>
                     <td>content</td>
-                    <td>最大1000文字</td>
-                    <td>内容は1000文字以内で入力してください</td>
+                    <td>内容欄の文字数を1000文字以内に制限する。</td>
+                    <td>「内容は1000文字以内で入力してください」</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>@NotNull</td>
                     <td>dueDate</td>
-                    <td>null禁止</td>
-                    <td>期限を選択してください</td>
+                    <td>日付未選択を禁止し、期限入力を必須にする。</td>
+                    <td>「期限を選択してください」</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>@Email</td>
                     <td>email</td>
-                    <td>メール形式</td>
-                    <td>正しいメールアドレスを入力してください</td>
+                    <td>メールアドレス形式かどうかを検証する。ユーザー登録やプロフィール更新で使用する。</td>
+                    <td>「正しいメールアドレスを入力してください」</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>@Pattern</td>
                     <td>password</td>
-                    <td>正規表現</td>
-                    <td>パスワードは8文字以上で入力してください</td>
+                    <td>正規表現でパスワードの桁数や使用可能文字を検証する。例: 8文字以上の条件に使用する。</td>
+                    <td>「パスワードは8文字以上で入力してください」</td>
                   </tr>
                 </tbody>
               </table>
