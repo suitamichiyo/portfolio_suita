@@ -203,29 +203,113 @@
               </div>
             </div>
           </div>
+
+          <div class="fill-block">
+            <div class="fill-label">タスク登録処理のフロー <span class="required">必須</span></div>
+            <div class="fill-hint">Spring Boot の @Valid と BindingResult を使った登録処理の分岐をASCII図で示す</div>
+            <div class="fill-content">
+              <div class="ascii-diagram">
+                <pre>
++------------------------------+
+| Client（ブラウザ）          |
++------------------------------+
+               |
+               | フォーム送信
+               | POST /tasks/create
+               v
++---------------------------------------------------+
+| TaskController.create(@Valid TaskForm form,       |
+|                     BindingResult bindingResult)  |
++---------------------------------------------------+
+               |
+               | バリデーションチェック
+               v
+        +----------------------+
+        | bindingResult.hasErrors()? |
+        +-----------+----------+
+                    |
+          +---------+---------+
+          |                   |
+         Yes                 No
+          |                   |
+          v                   v
++----------------------+   +------------------------+
+| 入力画面に戻る       |   | TaskService.create()   |
+| create.html を表示   |   +-----------+------------+
++----------------------+               |
+                                       | 呼び出し
+                                       v
+                            +------------------------+
+                            | TaskMapper.insert()    |
+                            +-----------+------------+
+                                        |
+                                        | SQL INSERT
+                                        v
+                            +------------------------+
+                            | Database               |
+                            +-----------+------------+
+                                        |
+                                        | 保存完了
+                                        v
+                            +------------------------+
+                            | redirect:/tasks        |
+                            +-----------+------------+
+                                        |
+                                        | リダイレクト
+                                        v
+                            +------------------------+
+                            | Client（ブラウザ）     |
+                            +------------------------+
+                </pre>
+              </div>
+            </div>
+          </div>
         </section>
 
         <section class="section" id="sec3">
           <h2 class="section-title"><span class="section-icon">3</span> 画面遷移フロー</h2>
 
           <div class="fill-block">
-            <div class="fill-label">主要画面の遷移 <span class="required">必須</span></div>
-            <div class="fill-hint">主要画面の遷移を示す</div>
+            <div class="fill-label">タスク管理アプリケーションの画面遷移図 <span class="required">必須</span></div>
+            <div class="fill-hint">各画面の遷移と URL パスをASCII図で示す</div>
             <div class="fill-content">
               <div class="ascii-diagram">
                 <pre>
-ログイン画面
-  |
-  v
-予約一覧画面
-  | \
-  |  \-> 予約新規登録画面
-  |
-  +----> 予約詳細画面 -> 予約編集画面
-  |
-  +----> 問い合わせ一覧画面
-  |
-  +----> 顧客一覧画面
+┌──────────────────────────────┐
+│ ログイン画面                 │
+│ URL: /login                  │
+└──────────────┬───────────────┘
+               |
+               | ログイン成功
+               v
+┌──────────────────────────────┐
+│ タスク一覧画面               │
+│ URL: /tasks                  │
+└───────┬─────────┬───────────┘
+        |         |
+        |         +------------------------------┐
+        |                                        |
+        v                                        v
+┌──────────────────────────────┐     ┌──────────────────────────────┐
+│ タスク新規作成画面           │     │ タスク詳細画面               │
+│ URL: /tasks/new              │     │ URL: /tasks/{id}             │
+└──────────────┬───────────────┘     └──────────────┬───────────────┘
+               |                                    |
+               | 確認画面ありの場合                 | 編集
+               v                                    v
+┌──────────────────────────────┐     ┌──────────────────────────────┐
+│ 確認画面（任意）             │     │ タスク編集画面               │
+│ URL: /tasks/confirm          │     │ URL: /tasks/{id}/edit        │
+└──────────────┬───────────────┘     └──────────────┬───────────────┘
+               |                                    |
+               | 登録完了                           | 更新完了
+               +-------------------┬----------------+
+                                   |
+                                   v
+                        ┌──────────────────────────────┐
+                        │ タスク一覧画面               │
+                        │ URL: /tasks                  │
+                        └──────────────────────────────┘
                 </pre>
               </div>
             </div>
@@ -236,30 +320,76 @@
           <h2 class="section-title"><span class="section-icon">4</span> データフロー</h2>
 
           <div class="fill-block">
-            <div class="fill-label">フォーム入力からDB更新まで <span class="required">必須</span></div>
-            <div class="fill-hint">入力値から永続化までのデータの流れを示す</div>
+            <div class="fill-label">TaskForm から Task エンティティ、tasks テーブルへのデータフロー <span class="required">必須</span></div>
+            <div class="fill-hint">フィールド、変換方法、保存方法、型変換を含めて示す</div>
             <div class="fill-content">
               <div class="ascii-diagram">
                 <pre>
-フォーム入力
-  |
-  v
-Controller
-  |
-  v
-Form / DTO
-  |
-  v
-Service
-  |
-  v
-Entity
-  |
-  v
-Mapper
-  |
-  v
-MySQLテーブル
++-------------------------------+
+| TaskForm                      |
+|-------------------------------|
+| title       : String          |
+| content     : String          |
+| dueDate     : String          |
+| priority    : String          |
+| status      : String          |
++-------------------------------+
+               |
+               | Controllerで受取
+               | @Valid TaskForm form
+               v
++-------------------------------+
+| 変換処理                      |
+|-------------------------------|
+| 1. BeanUtils.copyProperties() |
+|    で同名フィールドをコピー   |
+| 2. 手動マッピング             |
+|    dueDate  : String -> Date  |
+|    priority : String -> int   |
+|    status   : String -> Enum  |
++-------------------------------+
+               |
+               v
++-------------------------------+
+| Task Entity                   |
+|-------------------------------|
+| id          : Long            |
+| title       : String          |
+| content     : String          |
+| dueDate     : Date            |
+| priority    : int             |
+| status      : TaskStatus      |
+| createdAt   : Timestamp       |
+| updatedAt   : Timestamp       |
++-------------------------------+
+               |
+               | Service -> Mapper
+               v
++--------------------------------------------------+
+| TaskMapper.insert(Task task)                     |
+|--------------------------------------------------|
+| 保存方法: MyBatis @Insert                        |
+| INSERT INTO tasks                                |
+|   (title, content, due_date, priority, status)   |
+| VALUES                                           |
+|   (#{title}, #{content}, #{dueDate},             |
+|    #{priority}, #{status})                       |
++--------------------------------------------------+
+               |
+               | SQL実行
+               v
++-----------------------------------------------+
+| tasks テーブル                                |
+|-----------------------------------------------|
+| id          : BIGINT PK AUTO_INCREMENT        |
+| title       : VARCHAR(255)                    |
+| content     : TEXT                            |
+| due_date    : DATE                            |
+| priority    : INT                             |
+| status      : VARCHAR(20)                     |
+| created_at  : TIMESTAMP                       |
+| updated_at  : TIMESTAMP                       |
++-----------------------------------------------+
                 </pre>
               </div>
             </div>
@@ -271,30 +401,69 @@ MySQLテーブル
 
           <div class="fill-block">
             <div class="fill-label">認証フロー <span class="required">必須</span></div>
-            <div class="fill-hint">Spring Security による基本的な認証の流れを示す</div>
+            <div class="fill-hint">Spring Security を使用したログイン認証フローを示す</div>
             <div class="fill-content">
               <div class="ascii-diagram">
                 <pre>
-ブラウザ
-  |
-  | POST /login
-  v
-Spring Security Filter
-  |
-  v
-Authentication Manager
-  |
-  v
-UserDetailsService
-  |
-  v
-UserMapper
-  |
-  v
-MySQL
-  |
-  +--> 認証成功: /tasks へリダイレクト
-  +--> 認証失敗: /login?error を表示
++--------------------------------------+
+| ブラウザ                             |
++--------------------------------------+
+                 |
+                 | POST /login
+                 v
++--------------------------------------+
+| SecurityFilterChain                  |
++--------------------------------------+
+                 |
+                 v
++--------------------------------------+
+| UsernamePasswordAuthenticationFilter |
++--------------------------------------+
+                 |
+                 | username / password
+                 v
++--------------------------------------+
+| AuthenticationManager                |
++--------------------------------------+
+                 |
+                 v
++--------------------------------------+
+| UserDetailsService                   |
++--------------------------------------+
+                 |
+                 | ユーザー検索
+                 v
++--------------------------------------+
+| UserMapper（DBアクセス）             |
++--------------------------------------+
+                 |
+                 | SELECT user
+                 v
++--------------------------------------+
+| Database                             |
++--------------------------------------+
+                 |
+                 | ユーザー情報返却
+                 v
++--------------------------------------+
+| AuthenticationManager                |
++--------------------------------------+
+                 |
+        +--------+--------+
+        |                 |
+      成功               失敗
+        |                 |
+        v                 v
++-------------------+   +-------------------------+
+| SecurityContextへ |   | 認証エラー              |
+| 認証情報を保存    |   | /login?error を表示     |
++---------+---------+   +-------------------------+
+          |
+          | 認証成功
+          v
++-------------------------+
+| /tasks へリダイレクト   |
++-------------------------+
                 </pre>
               </div>
             </div>
@@ -302,13 +471,13 @@ MySQL
 
           <div class="fill-block">
             <div class="fill-label">アクセス制御一覧 <span class="optional">任意</span></div>
-            <div class="fill-hint">URLごとのアクセス可否の例</div>
+            <div class="fill-hint">ロールごとの主要機能に対するアクセス可否を示す</div>
             <div class="fill-content">
               <table class="doc-table">
                 <thead>
                   <tr>
                     <th>機能</th>
-                    <th>URL</th>
+                    <th>対象URL</th>
                     <th>ADMIN</th>
                     <th>USER</th>
                     <th>未認証</th>
@@ -318,37 +487,58 @@ MySQL
                   <tr>
                     <td>ログイン</td>
                     <td>/login</td>
-                    <td>可</td>
-                    <td>可</td>
-                    <td>可</td>
+                    <td>○</td>
+                    <td>○</td>
+                    <td>○</td>
                   </tr>
                   <tr>
-                    <td>タスク一覧</td>
+                    <td>タスク一覧表示</td>
                     <td>/tasks</td>
-                    <td>可</td>
-                    <td>可</td>
-                    <td>不可</td>
+                    <td>○</td>
+                    <td>○</td>
+                    <td>×</td>
                   </tr>
                   <tr>
-                    <td>タスク新規登録</td>
+                    <td>タスク新規作成</td>
                     <td>/tasks/new</td>
-                    <td>可</td>
-                    <td>可</td>
-                    <td>不可</td>
+                    <td>○</td>
+                    <td>○</td>
+                    <td>×</td>
                   </tr>
                   <tr>
-                    <td>顧客管理</td>
-                    <td>/customers</td>
-                    <td>可</td>
-                    <td>可</td>
-                    <td>不可</td>
+                    <td>タスク詳細表示</td>
+                    <td>/tasks/{id}</td>
+                    <td>○</td>
+                    <td>○</td>
+                    <td>×</td>
+                  </tr>
+                  <tr>
+                    <td>タスク編集</td>
+                    <td>/tasks/{id}/edit</td>
+                    <td>○</td>
+                    <td>○</td>
+                    <td>×</td>
+                  </tr>
+                  <tr>
+                    <td>タスク削除</td>
+                    <td>/tasks/{id}/delete</td>
+                    <td>○</td>
+                    <td>○</td>
+                    <td>×</td>
+                  </tr>
+                  <tr>
+                    <td>ユーザー管理</td>
+                    <td>/admin/users</td>
+                    <td>○</td>
+                    <td>×</td>
+                    <td>×</td>
                   </tr>
                   <tr>
                     <td>管理者設定</td>
                     <td>/admin/settings</td>
-                    <td>可</td>
-                    <td>不可</td>
-                    <td>不可</td>
+                    <td>○</td>
+                    <td>×</td>
+                    <td>×</td>
                   </tr>
                 </tbody>
               </table>
