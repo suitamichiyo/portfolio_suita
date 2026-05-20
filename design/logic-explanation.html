@@ -57,53 +57,50 @@
                              │
                              ▼
                     ┌─────────────────┐
-                    │ メール/パスワード │
-                    │     入力        │
+                    │ フォーム送信      │
+                    │ email / password │
                     └────────┬────────┘
                              │
                              ▼
                     ┌─────────────────┐
-                    │  入力値チェック   │
+                    │ 入力値の空チェック │
                     └────────┬────────┘
                              │
                     ┌────────┴────────┐
-                    ▼                  ▼
-               入力エラー          入力OK
-                    │                  │
-                    ▼                  ▼
-            ┌───────────┐     ┌─────────────────┐
-            │エラー表示  │     │  ユーザー検索    │
-            │ログイン画面│     │ (DBからメールで) │
-            └───────────┘     └────────┬────────┘
-                                       │
-                              ┌────────┴────────┐
-                              ▼                  ▼
-                         ユーザー無し        ユーザー有り
-                              │                  │
-                              ▼                  ▼
-                      ┌───────────┐     ┌─────────────────┐
-                      │認証エラー  │     │ パスワード照合   │
-                      │ログイン画面│     │(BCrypt.matches) │
-                      └───────────┘     └────────┬────────┘
-                                                 │
-                                        ┌────────┴────────┐
-                                        ▼                  ▼
-                                   不一致             一致
-                                        │                  │
-                                        ▼                  ▼
-                                ┌───────────┐     ┌─────────────────┐
-                                │認証エラー  │     │  認証成功        │
-                                │ログイン画面│     │ SecurityContext │
-                                └───────────┘     │   に保存        │
-                                                  └────────┬────────┘
-                                                           │
-                                                           ▼
-                                                  ┌─────────────────┐
-                                                  │ /tasks へ       │
-                                                  │ リダイレクト     │
-                                                  └─────────────────┘
-
-（上記を参考に編集してください）
+                     ▼                  ▼
+               空あり              空なし
+                     │                  │
+                     ▼                  ▼
+            ┌─────────────────┐  ┌────────────────────────┐
+            │ エラー追加        │  │ ユーザー存在チェック     │
+            │ ログイン画面に戻る │  │ DBからメールアドレス検索 │
+            └─────────────────┘  └──────────┬─────────────┘
+                                            │
+                                   ┌────────┴────────┐
+                                   ▼                 ▼
+                              user なし         user あり
+                                   │                 │
+                                   ▼                 ▼
+                        ┌─────────────────┐  ┌────────────────────┐
+                        │ 認証エラー追加    │  │ パスワード照合       │
+                        │ ログイン画面に戻る│  │ BCrypt.matches()    │
+                        └─────────────────┘  └──────────┬─────────┘
+                                                        │
+                                               ┌────────┴────────┐
+                                               ▼                 ▼
+                                          不一致              一致
+                                               │                 │
+                                               ▼                 ▼
+                                     ┌─────────────────┐  ┌────────────────────┐
+                                     │ 認証エラー追加    │  │ 認証成功処理         │
+                                     │ ログイン画面に戻る│  │ SecurityContext保存 │
+                                     └─────────────────┘  └──────────┬─────────┘
+                                                                      │
+                                                                      ▼
+                                                             ┌─────────────────┐
+                                                             │ /tasks へ       │
+                                                             │ リダイレクト     │
+                                                             └─────────────────┘
                 </pre>
               </div>
             </div>
@@ -117,37 +114,52 @@
                 <pre>
 <span class="comment">// ログイン処理の疑似コード</span>
 
-<span class="keyword">FUNCTION</span> login(email, password)
+<span class="keyword">FUNCTION</span> login(inputEmail, inputPassword)
 
-  <span class="comment">// 入力値チェック</span>
-  <span class="keyword">IF</span> email が空 <span class="keyword">THEN</span>
+  <span class="comment">// ダミー入力値例</span>
+  <span class="comment">// inputEmail = "user@example.com"</span>
+  <span class="comment">// inputPassword = "password123"</span>
+
+  <span class="comment">// 1. 入力値の空チェック</span>
+  <span class="keyword">IF</span> inputEmail が空 <span class="keyword">THEN</span>
     エラー「メールアドレスを入力してください」を追加
+  <span class="keyword">ELSE</span>
+    email = inputEmail
   <span class="keyword">END IF</span>
 
-  <span class="keyword">IF</span> password が空 <span class="keyword">THEN</span>
+  <span class="keyword">IF</span> inputPassword が空 <span class="keyword">THEN</span>
     エラー「パスワードを入力してください」を追加
+  <span class="keyword">ELSE</span>
+    password = inputPassword
   <span class="keyword">END IF</span>
 
   <span class="keyword">IF</span> エラーリストが空でない <span class="keyword">THEN</span>
     <span class="keyword">RETURN</span> ログイン画面（エラー表示）
+  <span class="keyword">ELSE</span>
+    <span class="comment">// 次の認証処理へ進む</span>
   <span class="keyword">END IF</span>
 
-  <span class="comment">// ユーザー検索</span>
+  <span class="comment">// 2. ユーザー存在チェック</span>
   user = userMapper.selectByEmail(email)
 
   <span class="keyword">IF</span> user が null <span class="keyword">THEN</span>
     エラー「メールアドレスまたはパスワードが正しくありません」を追加
     <span class="keyword">RETURN</span> ログイン画面（エラー表示）
+  <span class="keyword">ELSE</span>
+    <span class="comment">// ユーザーが存在するためパスワード照合へ進む</span>
   <span class="keyword">END IF</span>
 
-  <span class="comment">// パスワード照合</span>
+  <span class="comment">// 3. パスワード照合</span>
   <span class="keyword">IF</span> BCrypt.matches(password, user.password) が false <span class="keyword">THEN</span>
     エラー「メールアドレスまたはパスワードが正しくありません」を追加
     <span class="keyword">RETURN</span> ログイン画面（エラー表示）
+  <span class="keyword">ELSE</span>
+    <span class="comment">// 認証成功</span>
   <span class="keyword">END IF</span>
 
-  <span class="comment">// 認証成功</span>
-  SecurityContext に user 情報を保存
+  <span class="comment">// 4. 認証成功時の処理</span>
+  authentication = UsernamePasswordAuthenticationToken(user, null, user.authorities)
+  SecurityContext に authentication を保存
   <span class="keyword">RETURN</span> リダイレクト("/tasks")
 
 <span class="keyword">END FUNCTION</span>
@@ -167,37 +179,42 @@
               <div class="ascii-diagram">
                 <pre>
                     ┌─────────────────┐
-                    │  フォーム送信    │
+                    │ フォーム送信      │
+                    │ title / dueDate  │
                     └────────┬────────┘
                              │
                              ▼
                     ┌─────────────────┐
-                    │ @Valid による    │
+                    │ 1. @Valid による │
                     │ 自動バリデーション│
                     └────────┬────────┘
                              │
                     ┌────────┴────────┐
-                    ▼                  ▼
-            BindingResult に      エラーなし
-             エラーあり                │
-                    │                  │
-                    ▼                  ▼
-            ┌───────────────┐  ┌─────────────────┐
-            │ 入力画面に戻る │  │  追加バリデーション │
-            │ エラー表示     │  │  （業務ロジック）   │
-            └───────────────┘  └────────┬────────┘
-                                        │
-                               ┌────────┴────────┐
-                               ▼                  ▼
-                         業務エラー          エラーなし
-                               │                  │
-                               ▼                  ▼
-                       ┌───────────────┐  ┌─────────────────┐
-                       │ 入力画面に戻る │  │  登録処理実行    │
-                       │ エラー表示     │  │  リダイレクト    │
-                       └───────────────┘  └─────────────────┘
-
-（上記を参考に編集してください）
+                     ▼                  ▼
+         BindingResult に         エラーなし
+          エラーあり                  │
+                     │                  │
+                     ▼                  ▼
+            ┌────────────────────┐  ┌────────────────────┐
+            │ create.html に戻る  │  │ 2. Service での     │
+            │ フィールドエラー表示 │  │ 業務ロジック検証     │
+            └────────────────────┘  └──────────┬─────────┘
+                                                 │
+                                        ┌────────┴────────┐
+                                        ▼                 ▼
+                               業務エラーあり        業務エラーなし
+                                        │                 │
+                                        ▼                 ▼
+                         ┌────────────────────────┐  ┌─────────────────┐
+                         │ BindingResult.rejectValue │  │ Task 作成・保存 │
+                         │ / reject でエラー追加     │  │ /tasks へ遷移   │
+                         └──────────┬─────────────┘  └─────────────────┘
+                                    │
+                                    ▼
+                         ┌────────────────────┐
+                         │ create.html に戻る  │
+                         │ エラーメッセージ表示 │
+                         └────────────────────┘
                 </pre>
               </div>
             </div>
@@ -210,20 +227,28 @@
               <div class="code-block">
                 <pre>
 <span class="comment">// タスク登録のバリデーション処理</span>
+<span class="comment">// ダミー入力値例</span>
+<span class="comment">// title    = ""</span>
+<span class="comment">// dueDate  = "2026-01-01"</span>
+<span class="comment">// priority = "1"</span>
+<span class="comment">// status   = "TODO"</span>
 
 <span class="keyword">FUNCTION</span> createTask(taskForm, bindingResult)
 
-  <span class="comment">// Bean Validationのエラーチェック</span>
+  <span class="comment">// 1. @Valid による自動バリデーション</span>
   <span class="keyword">IF</span> bindingResult.hasErrors() <span class="keyword">THEN</span>
-    <span class="keyword">RETURN</span> 入力画面（フォーム + エラーメッセージ）
+    <span class="keyword">RETURN</span> create.html（入力値を保持してフィールドエラー表示）
+  <span class="keyword">ELSE</span>
+    <span class="comment">// Service の業務ロジックバリデーションへ進む</span>
   <span class="keyword">END IF</span>
 
-  <span class="comment">// 業務ロジックバリデーション</span>
-
+  <span class="comment">// 2. Service での業務ロジックバリデーション</span>
   <span class="comment">// 期限の妥当性チェック</span>
   <span class="keyword">IF</span> taskForm.dueDate が過去の日付 <span class="keyword">THEN</span>
     bindingResult.rejectValue("dueDate", "error.dueDate",
                               "期限は今日以降の日付を指定してください")
+  <span class="keyword">ELSE</span>
+    <span class="comment">// 期限は妥当</span>
   <span class="keyword">END IF</span>
 
   <span class="comment">// タイトルの重複チェック（同一ユーザー内）</span>
@@ -231,11 +256,15 @@
   <span class="keyword">IF</span> existingTask が存在する <span class="keyword">THEN</span>
     bindingResult.rejectValue("title", "error.title",
                               "同じタイトルのタスクが既に存在します")
+  <span class="keyword">ELSE</span>
+    <span class="comment">// 同名タスクなし</span>
   <span class="keyword">END IF</span>
 
-  <span class="comment">// エラーがあれば入力画面に戻る</span>
+  <span class="comment">// BindingResult に業務エラーが追加されたか確認</span>
   <span class="keyword">IF</span> bindingResult.hasErrors() <span class="keyword">THEN</span>
-    <span class="keyword">RETURN</span> 入力画面（フォーム + エラーメッセージ）
+    <span class="keyword">RETURN</span> create.html（入力値を保持してエラー表示）
+  <span class="keyword">ELSE</span>
+    <span class="comment">// 登録処理へ進む</span>
   <span class="keyword">END IF</span>
 
   <span class="comment">// 登録処理</span>
@@ -259,20 +288,27 @@
               <div class="code-block">
                 <pre>
 <span class="comment">&lt;!-- Thymeleafでのエラー表示 --&gt;</span>
+<span class="comment">&lt;!-- 例: title="", dueDate="2026-01-01", priority="1", status="TODO" --&gt;</span>
 
 <span class="comment">&lt;!-- フィールドエラー（特定フィールド） --&gt;</span>
+&lt;input type="text" th:field="*{title}"
+       th:value="${taskForm.title}"
+       th:classappend="${#fields.hasErrors('title')} ? 'error' : ''"&gt;
 &lt;div th:if="${#fields.hasErrors('title')}" class="error-message"&gt;
   &lt;p th:each="err : ${#fields.errors('title')}" th:text="${err}"&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;input type="date" th:field="*{dueDate}"
+       th:value="${taskForm.dueDate}"
+       th:classappend="${#fields.hasErrors('dueDate')} ? 'error' : ''"&gt;
+&lt;div th:if="${#fields.hasErrors('dueDate')}" class="error-message"&gt;
+  &lt;p th:each="err : ${#fields.errors('dueDate')}" th:text="${err}"&gt;&lt;/p&gt;
 &lt;/div&gt;
 
 <span class="comment">&lt;!-- グローバルエラー（フィールドに紐づかないエラー） --&gt;</span>
 &lt;div th:if="${#fields.hasGlobalErrors()}" class="global-error"&gt;
   &lt;p th:each="err : ${#fields.globalErrors()}" th:text="${err}"&gt;&lt;/p&gt;
 &lt;/div&gt;
-
-<span class="comment">&lt;!-- 入力フィールドのエラークラス付与 --&gt;</span>
-&lt;input type="text" th:field="*{title}"
-       th:classappend="${#fields.hasErrors('title')} ? 'error' : ''"&gt;
                 </pre>
               </div>
             </div>
@@ -291,41 +327,39 @@
                     ┌─────────────────┐
                     │  検索条件入力    │
                     │ ・キーワード     │
-                    │ ・カテゴリ      │
+                    │ ・カテゴリID    │
                     │ ・ステータス    │
-                    │ ・期間          │
+                    │ ・開始日/終了日 │
                     └────────┬────────┘
                              │
                              ▼
                     ┌─────────────────┐
-                    │  WHERE句の組立  │
-                    │  (動的SQL)      │
+                    │ MyBatis の      │
+                    │ &lt;if&gt; でWHERE句組立 │
                     └────────┬────────┘
                              │
-            ┌────────────────┼────────────────┐
-            ▼                ▼                ▼
-    ┌───────────────┐ ┌───────────────┐ ┌───────────────┐
-    │キーワードあり  │ │カテゴリあり   │ │ステータスあり │
-    │ title LIKE    │ │ category_id = │ │ status =      │
-    │ OR content    │ │ #{categoryId} │ │ #{status}     │
-    │ LIKE '%xxx%'  │ │               │ │               │
-    └───────────────┘ └───────────────┘ └───────────────┘
-            │                │                │
-            └────────────────┼────────────────┘
-                             │
-                             ▼
-                    ┌─────────────────┐
-                    │  AND で連結     │
-                    │  ORDER BY 追加  │
-                    └────────┬────────┘
-                             │
-                             ▼
-                    ┌─────────────────┐
-                    │  SQL実行        │
-                    │  結果返却       │
-                    └─────────────────┘
-
-（上記を参考に編集してください）
+            ┌────────────────┬────────────────┬────────────────┬────────────────┐
+            ▼                ▼                ▼                ▼
+    ┌───────────────┐ ┌───────────────┐ ┌───────────────┐ ┌────────────────┐
+    │キーワードあり  │ │カテゴリIDあり │ │ステータスあり │ │期間指定あり     │
+    │title LIKE     │ │category_id =  │ │status =       │ │due_date >=     │
+    │OR content LIKE│ │#{categoryId}  │ │#{status}      │ │#{startDate}    │
+    │%#{keyword}%   │ │               │ │               │ │AND due_date <= │
+    │               │ │               │ │               │ │#{endDate}      │
+    └───────────────┘ └───────────────┘ └───────────────┘ └────────────────┘
+            │                │                │                │
+            └────────────────┴────────────────┴────────────────┴────────┐
+                                                                         ▼
+                                                            ┌─────────────────┐
+                                                            │ AND で条件連結   │
+                                                            │ ORDER BY 追加    │
+                                                            └────────┬────────┘
+                                                                     │
+                                                                     ▼
+                                                            ┌─────────────────┐
+                                                            │ SQL実行         │
+                                                            │ 検索結果返却     │
+                                                            └─────────────────┘
                 </pre>
               </div>
             </div>
@@ -338,6 +372,13 @@
               <div class="code-block">
                 <pre>
 <span class="comment">// 複合検索のロジック（MyBatis XML形式）</span>
+<span class="comment">// ダミー入力値例</span>
+<span class="comment">// keyword    = "会議"</span>
+<span class="comment">// categoryId = 2</span>
+<span class="comment">// status     = "TODO"</span>
+<span class="comment">// startDate  = "2026-05-01"</span>
+<span class="comment">// endDate    = "2026-05-31"</span>
+<span class="comment">// sortBy     = "dueDate"</span>
 
 &lt;select id="search" resultType="Task"&gt;
   SELECT * FROM tasks
@@ -396,33 +437,39 @@
                              │
                              ▼
                     ┌─────────────────┐
-                    │  認証状態確認   │
-                    │(SecurityContext)│
+                    │ 認証状態確認     │
+                    │ SecurityContext  │
                     └────────┬────────┘
                              │
                     ┌────────┴────────┐
-                    ▼                  ▼
-              未認証              認証済み
-                    │                  │
-                    ▼                  ▼
-            ┌───────────┐     ┌─────────────────┐
-            │/login へ   │     │  ロール取得      │
-            │リダイレクト │     │ user.getRole()  │
-            └───────────┘     └────────┬────────┘
-                                       │
-                              ┌────────┴────────┐
-                              ▼                  ▼
-                           ADMIN              USER
-                              │                  │
-                              ▼                  ▼
-                    ┌─────────────────┐  ┌─────────────────┐
-                    │ 管理者機能      │  │ 一般ユーザー機能│
-                    │ ・ユーザー管理  │  │ ・自分のタスク  │
-                    │ ・全タスク閲覧  │  │   のみアクセス  │
-                    │ ・システム設定  │  │                 │
-                    └─────────────────┘  └─────────────────┘
-
-（上記を参考に編集してください）
+                     ▼                  ▼
+               未認証              認証済み
+                     │                  │
+                     ▼                  ▼
+            ┌─────────────────┐  ┌─────────────────┐
+            │ /login へ       │  │ ロール取得       │
+            │ リダイレクト     │  │ user.getRole()   │
+            └─────────────────┘  └────────┬────────┘
+                                        │
+                               ┌────────┼───────────────┐
+                               ▼        ▼               ▼
+                            ADMIN     USER          その他ロール
+                               │        │               │
+                               ▼        ▼               ▼
+                    ┌─────────────────┐  ┌────────────────────────┐  ┌─────────────────┐
+                    │ 全機能アクセス可 │  │ 対象データの所有者確認   │  │ 403 Forbidden   │
+                    │ ・ユーザー管理   │  │ task.userId == loginUser.id │  │ 権限不足         │
+                    │ ・全タスク閲覧   │  └──────────┬─────────────┘  │ エラー画面表示   │
+                    │ ・全タスク更新   │             │                └─────────────────┘
+                    │ ・システム設定   │    ┌────────┴────────┐
+                    └─────────────────┘    ▼                 ▼
+                                      一致する           一致しない
+                                           │                 │
+                                           ▼                 ▼
+                                 ┌─────────────────┐  ┌─────────────────┐
+                                 │ 自分のデータのみ │  │ 403 Forbidden   │
+                                 │ 詳細/更新/削除可 │  │ アクセス拒否     │
+                                 └─────────────────┘  └─────────────────┘
                 </pre>
               </div>
             </div>
@@ -484,26 +531,29 @@
                               │  (未着手) │
                               └─────┬─────┘
                                     │
-                                    │ 着手
+                                    │ 着手: 作業開始する
                                     ▼
                               ┌───────────┐
-                     ┌────────│   DOING   │────────┐
-                     │        │  (作業中) │        │
-                     │        └─────┬─────┘        │
-                     │              │              │
-                     │ 保留         │ 完了         │ 中止
-                     ▼              ▼              ▼
-               ┌───────────┐  ┌───────────┐  ┌───────────┐
-               │   HOLD    │  │   DONE    │  │ CANCELLED │
-               │   (保留)  │  │   (完了)  │  │  (中止)   │
-               └─────┬─────┘  └───────────┘  └───────────┘
-                     │              ▲
-                     │ 再開         │ 完了
-                     └──────────────┘
+                      ┌────────│   DOING   │────────┐
+                      │        │  (作業中) │        │
+                      │        └─────┬─────┘        │
+                      │              │              │
+                      │ 保留: 一時停止 │ 完了: 作業完了 │ 中止: 作業中断
+                      ▼              ▼              ▼
+                ┌───────────┐  ┌───────────┐  ┌───────────┐
+                │   HOLD    │  │   DONE    │  │ CANCELLED │
+                │   (保留)  │  │   (完了)  │  │  (中止)   │
+                └─────┬─────┘  └───────────┘  └───────────┘
+                      │              ▲
+                      │ 再開: 作業再開 │ 完了: 保留解除後に完了
+                      └──────────────┘
 
-          ※ DONEとCANCELLEDは最終状態（遷移不可）
-
-（上記を参考に編集してください）
+          遷移可否:
+            TODO      → DOING, CANCELLED
+            DOING     → TODO, HOLD, DONE, CANCELLED
+            HOLD      → DOING, DONE, CANCELLED
+            DONE      → 遷移不可（最終状態）
+            CANCELLED → 遷移不可（最終状態）
                 </pre>
               </div>
             </div>
@@ -516,16 +566,21 @@
               <div class="code-block">
                 <pre>
 <span class="comment">// ステータス遷移の判定ロジック</span>
+<span class="comment">// Enum 型を想定</span>
+<span class="comment">// enum TaskStatus { TODO, DOING, HOLD, DONE, CANCELLED }</span>
+<span class="comment">// ダミー入力値例</span>
+<span class="comment">// currentStatus = TaskStatus.DOING</span>
+<span class="comment">// newStatus     = TaskStatus.DONE</span>
 
 <span class="keyword">FUNCTION</span> canTransition(currentStatus, newStatus)
 
   <span class="comment">// 遷移ルールの定義</span>
   allowedTransitions = {
-    "TODO"      → ["DOING", "CANCELLED"],
-    "DOING"     → ["TODO", "HOLD", "DONE", "CANCELLED"],
-    "HOLD"      → ["DOING", "CANCELLED"],
-    "DONE"      → [],  <span class="comment">// 遷移不可</span>
-    "CANCELLED" → []   <span class="comment">// 遷移不可</span>
+    TaskStatus.TODO      → [TaskStatus.DOING, TaskStatus.CANCELLED],
+    TaskStatus.DOING     → [TaskStatus.TODO, TaskStatus.HOLD, TaskStatus.DONE, TaskStatus.CANCELLED],
+    TaskStatus.HOLD      → [TaskStatus.DOING, TaskStatus.DONE, TaskStatus.CANCELLED],
+    TaskStatus.DONE      → [],  <span class="comment">// 最終状態のため遷移不可</span>
+    TaskStatus.CANCELLED → []   <span class="comment">// 最終状態のため遷移不可</span>
   }
 
   <span class="comment">// 現在のステータスから遷移可能なステータスを取得</span>
@@ -547,21 +602,31 @@
 
   task = taskMapper.selectById(taskId)
 
+  <span class="keyword">IF</span> task が null <span class="keyword">THEN</span>
+    <span class="keyword">THROW</span> NotFoundException("タスクが見つかりません")
+  <span class="keyword">END IF</span>
+
   <span class="keyword">IF</span> NOT canTransition(task.status, newStatus) <span class="keyword">THEN</span>
     <span class="keyword">THROW</span> IllegalStateException(
       "「" + task.status + "」から「" + newStatus + "」への遷移はできません"
     )
+  <span class="keyword">ELSE</span>
+    <span class="comment">// 遷移可能なためステータス更新へ進む</span>
   <span class="keyword">END IF</span>
 
   task.status = newStatus
   task.updatedAt = 現在日時
 
   <span class="comment">// 完了時は完了日時を記録</span>
-  <span class="keyword">IF</span> newStatus == "DONE" <span class="keyword">THEN</span>
+  <span class="keyword">IF</span> newStatus == TaskStatus.DONE <span class="keyword">THEN</span>
     task.completedAt = 現在日時
+  <span class="keyword">ELSE</span>
+    <span class="comment">// 完了以外では completedAt を変更しない</span>
   <span class="keyword">END IF</span>
 
   taskMapper.updateStatus(task)
+
+  <span class="keyword">RETURN</span> task
 
 <span class="keyword">END FUNCTION</span>
                 </pre>
