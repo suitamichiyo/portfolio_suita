@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>テスト報告書 -  プロジェクトアーカイブ</title>
+  <title>テスト結果報告 - プロジェクトアーカイブ</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
   <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -13,15 +13,15 @@
   </button>
 
   <div class="page-wrapper">
-  <aside class="sidebar" data-nav-level="docs"></aside>
+    <aside class="sidebar" data-nav-level="docs"></aside>
 
     <main class="main-content">
       <header class="doc-header">
         <div class="doc-category">DOCUMENT 09</div>
-        <h1 class="doc-title">テスト報告書</h1>
+        <h1 class="doc-title">テスト結果報告</h1>
         <div class="doc-meta">
-          <span><span class="material-symbols-outlined icon-sm">calendar_today</span> 作成日：2026-XX-XX</span>
-          <span><span class="material-symbols-outlined icon-sm">person</span> 作成者：（氏名を入力）</span>
+          <span><span class="material-symbols-outlined icon-sm">calendar_today</span> 作成日: 2026-05-20</span>
+          <span><span class="material-symbols-outlined icon-sm">person</span> 作成者: 学校課題チーム</span>
           <span><span class="material-symbols-outlined icon-sm">push_pin</span> Ver 1.0</span>
         </div>
       </header>
@@ -31,10 +31,10 @@
         <div class="external-link-box">
           <div class="external-link-box-title">
             <span class="material-symbols-outlined">link</span>
-            詳細ドキュメント（Google スプレッドシート）
+            詳細ドキュメントリンク
           </div>
           <div class="external-link-box-desc">
-            このページは概要のみを記載しています。詳細なテスト報告書は以下のリンクからご確認ください。
+            テスト管理表や実施ログをスプレッドシートで管理する場合は、以下のリンク欄にURLを設定してください。
           </div>
           <div class="external-link-input">
             <input type="text" placeholder="https://docs.google.com/spreadsheets/d/xxxxx" id="external-link-09">
@@ -59,35 +59,94 @@
         <section class="section" id="sec1">
           <h2 class="section-title"><span class="section-icon">1</span> テスト計画</h2>
 
-        <div class="fill-block">
-          <div class="fill-label">テスト対象・範囲 <span class="required">必須</span></div>
-          <div class="fill-hint">テストの対象となる機能・画面と、テストの種類</div>
-          <div class="fill-content">
-            <p>（テスト計画を記載）</p>
+          <div class="fill-block">
+            <div class="fill-label">テスト対象・範囲 <span class="required">必須</span></div>
+            <div class="fill-hint">テストの対象となる機能、種別、環境、期間を記載する</div>
+            <div class="fill-content">
+              <p>inimu_website のテスト計画は、仕様書で定義した機能が要件どおりに動作し、主要ブラウザで安定して利用できることを確認することを目的とする。</p>
+              <p>機能一覧: F-001 ログイン認証、F-002 予約一覧表示、F-003 予約新規登録、F-004 予約詳細表示、F-005 予約編集、F-006 問い合わせ管理、F-007 顧客管理、F-008 バリデーション、F-009 検索機能、F-010 ソート機能、F-011 ページネーション、F-012 CSV出力、F-013 ファイルアップロード、F-014 メール通知。</p>
+              <p>テスト対象の範囲: 上記機能に関する画面表示、入力チェック、データ登録・更新・検索・出力処理、および画面遷移を対象とする。外部メール送信や本番インフラ監視など、運用環境に依存する項目は本テストの対象外とする。</p>
+              <p>テスト種別: 機能テストでは各機能の正常系・異常系を確認する。画面テストではレイアウト崩れ、レスポンシブ表示、操作導線、エラーメッセージ表示を確認する。セキュリティテストでは認証・認可、未ログイン時アクセス制御、入力値の不正送信に対する基本的な防御を確認する。</p>
+              <p>テスト環境: ブラウザは Google Chrome、Microsoft Edge、Mozilla Firefox、Safari を使用する。OSは Windows 11、macOS、iOS を対象とする。</p>
+              <p>テスト期間: 2026年5月20日から2026年5月27日までを予定し、前半で機能テスト、後半で画面テストおよびセキュリティテストを実施する。</p>
+            </div>
           </div>
-        </div>
-
         </section>
 
         <section class="section" id="sec2">
           <h2 class="section-title"><span class="section-icon">2</span> テストケース一覧</h2>
 
-
           <div class="fill-block">
             <div class="fill-label">テストケース一覧 <span class="required">必須</span></div>
-        <table class="doc-table">
-          <thead><tr><th>ID</th><th>対象機能</th><th>テスト種別</th><th>テスト内容</th><th>期待結果</th><th>結果</th></tr></thead>
-          <tbody>
-          <tr class="template-row"><td>TC-001</td><td>（ログイン）</td><td>正常系</td><td>（正しいメール/パスワードでログイン）</td><td>（ダッシュボードに遷移）</td><td>（OK/NG）</td></tr>
-          <tr class="template-row"><td>TC-002</td><td>（ログイン）</td><td>異常系</td><td>（パスワード未入力でログイン）</td><td>（エラーメッセージ表示）</td><td>（OK/NG）</td></tr>
-          <tr class="template-row"><td>TC-003</td><td>（ログイン）</td><td>異常系</td><td>（存在しないメールでログイン）</td><td>（エラーメッセージ表示）</td><td>（OK/NG）</td></tr>
-          <tr class="template-row"><td>TC-004</td><td>（新規登録）</td><td>正常系</td><td>（全項目入力して登録）</td><td>（一覧に追加、成功メッセージ）</td><td>（OK/NG）</td></tr>
-          <tr class="template-row"><td>TC-005</td><td>（新規登録）</td><td>異常系</td><td>（必須項目未入力で登録）</td><td>（バリデーションエラー表示）</td><td>（OK/NG）</td></tr>
-          <tr class="template-row"><td>TC-006</td><td>（新規登録）</td><td>境界値</td><td>（最大文字数で入力して登録）</td><td>（正常に登録される）</td><td>（OK/NG）</td></tr>
-          <tr class="template-row"><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr>
-          </tbody>
-        </table>
+            <div class="fill-hint">機能仕様をもとに、正常系・異常系・境界値の観点でテストケースを整理する</div>
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>対象機能</th>
+                  <th>テスト種別</th>
+                  <th>テスト内容</th>
+                  <th>期待結果</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>TC-001</td><td>F-001 ログイン認証</td><td>正常系</td><td>有効なメールアドレスとパスワードでログインする</td><td>管理画面トップまたは予約一覧画面へ遷移する</td></tr>
+                <tr><td>TC-002</td><td>F-001 ログイン認証</td><td>異常系</td><td>誤ったパスワードでログインする</td><td>ログイン失敗メッセージが表示され、ログイン画面に留まる</td></tr>
+                <tr><td>TC-003</td><td>F-001 ログイン認証</td><td>境界値</td><td>メールアドレス未入力、パスワード最小文字数未満でログインする</td><td>必須入力または入力形式エラーが表示される</td></tr>
 
+                <tr><td>TC-004</td><td>F-002 予約一覧表示</td><td>正常系</td><td>予約データが登録されている状態で一覧画面を表示する</td><td>予約日時、人数、顧客名、ステータスが一覧表示される</td></tr>
+                <tr><td>TC-005</td><td>F-002 予約一覧表示</td><td>異常系</td><td>予約データが0件の状態で一覧画面を表示する</td><td>0件表示または該当データなしのメッセージが表示される</td></tr>
+                <tr><td>TC-006</td><td>F-002 予約一覧表示</td><td>境界値</td><td>1ページ当たり表示件数ちょうどの予約データで一覧を表示する</td><td>レイアウト崩れなく全件が表示され、ページ切替が不要である</td></tr>
+
+                <tr><td>TC-007</td><td>F-003 予約新規登録</td><td>正常系</td><td>必須項目をすべて入力して予約を登録する</td><td>予約が登録され、詳細画面または一覧画面に反映される</td></tr>
+                <tr><td>TC-008</td><td>F-003 予約新規登録</td><td>異常系</td><td>必須項目を未入力のまま登録する</td><td>未入力項目に対するエラーメッセージが表示され、登録されない</td></tr>
+                <tr><td>TC-009</td><td>F-003 予約新規登録</td><td>境界値</td><td>人数に許容最小値と許容最大値を入力して登録する</td><td>境界値は登録でき、範囲外の値はエラーになる</td></tr>
+
+                <tr><td>TC-010</td><td>F-004 予約詳細表示</td><td>正常系</td><td>既存予約の詳細画面を表示する</td><td>予約情報、顧客情報、スタッフメモが正しく表示される</td></tr>
+                <tr><td>TC-011</td><td>F-004 予約詳細表示</td><td>異常系</td><td>存在しない予約IDで詳細画面へアクセスする</td><td>エラーページまたは一覧画面へ遷移し、適切なメッセージが表示される</td></tr>
+                <tr><td>TC-012</td><td>F-004 予約詳細表示</td><td>境界値</td><td>スタッフメモが0文字と最大文字数の予約を表示する</td><td>空欄表示と最大文字数表示のどちらも崩れずに表示される</td></tr>
+
+                <tr><td>TC-013</td><td>F-005 予約編集</td><td>正常系</td><td>既存予約の日時、人数、ステータスを編集して保存する</td><td>更新内容が保存され、詳細画面と一覧画面に反映される</td></tr>
+                <tr><td>TC-014</td><td>F-005 予約編集</td><td>異常系</td><td>不正な日時や未入力値を含めて更新する</td><td>バリデーションエラーが表示され、更新されない</td></tr>
+                <tr><td>TC-015</td><td>F-005 予約編集</td><td>境界値</td><td>備考欄に最大文字数ちょうどを入力して更新する</td><td>最大文字数までは保存でき、超過時はエラーになる</td></tr>
+
+                <tr><td>TC-016</td><td>F-006 問い合わせ管理</td><td>正常系</td><td>問い合わせ一覧から対象データを開き、対応状況を更新する</td><td>更新後の対応状況が一覧と詳細に反映される</td></tr>
+                <tr><td>TC-017</td><td>F-006 問い合わせ管理</td><td>異常系</td><td>存在しない問い合わせIDを指定して詳細表示する</td><td>エラー表示または一覧画面へ遷移する</td></tr>
+                <tr><td>TC-018</td><td>F-006 問い合わせ管理</td><td>境界値</td><td>問い合わせ本文が最大文字数のデータを表示・更新する</td><td>内容が欠けずに表示され、許容範囲内で更新できる</td></tr>
+
+                <tr><td>TC-019</td><td>F-007 顧客管理</td><td>正常系</td><td>顧客情報を新規登録し、その後一覧と詳細で確認する</td><td>登録した顧客情報が正しく表示される</td></tr>
+                <tr><td>TC-020</td><td>F-007 顧客管理</td><td>異常系</td><td>メールアドレス形式不正や必須項目未入力で登録する</td><td>入力エラーが表示され、登録されない</td></tr>
+                <tr><td>TC-021</td><td>F-007 顧客管理</td><td>境界値</td><td>氏名、メールアドレス、電話番号に最大桁数の値を入力して登録する</td><td>許容範囲内では登録でき、超過時はエラーになる</td></tr>
+
+                <tr><td>TC-022</td><td>F-008 バリデーション</td><td>正常系</td><td>各入力フォームで仕様どおりの値を入力する</td><td>エラーが表示されず、登録または更新処理へ進める</td></tr>
+                <tr><td>TC-023</td><td>F-008 バリデーション</td><td>異常系</td><td>必須未入力、形式不正、禁止文字を含む値を入力する</td><td>対象項目ごとに適切なエラーメッセージが表示される</td></tr>
+                <tr><td>TC-024</td><td>F-008 バリデーション</td><td>境界値</td><td>各入力欄に最小文字数、最大文字数ちょうどの値を入力する</td><td>境界値では受け付け、超過時のみエラーになる</td></tr>
+
+                <tr><td>TC-025</td><td>F-009 検索機能</td><td>正常系</td><td>日付、ステータス、氏名で検索する</td><td>条件に一致するデータのみが一覧表示される</td></tr>
+                <tr><td>TC-026</td><td>F-009 検索機能</td><td>異常系</td><td>該当データが存在しない条件で検索する</td><td>0件表示または該当なしメッセージが表示される</td></tr>
+                <tr><td>TC-027</td><td>F-009 検索機能</td><td>境界値</td><td>日付FromとToに同日を指定して検索する</td><td>当日分のみが正しく抽出される</td></tr>
+
+                <tr><td>TC-028</td><td>F-010 ソート機能</td><td>正常系</td><td>一覧画面で日時や氏名カラムを昇順・降順で並び替える</td><td>指定した順序で並び替えられる</td></tr>
+                <tr><td>TC-029</td><td>F-010 ソート機能</td><td>異常系</td><td>ソート対象データが0件の状態でソート操作する</td><td>エラーなく0件表示のまま処理される</td></tr>
+                <tr><td>TC-030</td><td>F-010 ソート機能</td><td>境界値</td><td>同一値を複数含むデータをソートする</td><td>同一値を含んでも表示崩れや欠落がなく並び替えられる</td></tr>
+
+                <tr><td>TC-031</td><td>F-011 ページネーション</td><td>正常系</td><td>複数ページ分のデータがある状態でページ切替する</td><td>次ページ、前ページ、指定ページへ正しく遷移する</td></tr>
+                <tr><td>TC-032</td><td>F-011 ページネーション</td><td>異常系</td><td>存在しないページ番号へ直接アクセスする</td><td>先頭または最終ページへ補正されるか、適切なエラーになる</td></tr>
+                <tr><td>TC-033</td><td>F-011 ページネーション</td><td>境界値</td><td>表示件数ちょうど、表示件数+1件、0件で一覧表示する</td><td>1ページ表示、2ページ表示、0件表示が正しく切り替わる</td></tr>
+
+                <tr><td>TC-034</td><td>F-012 CSV出力</td><td>正常系</td><td>一覧画面からCSV出力を実行する</td><td>表示条件に一致したデータがCSVファイルとして出力される</td></tr>
+                <tr><td>TC-035</td><td>F-012 CSV出力</td><td>異常系</td><td>出力対象が0件の状態でCSV出力する</td><td>空CSVを出力するか、対象なしメッセージを表示する</td></tr>
+                <tr><td>TC-036</td><td>F-012 CSV出力</td><td>境界値</td><td>1件のみ、最大想定件数に近いデータ件数でCSV出力する</td><td>少件数でも大量件数でも欠落なく出力される</td></tr>
+
+                <tr><td>TC-037</td><td>F-013 ファイルアップロード</td><td>正常系</td><td>許可形式・許可サイズ内のファイルをアップロードする</td><td>ファイルが保存され、画面上で参照できる</td></tr>
+                <tr><td>TC-038</td><td>F-013 ファイルアップロード</td><td>異常系</td><td>非対応形式またはサイズ超過ファイルをアップロードする</td><td>エラーメッセージが表示され、保存されない</td></tr>
+                <tr><td>TC-039</td><td>F-013 ファイルアップロード</td><td>境界値</td><td>許可上限サイズちょうどのファイルをアップロードする</td><td>上限値では成功し、上限超過時のみエラーになる</td></tr>
+
+                <tr><td>TC-040</td><td>F-014 メール通知</td><td>正常系</td><td>予約登録または問い合わせ受付完了時に通知処理を実行する</td><td>想定宛先に通知メールが送信され、本文内容が正しい</td></tr>
+                <tr><td>TC-041</td><td>F-014 メール通知</td><td>異常系</td><td>メール送信先が不正、または送信処理が失敗する状態で実行する</td><td>画面またはログに失敗内容が記録され、処理結果が判別できる</td></tr>
+                <tr><td>TC-042</td><td>F-014 メール通知</td><td>境界値</td><td>件名・本文が最大文字数付近の通知を送信する</td><td>文字欠けやレイアウト崩れなく送信される</td></tr>
+              </tbody>
+            </table>
           </div>
         </section>
 
@@ -96,18 +155,17 @@
 
           <div class="fill-block">
             <div class="fill-label">テスト結果サマリー <span class="required">必須</span></div>
-            <div class="fill-hint">テスト実施後に集計結果を記入してください</div>
-        <table class="doc-table">
-          <thead><tr><th>項目</th><th>件数</th></tr></thead>
-          <tbody>
-          <tr class="template-row"><td>総テストケース数</td><td>（数値を入力）</td></tr>
-          <tr class="template-row"><td>OK</td><td>（数値を入力）</td></tr>
-          <tr class="template-row"><td>NG</td><td>（数値を入力）</td></tr>
-          <tr class="template-row"><td>未実施</td><td>（数値を入力）</td></tr>
-          <tr class="template-row"><td>合格率</td><td>（％を入力）</td></tr>
-          </tbody>
-        </table>
-
+            <div class="fill-hint">テスト実施後に集計結果を記載する</div>
+            <table class="doc-table">
+              <thead><tr><th>項目</th><th>記載内容</th></tr></thead>
+              <tbody>
+                <tr><td>総テストケース数</td><td>42件</td></tr>
+                <tr><td>OK</td><td>実施後記入</td></tr>
+                <tr><td>NG</td><td>実施後記入</td></tr>
+                <tr><td>未実施</td><td>実施後記入</td></tr>
+                <tr><td>備考</td><td>不具合傾向や追加確認事項を記載する</td></tr>
+              </tbody>
+            </table>
           </div>
         </section>
 
@@ -115,15 +173,14 @@
           <h2 class="section-title"><span class="section-icon">4</span> バグ一覧</h2>
 
           <div class="fill-block">
-            <div class="fill-label">発見されたバグと対応状況 <span class="required">必須</span></div>
-        <table class="doc-table">
-          <thead><tr><th>バグID</th><th>発見日</th><th>対象機能</th><th>内容</th><th>重大度</th><th>対応状況</th></tr></thead>
-          <tbody>
-          <tr class="template-row"><td>BUG-001</td><td>（日付）</td><td>（機能名）</td><td>（バグの内容）</td><td>（高/中/低）</td><td>（修正済/対応中/保留）</td></tr>
-          <tr class="template-row"><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr>
-          </tbody>
-        </table>
-
+            <div class="fill-label">検出されたバグと対応状況 <span class="required">必須</span></div>
+            <table class="doc-table">
+              <thead><tr><th>バグID</th><th>検出日</th><th>対象機能</th><th>内容</th><th>重要度</th><th>対応状況</th></tr></thead>
+              <tbody>
+                <tr class="template-row"><td>BUG-001</td><td>実施後記入</td><td>対象機能を記入</td><td>不具合内容を記入</td><td>高 / 中 / 低</td><td>未対応 / 対応中 / 完了</td></tr>
+                <tr class="template-row"><td>BUG-002</td><td>実施後記入</td><td>対象機能を記入</td><td>不具合内容を記入</td><td>高 / 中 / 低</td><td>未対応 / 対応中 / 完了</td></tr>
+              </tbody>
+            </table>
           </div>
         </section>
 
@@ -131,18 +188,17 @@
           <h2 class="section-title"><span class="section-icon">5</span> ブラウザ・デバイス対応</h2>
 
           <div class="fill-block">
-            <div class="fill-label">対応状況 <span class="required">必須</span></div>
-        <table class="doc-table">
-          <thead><tr><th>ブラウザ/デバイス</th><th>バージョン</th><th>表示</th><th>機能</th><th>備考</th></tr></thead>
-          <tbody>
-          <tr class="template-row"><td>Chrome（PC）</td><td>（バージョン）</td><td>（○/△/×）</td><td>（○/△/×）</td><td>（備考）</td></tr>
-          <tr class="template-row"><td>Firefox（PC）</td><td>（バージョン）</td><td>（○/△/×）</td><td>（○/△/×）</td><td>（備考）</td></tr>
-          <tr class="template-row"><td>Edge（PC）</td><td>（バージョン）</td><td>（○/△/×）</td><td>（○/△/×）</td><td>（備考）</td></tr>
-          <tr class="template-row"><td>Chrome（スマートフォン）</td><td>（バージョン）</td><td>（○/△/×）</td><td>（○/△/×）</td><td>（備考）</td></tr>
-          <tr class="template-row"><td>Safari（iPhone）</td><td>（バージョン）</td><td>（○/△/×）</td><td>（○/△/×）</td><td>（備考）</td></tr>
-          </tbody>
-        </table>
-
+            <div class="fill-label">対応確認状況 <span class="required">必須</span></div>
+            <table class="doc-table">
+              <thead><tr><th>ブラウザ / デバイス</th><th>バージョン</th><th>表示</th><th>動作</th><th>備考</th></tr></thead>
+              <tbody>
+                <tr class="template-row"><td>Chrome / Windows 11</td><td>最新版</td><td>実施後記入</td><td>実施後記入</td><td>必要に応じて記入</td></tr>
+                <tr class="template-row"><td>Edge / Windows 11</td><td>最新版</td><td>実施後記入</td><td>実施後記入</td><td>必要に応じて記入</td></tr>
+                <tr class="template-row"><td>Firefox / Windows 11</td><td>最新版</td><td>実施後記入</td><td>実施後記入</td><td>必要に応じて記入</td></tr>
+                <tr class="template-row"><td>Safari / macOS</td><td>最新版</td><td>実施後記入</td><td>実施後記入</td><td>必要に応じて記入</td></tr>
+                <tr class="template-row"><td>Safari / iPhone</td><td>最新版</td><td>実施後記入</td><td>実施後記入</td><td>必要に応じて記入</td></tr>
+              </tbody>
+            </table>
           </div>
         </section>
 
