@@ -53,30 +53,28 @@
               <div class="ascii-diagram">
                 <pre>
 src/main/java/
-└── com.example.taskapp/
-    ├── TaskAppApplication.java        # メインクラス
+└── com.example.taskapp
+    ├── TaskAppApplication.java        # Spring Boot起動クラス
     ├── config/
     │   ├── SecurityConfig.java        # Spring Security設定
-    │   └── WebConfig.java             # Web設定
+    │   └── WebConfig.java             # MVC共通設定
     ├── controller/
-    │   ├── TaskController.java        # タスク管理
-    │   ├── UserController.java        # ユーザー管理
-    │   └── LoginController.java       # 認証
+    │   ├── LoginController.java       # ログイン画面/認証関連
+    │   ├── TaskController.java        # タスク一覧・詳細・登録・更新・削除
+    │   └── UserController.java        # ユーザー管理
     ├── service/
-    │   ├── TaskService.java           # タスクビジネスロジック
-    │   └── UserService.java           # ユーザービジネスロジック
+    │   ├── TaskService.java           # タスク業務ロジック
+    │   └── UserService.java           # ユーザー業務ロジック
     ├── repository/
-    │   ├── TaskMapper.java            # タスクDBアクセス
-    │   └── UserMapper.java            # ユーザーDBアクセス
+    │   ├── TaskMapper.java            # MyBatisによるtasksテーブルアクセス
+    │   └── UserMapper.java            # MyBatisによるusersテーブルアクセス
     ├── entity/
-    │   ├── Task.java                  # タスクエンティティ
-    │   ├── User.java                  # ユーザーエンティティ
-    │   └── Category.java              # カテゴリエンティティ
+    │   ├── Category.java              # カテゴリ情報
+    │   ├── Task.java                  # タスク情報
+    │   └── User.java                  # ユーザー情報
     └── form/
-        ├── TaskForm.java              # タスク入力フォーム
-        └── LoginForm.java             # ログインフォーム
-
-（上記を参考に編集してください）
+        ├── LoginForm.java             # ログイン入力フォーム
+        └── TaskForm.java              # タスク登録・編集フォーム
                 </pre>
               </div>
             </div>
@@ -95,34 +93,34 @@ src/main/java/
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="template-row">
+                  <tr>
                     <td>config</td>
-                    <td>アプリケーション設定</td>
+                    <td>セキュリティ設定やMVC共通設定など、アプリケーション全体の設定を管理する。</td>
                     <td>@Configuration, @EnableWebSecurity</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>controller</td>
-                    <td>リクエスト/レスポンス処理</td>
+                    <td>HTTPリクエストを受け取り、Serviceを呼び出して画面名やリダイレクト先を返却する。</td>
                     <td>@Controller, @GetMapping, @PostMapping</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>service</td>
-                    <td>ビジネスロジック実装</td>
+                    <td>入力値の業務チェック、エンティティ変換、登録・更新・検索などの業務ロジックを実装する。</td>
                     <td>@Service, @Transactional</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>repository</td>
-                    <td>データベースアクセス</td>
+                    <td>MyBatis MapperとしてSQLを実行し、MySQLとのデータ入出力を担当する。</td>
                     <td>@Mapper</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>entity</td>
-                    <td>データモデル定義</td>
+                    <td>データベーステーブルに対応する業務データのモデルを定義する。</td>
                     <td>@Data, @NoArgsConstructor</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>form</td>
-                    <td>画面入力データ受け取り</td>
+                    <td>画面入力値を受け取り、Bean Validationで入力チェックを行う。</td>
                     <td>@Data, @NotBlank, @Size</td>
                   </tr>
                 </tbody>
@@ -145,25 +143,32 @@ src/main/java/
 │                Task                     │
 ├────────────────────────────────────────┤
 │ - id: Long                             │
+│   主キー                                │
 │ - title: String                        │
+│   タイトル                              │
 │ - content: String                      │
+│   内容                                  │
 │ - dueDate: LocalDate                   │
+│   期限                                  │
 │ - priority: Integer                    │
+│   優先度                                │
 │ - status: String                       │
+│   状態                                  │
 │ - userId: Long                         │
-│ - categoryId: Long                     │
+│   ユーザーID（外部キー）                │
 │ - createdAt: LocalDateTime             │
+│   作成日時                              │
 │ - updatedAt: LocalDateTime             │
+│   更新日時                              │
 ├────────────────────────────────────────┤
-│ + getter/setter（Lombok @Data）         │
+│ + getter/setter                        │
+│ + toString(), equals(), hashCode()     │
 └────────────────────────────────────────┘
 
-アノテーション：
+使用するLombokアノテーション：
   @Data
   @NoArgsConstructor
   @AllArgsConstructor
-
-（上記を参考に編集してください）
                 </pre>
               </div>
             </div>
@@ -180,18 +185,30 @@ src/main/java/
 │                User                     │
 ├────────────────────────────────────────┤
 │ - id: Long                             │
+│   主キー                                │
 │ - email: String                        │
+│   ログインIDとして使用するメールアドレス  │
 │ - password: String                     │
+│   パスワード（ハッシュ化して保持）        │
 │ - name: String                         │
+│   ユーザー名                            │
 │ - role: String                         │
+│   権限区分（ADMIN / USER）              │
 │ - enabled: Boolean                     │
+│   利用可否フラグ                        │
 │ - createdAt: LocalDateTime             │
+│   作成日時                              │
 │ - updatedAt: LocalDateTime             │
+│   更新日時                              │
 ├────────────────────────────────────────┤
-│ + getter/setter（Lombok @Data）         │
+│ + getter/setter                        │
+│ + toString(), equals(), hashCode()     │
 └────────────────────────────────────────┘
 
-（上記を参考に編集してください）
+使用するLombokアノテーション：
+  @Data
+  @NoArgsConstructor
+  @AllArgsConstructor
                 </pre>
               </div>
             </div>
@@ -208,14 +225,22 @@ src/main/java/
 │              Category                   │
 ├────────────────────────────────────────┤
 │ - id: Long                             │
+│   主キー                                │
 │ - name: String                         │
+│   カテゴリ名                            │
 │ - color: String                        │
+│   表示用カラーコード                    │
 │ - userId: Long                         │
+│   ユーザーID（外部キー）                │
 ├────────────────────────────────────────┤
-│ + getter/setter（Lombok @Data）         │
+│ + getter/setter                        │
+│ + toString(), equals(), hashCode()     │
 └────────────────────────────────────────┘
 
-（上記を参考に編集してください）
+使用するLombokアノテーション：
+  @Data
+  @NoArgsConstructor
+  @AllArgsConstructor
                 </pre>
               </div>
             </div>
@@ -244,8 +269,6 @@ src/main/java/
 │ + delete(id: Long): void                       │
 │ + search(keyword: String): List&lt;Task&gt;         │
 └────────────────────────────────────────────────┘
-
-（上記を参考に編集してください）
                 </pre>
               </div>
             </div>
@@ -261,47 +284,54 @@ src/main/java/
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="template-row">
+                  <tr>
                     <td>selectAll</td>
                     <td>なし</td>
                     <td>List&lt;Task&gt;</td>
                     <td>SELECT</td>
-                    <td>全件取得</td>
+                    <td>tasksテーブルからタスク情報を全件取得する。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>selectById</td>
                     <td>id: Long</td>
                     <td>Task</td>
                     <td>SELECT</td>
-                    <td>ID指定取得</td>
+                    <td>主キーIDを条件に1件のタスク情報を取得する。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>selectByUserId</td>
                     <td>userId: Long</td>
                     <td>List&lt;Task&gt;</td>
                     <td>SELECT</td>
-                    <td>ユーザー別取得</td>
+                    <td>指定ユーザーに紐づくタスク一覧を取得する。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>insert</td>
                     <td>task: Task</td>
                     <td>void</td>
                     <td>INSERT</td>
-                    <td>新規登録</td>
+                    <td>Taskエンティティの内容をtasksテーブルへ新規登録する。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>update</td>
                     <td>task: Task</td>
                     <td>void</td>
                     <td>UPDATE</td>
-                    <td>更新</td>
+                    <td>主キーIDをもとに既存タスク情報を更新する。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>delete</td>
                     <td>id: Long</td>
                     <td>void</td>
                     <td>DELETE</td>
-                    <td>削除</td>
+                    <td>主キーIDを指定してタスク情報を削除する。</td>
+                  </tr>
+                  <tr>
+                    <td>search</td>
+                    <td>keyword: String</td>
+                    <td>List&lt;Task&gt;</td>
+                    <td>SELECT</td>
+                    <td>タイトルや内容を対象にキーワード検索した結果を取得する。</td>
                   </tr>
                 </tbody>
               </table>
@@ -321,7 +351,7 @@ src/main/java/
 ┌────────────────────────────────────────────────────┐
 │                   《Service》                       │
 │                   TaskService                       │
-│                   @Service                          │
+│             @Service / @Transactional               │
 ├────────────────────────────────────────────────────┤
 │ - taskMapper: TaskMapper                           │
 ├────────────────────────────────────────────────────┤
@@ -338,9 +368,61 @@ src/main/java/
 依存関係：
   TaskService ────▶ TaskMapper （@Autowired）
 
-（上記を参考に編集してください）
+FormからEntityへの変換処理：
+  create / update では TaskForm から入力値を受け取り、
+  Task エンティティへ値を詰め替えて Mapper に渡す。
+  変換方法は BeanUtils.copyProperties または setter による手動マッピングを使用する。
+  例：
+    - form.title      -> task.title
+    - form.content    -> task.content
+    - form.dueDate    -> task.dueDate
+    - form.priority   -> task.priority
+    - form.status     -> task.status
+    - userId          -> task.userId
+
+@Transactional の使用箇所：
+  - create：登録処理を1トランザクションで実行
+  - update：更新処理を1トランザクションで実行
+  - delete：削除処理を1トランザクションで実行
+  - changeStatus：状態変更を1トランザクションで実行
                 </pre>
               </div>
+            </div>
+            <div class="fill-content" style="margin-top: 16px;">
+              <table class="doc-table">
+                <thead>
+                  <tr>
+                    <th>項目</th>
+                    <th>内容</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>依存するMapper</td>
+                    <td>TaskMapper をDIし、タスク情報の取得・登録・更新・削除をRepository層へ委譲する。</td>
+                  </tr>
+                  <tr>
+                    <td>CRUDメソッド</td>
+                    <td>findAll, findById, create, update, delete により、タスクの参照・登録・更新・削除を行う。</td>
+                  </tr>
+                  <tr>
+                    <td>検索メソッド</td>
+                    <td>search(keyword) でタイトルや内容を対象としたキーワード検索を行う。</td>
+                  </tr>
+                  <tr>
+                    <td>ステータス変更メソッド</td>
+                    <td>changeStatus(id, status) で対象タスクの状態のみを変更する。</td>
+                  </tr>
+                  <tr>
+                    <td>Form→Entity変換</td>
+                    <td>TaskForm の各入力項目を Task へ変換して保存する。必要に応じて BeanUtils.copyProperties や setter による手動マッピングを利用する。</td>
+                  </tr>
+                  <tr>
+                    <td>@Transactional</td>
+                    <td>create, update, delete, changeStatus など、データ更新を伴うメソッドに適用する。</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </section>
@@ -367,11 +449,9 @@ src/main/java/
 │ + createForm(model: Model): String                      │
 │ + create(form: TaskForm, result: BindingResult): String │
 │ + editForm(id: Long, model: Model): String              │
-│ + update(id: Long, form: TaskForm, result): String      │
+│ + update(id: Long, form: TaskForm, result: BindingResult): String │
 │ + delete(id: Long): String                              │
 └─────────────────────────────────────────────────────────┘
-
-（上記を参考に編集してください）
                 </pre>
               </div>
             </div>
@@ -386,47 +466,47 @@ src/main/java/
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="template-row">
+                  <tr>
                     <td>list</td>
                     <td>GET</td>
                     <td>/tasks</td>
-                    <td>一覧表示</td>
+                    <td>タスク一覧画面を表示する。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>show</td>
                     <td>GET</td>
                     <td>/tasks/{id}</td>
-                    <td>詳細表示</td>
+                    <td>指定IDのタスク詳細画面を表示する。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>createForm</td>
                     <td>GET</td>
                     <td>/tasks/new</td>
-                    <td>新規作成フォーム</td>
+                    <td>タスク新規作成フォームを表示する。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>create</td>
                     <td>POST</td>
                     <td>/tasks</td>
-                    <td>新規作成処理</td>
+                    <td>フォーム入力値を受け取り、新規タスクを登録する。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>editForm</td>
                     <td>GET</td>
                     <td>/tasks/{id}/edit</td>
-                    <td>編集フォーム</td>
+                    <td>指定IDのタスク編集フォームを表示する。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>update</td>
                     <td>POST</td>
                     <td>/tasks/{id}</td>
-                    <td>更新処理</td>
+                    <td>指定IDのタスクを更新する。</td>
                   </tr>
-                  <tr class="template-row">
+                  <tr>
                     <td>delete</td>
                     <td>POST</td>
                     <td>/tasks/{id}/delete</td>
-                    <td>削除処理</td>
+                    <td>指定IDのタスクを削除する。</td>
                   </tr>
                 </tbody>
               </table>
@@ -443,40 +523,52 @@ src/main/java/
             <div class="fill-content">
               <div class="ascii-diagram">
                 <pre>
-┌──────────────────────────────────────────────────────────────────┐
-│                        依存関係図                                  │
-├──────────────────────────────────────────────────────────────────┤
-│                                                                   │
-│   ┌────────────────┐         ┌────────────────┐                  │
-│   │ TaskController │────────▶│  TaskService   │                  │
-│   │ UserController │────────▶│  UserService   │                  │
-│   └────────────────┘         └────────────────┘                  │
-│          │                          │                             │
-│          │ @Autowired               │ @Autowired                  │
-│          ▼                          ▼                             │
-│   ┌────────────────┐         ┌────────────────┐                  │
-│   │   TaskForm     │         │   TaskMapper   │                  │
-│   │   (入力)       │         │   UserMapper   │                  │
-│   └────────────────┘         └────────────────┘                  │
-│                                     │                             │
-│                                     │ MyBatis                     │
-│                                     ▼                             │
-│                              ┌────────────────┐                   │
-│                              │     Task       │                   │
-│                              │     User       │                   │
-│                              │   Category     │                   │
-│                              │   (Entity)     │                   │
-│                              └────────────────┘                   │
-│                                     │                             │
-│                                     ▼                             │
-│                              ┌────────────────┐                   │
-│                              │   Database     │                   │
-│                              │   (MySQL)      │                   │
-│                              └────────────────┘                   │
-│                                                                   │
-└──────────────────────────────────────────────────────────────────┘
-
-（上記を参考に編集してください）
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                           Spring Boot クラス間依存関係                       │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│ [Controller層]                                                              │
+│   TaskController --------------------------┐                                │
+│      │                                     │ @Autowired                     │
+│      │ uses                                ▼                                │
+│      ├──── TaskForm                   TaskService                           │
+│      │    （入力フォーム）                 │                                │
+│      │                                     │ @Autowired                     │
+│      │                                     ▼                                │
+│      │                                TaskMapper                            │
+│      │                                     │                                │
+│      │                                     │ maps                           │
+│      │                                     ▼                                │
+│      │                             Task / Category                          │
+│      │                                     │                                │
+│      │                                     ▼                                │
+│      │                                  Database                            │
+│      │                                  （MySQL）                           │
+│      │                                                                      │
+│   UserController --------------------------┐                                │
+│                                            │ @Autowired                     │
+│                                            ▼                                │
+│                                        UserService                          │
+│                                            │                                │
+│                                            │ @Autowired                     │
+│                                            ▼                                │
+│                                        UserMapper                           │
+│                                            │                                │
+│                                            │ maps                           │
+│                                            ▼                                │
+│                                           User                              │
+│                                            │                                │
+│                                            ▼                                │
+│                                         Database                            │
+│                                         （MySQL）                           │
+│                                                                             │
+│ DIコンテナによる注入関係：                                                  │
+│   - TaskController  --@Autowired--> TaskService                             │
+│   - UserController  --@Autowired--> UserService                             │
+│   - TaskService     --@Autowired--> TaskMapper                              │
+│   - UserService     --@Autowired--> UserMapper                              │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
                 </pre>
               </div>
             </div>
