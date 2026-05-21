@@ -64,6 +64,186 @@
               </ul>
             </div>
 
+            <div class="subsection" style="margin-top: 20px;">
+              <h3 class="subsection-title">入力プロンプト例</h3>
+              <div class="code-block">
+                <pre>Spring Bootプロジェクトの初期設定を行ってください。
+
+【プロジェクト情報】
+・プロジェクト名：taskapp
+・パッケージ名：com.example.taskapp
+・Java バージョン：17
+・Spring Boot バージョン：3.x（最新安定版）
+・ビルドツール：Maven
+
+【必要な依存関係】
+・Spring Web
+・Thymeleaf
+・MyBatis Framework
+・MySQL Driver
+・Lombok
+・Spring Boot DevTools
+・Validation
+
+【作成してほしいファイル】
+1. pom.xml の依存関係設定
+2. application.properties の基本設定
+   - データベース接続設定（MySQL）
+   - MyBatis設定
+   - Thymeleaf設定
+3. 基本的なディレクトリ構造
+
+【データベース接続情報】
+・URL: jdbc:mysql://localhost:3306/taskapp
+・ユーザー名: root
+・パスワード: （環境に合わせて設定）</pre>
+              </div>
+            </div>
+
+            <div class="subsection" style="margin-top: 20px;">
+              <h3 class="subsection-title">pom.xml 出力例</h3>
+              <div class="code-block">
+                <pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+  &lt;parent&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+    &lt;version&gt;3.5.14&lt;/version&gt;
+    &lt;relativePath/&gt;
+  &lt;/parent&gt;
+
+  &lt;groupId&gt;com.example&lt;/groupId&gt;
+  &lt;artifactId&gt;taskapp&lt;/artifactId&gt;
+  &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+  &lt;name&gt;taskapp&lt;/name&gt;
+  &lt;description&gt;Task management application&lt;/description&gt;
+
+  &lt;properties&gt;
+    &lt;java.version&gt;17&lt;/java.version&gt;
+  &lt;/properties&gt;
+
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;
+      &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;
+      &lt;version&gt;3.0.4&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;com.mysql&lt;/groupId&gt;
+      &lt;artifactId&gt;mysql-connector-j&lt;/artifactId&gt;
+      &lt;scope&gt;runtime&lt;/scope&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+      &lt;artifactId&gt;lombok&lt;/artifactId&gt;
+      &lt;optional&gt;true&lt;/optional&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;
+      &lt;scope&gt;runtime&lt;/scope&gt;
+      &lt;optional&gt;true&lt;/optional&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot-starter-validation&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+      &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+
+  &lt;build&gt;
+    &lt;plugins&gt;
+      &lt;plugin&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+        &lt;configuration&gt;
+          &lt;excludes&gt;
+            &lt;exclude&gt;
+              &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+              &lt;artifactId&gt;lombok&lt;/artifactId&gt;
+            &lt;/exclude&gt;
+          &lt;/excludes&gt;
+        &lt;/configuration&gt;
+      &lt;/plugin&gt;
+    &lt;/plugins&gt;
+  &lt;/build&gt;
+&lt;/project&gt;</pre>
+              </div>
+            </div>
+
+            <div class="subsection" style="margin-top: 20px;">
+              <h3 class="subsection-title">application.properties 出力例</h3>
+              <div class="code-block">
+                <pre>spring.application.name=taskapp
+
+# Database
+spring.datasource.url=jdbc:mysql://localhost:3306/taskapp?useSSL=false&amp;serverTimezone=Asia/Tokyo&amp;characterEncoding=UTF-8
+spring.datasource.username=root
+spring.datasource.password=YOUR_PASSWORD
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+# MyBatis
+mybatis.type-aliases-package=com.example.taskapp.entity
+mybatis.configuration.map-underscore-to-camel-case=true
+mybatis.configuration.log-impl=org.apache.ibatis.logging.stdout.StdOutImpl
+
+# Thymeleaf
+spring.thymeleaf.cache=false
+spring.thymeleaf.prefix=classpath:/templates/
+spring.thymeleaf.suffix=.html
+spring.thymeleaf.mode=HTML
+spring.thymeleaf.encoding=UTF-8
+
+# DevTools
+spring.devtools.restart.enabled=true
+spring.devtools.livereload.enabled=true</pre>
+              </div>
+            </div>
+
+            <div class="subsection" style="margin-top: 20px;">
+              <h3 class="subsection-title">ディレクトリ構造 出力例</h3>
+              <div class="code-block">
+                <pre>taskapp/
+├─ pom.xml
+└─ src/
+   ├─ main/
+   │  ├─ java/
+   │  │  └─ com/example/taskapp/
+   │  │     ├─ TaskAppApplication.java
+   │  │     ├─ config/
+   │  │     ├─ controller/
+   │  │     ├─ service/
+   │  │     ├─ repository/
+   │  │     ├─ entity/
+   │  │     └─ form/
+   │  └─ resources/
+   │     ├─ application.properties
+   │     ├─ static/
+   │     │  ├─ css/
+   │     │  └─ js/
+   │     └─ templates/
+   └─ test/
+      └─ java/
+         └─ com/example/taskapp/</pre>
+              </div>
+            </div>
+
 
             <div class="subsection" style="margin-top: 20px;">
               <h3 class="subsection-title">期待される出力</h3>
@@ -103,12 +283,87 @@
               </ul>
             </div>
 
+            <div class="subsection" style="margin-top: 20px;">
+              <h3 class="subsection-title">入力プロンプト例</h3>
+              <div class="code-block">
+                <pre>以下のDB設計書を元に、Entityクラスを作成してください。
+
+【テーブル定義】
+■ tasks テーブル
+| カラム名     | 型           | NULL | 説明                 |
+|-------------|--------------|------|----------------------|
+| id          | BIGINT       | NO   | 主キー（自動採番）    |
+| title       | VARCHAR(100) | NO   | タイトル              |
+| content     | TEXT         | YES  | 内容                 |
+| due_date    | DATE         | YES  | 期限                 |
+| priority    | INT          | NO   | 優先度（1-3）         |
+| status      | VARCHAR(20)  | NO   | ステータス            |
+| user_id     | BIGINT       | NO   | ユーザーID（外部キー） |
+| created_at  | DATETIME     | NO   | 作成日時              |
+| updated_at  | DATETIME     | NO   | 更新日時              |
+
+【要件】
+・パッケージ：com.example.taskapp.entity
+・Lombokアノテーション使用（@Data, @NoArgsConstructor, @AllArgsConstructor）
+・日付型はLocalDate、日時型はLocalDateTimeを使用
+・フィールド名はキャメルケース、カラム名はスネークケースで対応</pre>
+              </div>
+            </div>
+
+            <div class="subsection" style="margin-top: 20px;">
+              <h3 class="subsection-title">Task.java 出力例</h3>
+              <div class="code-block">
+                <pre>package com.example.taskapp.entity;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Task {
+
+    private Long id;
+    private String title;
+    private String content;
+    private LocalDate dueDate;
+    private Integer priority;
+    private String status;
+    private Long userId;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+}</pre>
+              </div>
+            </div>
+
+            <div class="subsection" style="margin-top: 20px;">
+              <h3 class="subsection-title">補足</h3>
+              <ul style="font-size: 14px; color: var(--text-light); margin-left: 20px;">
+                <li>`due_date` は `dueDate`、`user_id` は `userId`、`created_at` は `createdAt` のようにキャメルケースへ変換する</li>
+                <li>`DATE` は `LocalDate`、`DATETIME` は `LocalDateTime` に対応させる</li>
+                <li>MyBatisの `map-underscore-to-camel-case=true` を使うとスネークケースとキャメルケースを自動対応しやすい</li>
+              </ul>
+            </div>
+
+            <div class="subsection" style="margin-top: 20px;">
+              <h3 class="subsection-title">期待される出力</h3>
+              <ul style="font-size: 14px; color: var(--text-light); margin-left: 20px;">
+                <li>`src/main/java/com/example/taskapp/entity/Task.java`</li>
+                <li>Lombokアノテーション付きのEntityクラス</li>
+                <li>DBカラムとJavaフィールド対応が分かるコード</li>
+              </ul>
+            </div>
 
             <div class="subsection" style="margin-top: 20px;">
               <h3 class="subsection-title">確認ポイント</h3>
               <ul style="font-size: 14px; color: var(--text-light); margin-left: 20px;">
                 <li>フィールドの型が適切か（Long, String, LocalDate等）</li>
                 <li>Lombokアノテーションが正しく設定されているか</li>
+                <li>スネークケースのカラム名とキャメルケースのフィールド名が対応しているか</li>
               </ul>
             </div>
           </div>
@@ -125,6 +380,136 @@
               </div>
             </div>
 
+            <div class="subsection">
+              <h3 class="subsection-title">入力プロンプト例</h3>
+              <div class="code-block">
+                <pre>TaskエンティティのMyBatis Mapperを作成してください。
+
+【要件】
+・パッケージ：com.example.taskapp.repository
+・インターフェース名：TaskMapper
+・@Mapperアノテーションを使用
+
+【実装するメソッド】
+1. selectAll() - 全件取得（作成日時降順）
+2. selectById(Long id) - ID指定取得
+3. selectByUserId(Long userId) - ユーザー別取得
+4. insert(Task task) - 新規登録（自動採番のIDを取得）
+5. update(Task task) - 更新
+6. delete(Long id) - 削除
+
+【SQL実装方式】
+・アノテーション方式（@Select, @Insert, @Update, @Delete）を使用
+・カラム名とフィールド名のマッピングは@Resultsを使用
+
+【注意点】
+・insertではuseGeneratedKeys=trueを指定してIDを取得
+・キャメルケース⇔スネークケースの変換に対応</pre>
+              </div>
+            </div>
+
+            <div class="subsection" style="margin-top: 20px;">
+              <h3 class="subsection-title">TaskMapper.java 出力例</h3>
+              <div class="code-block">
+                <pre>package com.example.taskapp.repository;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+
+import com.example.taskapp.entity.Task;
+
+@Mapper
+public interface TaskMapper {
+
+    @Results(id = "taskResultMap", value = {
+        @Result(property = "id", column = "id"),
+        @Result(property = "title", column = "title"),
+        @Result(property = "content", column = "content"),
+        @Result(property = "dueDate", column = "due_date"),
+        @Result(property = "priority", column = "priority"),
+        @Result(property = "status", column = "status"),
+        @Result(property = "userId", column = "user_id"),
+        @Result(property = "createdAt", column = "created_at"),
+        @Result(property = "updatedAt", column = "updated_at")
+    })
+    @Select("""
+        SELECT id, title, content, due_date, priority, status, user_id, created_at, updated_at
+        FROM tasks
+        ORDER BY created_at DESC
+        """)
+    List&lt;Task&gt; selectAll();
+
+    @Select("""
+        SELECT id, title, content, due_date, priority, status, user_id, created_at, updated_at
+        FROM tasks
+        WHERE id = #{id}
+        """)
+    @org.apache.ibatis.annotations.ResultMap("taskResultMap")
+    Task selectById(Long id);
+
+    @Select("""
+        SELECT id, title, content, due_date, priority, status, user_id, created_at, updated_at
+        FROM tasks
+        WHERE user_id = #{userId}
+        ORDER BY created_at DESC
+        """)
+    @org.apache.ibatis.annotations.ResultMap("taskResultMap")
+    List&lt;Task&gt; selectByUserId(Long userId);
+
+    @Insert("""
+        INSERT INTO tasks (title, content, due_date, priority, status, user_id, created_at, updated_at)
+        VALUES (#{title}, #{content}, #{dueDate}, #{priority}, #{status}, #{userId}, #{createdAt}, #{updatedAt})
+        """)
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    int insert(Task task);
+
+    @Update("""
+        UPDATE tasks
+        SET title = #{title},
+            content = #{content},
+            due_date = #{dueDate},
+            priority = #{priority},
+            status = #{status},
+            user_id = #{userId},
+            updated_at = #{updatedAt}
+        WHERE id = #{id}
+        """)
+    int update(Task task);
+
+    @Delete("""
+        DELETE FROM tasks
+        WHERE id = #{id}
+        """)
+    int delete(Long id);
+}</pre>
+              </div>
+            </div>
+
+            <div class="subsection" style="margin-top: 20px;">
+              <h3 class="subsection-title">補足</h3>
+              <ul style="font-size: 14px; color: var(--text-light); margin-left: 20px;">
+                <li>`due_date` → `dueDate`、`user_id` → `userId`、`created_at` → `createdAt` を `@Results` で対応させる</li>
+                <li>`insert` は `@Options(useGeneratedKeys = true, keyProperty = "id")` で自動採番IDを取得する</li>
+                <li>戻り値を `int` にすると、更新件数や削除件数も確認しやすい</li>
+              </ul>
+            </div>
+
+            <div class="subsection" style="margin-top: 20px;">
+              <h3 class="subsection-title">期待される出力</h3>
+              <ul style="font-size: 14px; color: var(--text-light); margin-left: 20px;">
+                <li>`src/main/java/com/example/taskapp/repository/TaskMapper.java`</li>
+                <li>`@Mapper` 付きのMyBatisインターフェース</li>
+                <li>CRUDメソッドと `@Results` によるマッピング定義</li>
+              </ul>
+            </div>
 
             <div class="subsection" style="margin-top: 20px;">
               <h3 class="subsection-title">確認ポイント</h3>
@@ -132,6 +517,7 @@
                 <li>@Mapperアノテーションが付与されているか</li>
                 <li>SQLの構文が正しいか</li>
                 <li>カラム名とフィールド名のマッピングが正しいか</li>
+                <li>`insert` で採番されたIDが `task.id` に格納される設定になっているか</li>
               </ul>
             </div>
           </div>
@@ -146,6 +532,144 @@
                 <div class="step-title">Service作成</div>
                 <div class="step-desc">ビジネスロジック層のServiceクラスを作成する</div>
               </div>
+            </div>
+
+            <div class="subsection">
+              <h3 class="subsection-title">入力プロンプト例</h3>
+              <div class="code-block">
+                <pre>TaskServiceクラスを作成してください。
+
+【要件】
+・パッケージ：com.example.taskapp.service
+・クラス名：TaskService
+・@Serviceアノテーションを使用
+・TaskMapperをコンストラクタインジェクション
+
+【実装するメソッド】
+1. findAll() - 全タスク取得
+2. findById(Long id) - ID指定取得
+3. findByUserId(Long userId) - ユーザー別取得
+4. create(TaskForm form, Long userId) - 新規作成
+   - FormからEntityへの変換処理
+   - 作成日時・更新日時の設定
+5. update(Long id, TaskForm form) - 更新
+   - 既存データの取得と更新
+   - 更新日時の設定
+6. delete(Long id) - 削除
+
+【トランザクション】
+・create, update, deleteメソッドには@Transactionalを付与
+
+【Form → Entity 変換】
+・TaskForm（画面入力）からTask（エンティティ）への変換ロジックを含める</pre>
+              </div>
+            </div>
+
+            <div class="subsection" style="margin-top: 20px;">
+              <h3 class="subsection-title">TaskService.java 出力例</h3>
+              <div class="code-block">
+                <pre>package com.example.taskapp.service;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.example.taskapp.entity.Task;
+import com.example.taskapp.form.TaskForm;
+import com.example.taskapp.repository.TaskMapper;
+
+@Service
+public class TaskService {
+
+    private final TaskMapper taskMapper;
+
+    public TaskService(TaskMapper taskMapper) {
+        this.taskMapper = taskMapper;
+    }
+
+    public List&lt;Task&gt; findAll() {
+        return taskMapper.selectAll();
+    }
+
+    public Task findById(Long id) {
+        return taskMapper.selectById(id);
+    }
+
+    public List&lt;Task&gt; findByUserId(Long userId) {
+        return taskMapper.selectByUserId(userId);
+    }
+
+    @Transactional
+    public void create(TaskForm form, Long userId) {
+        Task task = new Task();
+        LocalDateTime now = LocalDateTime.now();
+
+        task.setTitle(form.getTitle());
+        task.setContent(form.getContent());
+        task.setDueDate(form.getDueDate());
+        task.setPriority(form.getPriority());
+        task.setStatus(form.getStatus());
+        task.setUserId(userId);
+        task.setCreatedAt(now);
+        task.setUpdatedAt(now);
+
+        taskMapper.insert(task);
+    }
+
+    @Transactional
+    public void update(Long id, TaskForm form) {
+        Task task = taskMapper.selectById(id);
+        if (task == null) {
+            throw new IllegalArgumentException("指定されたタスクが存在しません");
+        }
+
+        task.setTitle(form.getTitle());
+        task.setContent(form.getContent());
+        task.setDueDate(form.getDueDate());
+        task.setPriority(form.getPriority());
+        task.setStatus(form.getStatus());
+        task.setUpdatedAt(LocalDateTime.now());
+
+        taskMapper.update(task);
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        taskMapper.delete(id);
+    }
+}</pre>
+              </div>
+            </div>
+
+            <div class="subsection" style="margin-top: 20px;">
+              <h3 class="subsection-title">補足</h3>
+              <ul style="font-size: 14px; color: var(--text-light); margin-left: 20px;">
+                <li>読み取り系の `findAll` `findById` `findByUserId` は通常 `@Transactional` 不要</li>
+                <li>`create` では `createdAt` と `updatedAt` を同じ現在時刻で設定する</li>
+                <li>`update` では既存データを取得してから変更対象フィールドのみ上書きする</li>
+                <li>`TaskForm → Task` 変換は setter による手動マッピングで表現している</li>
+              </ul>
+            </div>
+
+            <div class="subsection" style="margin-top: 20px;">
+              <h3 class="subsection-title">期待される出力</h3>
+              <ul style="font-size: 14px; color: var(--text-light); margin-left: 20px;">
+                <li>`src/main/java/com/example/taskapp/service/TaskService.java`</li>
+                <li>`@Service` 付きのサービスクラス</li>
+                <li>CRUDメソッドと `TaskForm → Task` 変換ロジック</li>
+              </ul>
+            </div>
+
+            <div class="subsection" style="margin-top: 20px;">
+              <h3 class="subsection-title">確認ポイント</h3>
+              <ul style="font-size: 14px; color: var(--text-light); margin-left: 20px;">
+                <li>`TaskMapper` がコンストラクタインジェクションされているか</li>
+                <li>`create` `update` `delete` に `@Transactional` が付与されているか</li>
+                <li>`TaskForm` の入力値が `Task` に正しく詰め替えられているか</li>
+                <li>`createdAt` `updatedAt` が適切に設定されているか</li>
+              </ul>
             </div>
 
           </div>
