@@ -156,7 +156,7 @@ address { font-style: normal; }
 }
 
 .header-logo { display: flex; align-items: center; flex-shrink: 0; }
-.header-logo img { height: 26px; width: auto; }
+.header-logo img { height: 48px; width: auto; }
 .logo-w { display: none; }
 .logo-b { display: block; }
 
@@ -560,7 +560,7 @@ address { font-style: normal; }
   gap: 48px;
 }
 .footer-logo { display: block; margin-bottom: 20px; }
-.footer-logo img { height: 24px; width: auto; }
+.footer-logo img { height: 44px; width: auto; }
 .footer-addr { font-family: var(--ff-sans); font-size: 12px; line-height: 1.9; margin-bottom: 8px; color: rgba(255,255,255,0.48); }
 .footer-co   { font-family: var(--ff-sans); font-size: 11px; color: rgba(255,255,255,0.26); }
 
