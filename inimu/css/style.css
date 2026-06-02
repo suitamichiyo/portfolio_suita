@@ -906,20 +906,16 @@ address { font-style: normal; }
   gap: 52px;
   align-items: center;
 }
-.ws-sns-img-box {
-  aspect-ratio: 4/3;
-  background-color: #E8E5DF;
-  border-radius: var(--r-card);
-  overflow: hidden;
-  position: relative;
+.ws-sns-photos {
+  display: flex;
+  gap: 10px;
 }
-.ws-sns-img-box img { width: 100%; height: 100%; object-fit: cover; }
-.ws-sns-placeholder {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(to bottom right, transparent calc(50% - 0.5px), rgba(0,0,0,0.1) calc(50% - 0.5px), rgba(0,0,0,0.1) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
-    linear-gradient(to top right,    transparent calc(50% - 0.5px), rgba(0,0,0,0.1) calc(50% - 0.5px), rgba(0,0,0,0.1) calc(50% + 0.5px), transparent calc(50% + 0.5px));
+.ws-sns-photos img {
+  width: 50%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--r-card);
+  display: block;
 }
 .ws-sns-text p {
   font-family: var(--ff-serif);
