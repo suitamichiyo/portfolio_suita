@@ -15,29 +15,7 @@
        Background unified: #F7F7F5
        ============================================================ */
 
-    /* ---- Hero ---- */
-    .prod-hero {
-      margin-top: 64px;
-      padding: 96px 0 80px;
-      background-color: #F7F7F5;
-      border-bottom: 0.5px solid #E0E0E0;
-      text-align: center;
-    }
-    .prod-hero .kicker { font-size: 11px; letter-spacing: 0.16em; margin-bottom: 20px; }
-    .prod-hero-h1 {
-      font-family: 'Noto Serif JP', serif;
-      font-size: 40px;
-      font-weight: 500;
-      line-height: 1.65;
-      color: #1A1A1A;
-      margin-bottom: 14px;
-    }
-    .prod-hero-sub {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 13px;
-      color: #888888;
-      line-height: 1.7;
-    }
+    /* ---- Hero (photo) — uses shared .page-hero from style.css ---- */
 
     /* ---- 3層セクション — Series Grid ---- */
     .series-grid {
@@ -506,11 +484,19 @@
   </div>
 
   <!-- ========== HERO ========== -->
-  <section class="prod-hero">
-    <div class="container">
-      <span class="kicker">PRODUCTS</span>
-      <h1 class="prod-hero-h1">失敗しない香り選びを、ここで。</h1>
-      <p class="prod-hero-sub">日本の素材と物語を纏う、inimuの香りたち</p>
+  <section class="page-hero">
+    <figure class="page-hero-bg">
+      <img src="../document/picture/products_hero.png" alt="PRODUCTS ヒーロービジュアル" class="page-hero-img">
+      <div class="page-hero-scrim"></div>
+    </figure>
+    <div class="page-hero-body">
+      <span class="kicker kicker-inv">PRODUCTS</span>
+      <h1 class="page-hero-h1">失敗しない香り選びを、ここで。</h1>
+      <p class="page-hero-sub">日本の素材と物語を纏う、inimuの香りたち</p>
+    </div>
+    <div class="page-hero-scroll">
+      <span>SCROLL</span>
+      <div class="page-hero-scroll-line"></div>
     </div>
   </section>
 
@@ -652,7 +638,7 @@
         <!-- Room Fragrance -->
         <article class="aroma-card">
           <div class="aroma-img">
-            <div class="ph-img"></div>
+            <img src="../document/picture/products_section3_roomfreglance.jpg" alt="アロマレコルト ルームフレグランス">
           </div>
           <div class="aroma-body">
             <span class="aroma-cat">Room Fragrance</span>
@@ -696,7 +682,7 @@
         <!-- COCKTAIL SAVON -->
         <article class="social-card">
           <div class="social-img">
-            <div class="ph-img"></div>
+            <img src="../document/picture/products_section4_cocktailsavon.png" alt="COCKTAIL SAVON">
           </div>
           <div class="social-body">
             <span class="badge-amber">自立支援</span>
@@ -708,7 +694,7 @@
         <!-- JOY'N -->
         <article class="social-card">
           <div class="social-img">
-            <div class="ph-img"></div>
+            <img src="../document/picture/products_section4_joy'n.webp" alt="JOY'N">
           </div>
           <div class="social-body">
             <span class="badge-amber">自立支援</span>
@@ -720,7 +706,7 @@
         <!-- MUSUBI -->
         <article class="social-card">
           <div class="social-img">
-            <div class="ph-img"></div>
+            <img src="../document/picture/products_section4_musubi.webp" alt="MUSUBI">
           </div>
           <div class="social-body">
             <span class="badge-teal">廃棄資源活用</span>
@@ -749,7 +735,7 @@
         <!-- 浅草おみやげセット -->
         <article class="gift-card">
           <div class="gift-img">
-            <div class="ph-img"></div>
+            <img src="../document/picture/products_section5_wanowa+perfumers.png" alt="浅草おみやげセット">
           </div>
           <div class="gift-body">
             <p class="gift-name">浅草おみやげセット</p>
@@ -776,7 +762,7 @@
         <!-- 社会貢献ギフト -->
         <article class="gift-card">
           <div class="gift-img">
-            <div class="ph-img"></div>
+            <img src="../document/picture/products_section5_cocktailsavon+joy'n.png" alt="社会貢献ギフト">
           </div>
           <div class="gift-body">
             <p class="gift-name">社会貢献ギフト</p>
