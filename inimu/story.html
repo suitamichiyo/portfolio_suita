@@ -15,14 +15,8 @@
        Background unified: #F7F7F5
        ============================================================ */
 
-    /* ---- ブランドの始まり ---- */
-    .story-begin-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-    .story-begin-text {}
+    /* ---- ブランドの始まり（テキストのみ） ---- */
+    .story-begin-text { max-width: 760px; }
     .story-begin-kicker {
       font-family: 'Cormorant Garamond', serif;
       font-size: 11px;
@@ -48,14 +42,6 @@
       margin-bottom: 22px;
     }
     .story-begin-body p:last-child { margin-bottom: 0; }
-    .story-begin-img {
-      aspect-ratio: 3/4;
-      border-radius: 4px;
-      overflow: hidden;
-      background-color: #E8E5DF;
-    }
-    .story-begin-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
     /* ---- 素材セクション ---- */
     .ingredient-grid {
       display: grid;
@@ -137,33 +123,7 @@
     .oem-inner {
       max-width: 1440px;
       margin: 0 auto;
-      padding: 100px 160px;
-    }
-    .oem-kicker {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.36);
-      display: block;
-      margin-bottom: 22px;
-    }
-    .oem-h2 {
-      font-family: 'Noto Serif JP', serif;
-      font-size: 28px;
-      font-weight: 500;
-      line-height: 1.75;
-      color: #FFFFFF;
-      margin-bottom: 28px;
-      max-width: 640px;
-    }
-    .oem-body {
-      font-family: 'Noto Serif JP', serif;
-      font-size: 14px;
-      line-height: 2.2;
-      color: rgba(255,255,255,0.68);
-      margin-bottom: 36px;
-      max-width: 680px;
+      padding: 72px 160px;
     }
     .oem-partners {
       display: flex;
@@ -370,10 +330,8 @@
        RESPONSIVE — Tablet 768–1139px
        ============================================================ */
     @media (max-width: 1139px) {
-      .story-begin-grid { gap: 52px; }
       .story-begin-h2 { font-size: 24px; }
-      .oem-inner { padding: 80px 48px; }
-      .oem-h2 { font-size: 24px; }
+      .oem-inner { padding: 60px 48px; }
       .oem-stat-num { font-size: 44px; }
       .planting-grid { gap: 52px; }
       .planting-h2 { font-size: 24px; }
@@ -385,8 +343,6 @@
        RESPONSIVE — Mobile ≤767px
        ============================================================ */
     @media (max-width: 767px) {
-      .story-begin-grid { grid-template-columns: 1fr; gap: 36px; }
-      .story-begin-img { aspect-ratio: 4/3; order: -1; }
       .story-begin-h2 { font-size: 22px; }
 
       .ingredient-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
@@ -394,8 +350,7 @@
       .ingredient-desc-item { border-right: none; border-bottom: 0.5px solid #E0E0E0; }
       .ingredient-desc-item:last-child { border-bottom: none; }
 
-      .oem-inner { padding: 60px 20px; }
-      .oem-h2 { font-size: 22px; }
+      .oem-inner { padding: 48px 20px; }
       .oem-stat-num { font-size: 40px; }
       .oem-stat { padding: 28px 16px; }
       .oem-stats { grid-template-columns: 1fr; }
@@ -481,22 +436,14 @@
   </div>
   <section class="sec-pad">
     <div class="container">
-      <div class="story-begin-grid">
-
-        <div class="story-begin-text">
-          <span class="story-begin-kicker">HOW IT BEGAN</span>
-          <h2 class="story-begin-h2">香りを通じて、<br>日本のものづくりを伝えたかった。</h2>
-          <div class="story-begin-body">
-            <p>2008年、KARA INNOVATEは東京で創業した。はじめは小さな調香の仕事だった。ホテルのロビー、セレクトショップの棚、誰かの大切な贈り物。様々な場で求められる香りを届けようとしていた。</p>
-            <p>そして気づいた。香りは、場所と人の間に静かに宿るものだと。</p>
-            <p>ヒノキの森、ゆずの産地、伽羅の薫り。それは単なる素材ではなく、土地と人と時間が作り出した物語だった。inimuは、その物語を多くの方に届けていくために生まれた。</p>
-          </div>
+      <div class="story-begin-text">
+        <span class="story-begin-kicker">HOW IT BEGAN</span>
+        <h2 class="story-begin-h2">香りを通じて、<br>日本のものづくりを伝えたかった。</h2>
+        <div class="story-begin-body">
+          <p>2008年、KARA INNOVATEは東京で創業した。はじめは小さな調香の仕事だった。ホテルのロビー、セレクトショップの棚、誰かの大切な贈り物。様々な場で求められる香りを届けようとしていた。</p>
+          <p>そして気づいた。香りは、場所と人の間に静かに宿るものだと。</p>
+          <p>ヒノキの森、ゆずの産地、伽羅の薫り。それは単なる素材ではなく、土地と人と時間が作り出した物語だった。inimuは、その物語を多くの方に届けていくために生まれた。</p>
         </div>
-
-        <div class="story-begin-img">
-          <img src="../document/picture/annfragrance.jpg" alt="inimu ブランドの始まり">
-        </div>
-
       </div>
     </div>
   </section>
@@ -611,10 +558,6 @@
   </div>
   <section class="oem-sec">
     <div class="oem-inner">
-
-      <span class="oem-kicker">TRUSTED BY</span>
-      <h2 class="oem-h2">「プロが選ぶ香り」として、<br>多くのブランドと歩んできた。</h2>
-      <p class="oem-body">2008年の創業以来、私たちはOEM・ODMの実績を積み重ねてきた。ライフスタイルショップ、デザインホテル、ブランドショップ。それぞれの世界観に寄り添いながら、香りを届けてきた19年間がある。その一つひとつが、inimuという店のバックボーンになっている。</p>
 
       <div class="oem-partners">
         <span class="oem-partners-label">COLLABORATION PARTNERS</span>
