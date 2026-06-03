@@ -4,14 +4,470 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PRODUCTS — inimu</title>
-  <meta name="description" content="inimuの商品ラインアップ。WANOWA・PERFUMERS・破天荒。">
+  <meta name="description" content="inimuの香りラインアップ。WANOWA・PERFUMERS・破天荒・アロマレコルト・社会性商品・ギフト。失敗しない香り選びを、浅草で。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Sans+JP:wght@400;500&family=Noto+Serif+JP:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ============================================================
+       PRODUCTS page — additional styles
+       Background unified: #F7F7F5
+       ============================================================ */
+
+    /* ---- Hero ---- */
+    .prod-hero {
+      margin-top: 64px;
+      padding: 96px 0 80px;
+      background-color: #F7F7F5;
+      border-bottom: 0.5px solid #E0E0E0;
+      text-align: center;
+    }
+    .prod-hero .kicker { font-size: 11px; letter-spacing: 0.16em; margin-bottom: 20px; }
+    .prod-hero-h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 40px;
+      font-weight: 500;
+      line-height: 1.65;
+      color: #1A1A1A;
+      margin-bottom: 14px;
+    }
+    .prod-hero-sub {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 13px;
+      color: #888888;
+      line-height: 1.7;
+    }
+
+    /* ---- 3層セクション — Series Grid ---- */
+    .series-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .series-card {
+      background-color: #FFFFFF;
+      border: 0.5px solid #E0E0E0;
+      border-radius: 4px;
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .series-card:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(0,0,0,0.08); }
+    .series-card-feat { border: 2px solid #3D3D3A; }
+
+    .series-img {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background-color: #E8E5DF;
+      position: relative;
+    }
+    .series-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+    .series-card:hover .series-img img { transform: scale(1.05); }
+
+    .series-body { padding: 20px 22px 24px; }
+    .series-level {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10px;
+      color: #AAAAAA;
+      margin-bottom: 6px;
+      letter-spacing: 0.04em;
+      display: block;
+    }
+    .series-badges { margin-bottom: 8px; }
+    .series-name {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22px;
+      font-weight: 500;
+      color: #1A1A1A;
+      margin-bottom: 10px;
+    }
+    .series-desc {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13px;
+      color: #888888;
+      line-height: 2.0;
+      margin-bottom: 18px;
+    }
+    .series-strength {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .series-strength-label {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10px;
+      color: #AAAAAA;
+      white-space: nowrap;
+    }
+    .strength-bar {
+      display: flex;
+      gap: 4px;
+    }
+    .strength-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #E0E0E0;
+    }
+    .strength-dot.filled { background-color: #1A1A1A; }
+
+    /* ---- 破天荒特集 (dark) ---- */
+    .hatenkou-sec {
+      background-color: #1A1A1A;
+      color: #FFFFFF;
+    }
+    .hatenkou-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 100px 160px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .hatenkou-kicker {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.36);
+      display: block;
+      margin-bottom: 22px;
+    }
+    .hatenkou-h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 36px;
+      font-weight: 500;
+      line-height: 1.68;
+      color: #FFFFFF;
+      margin-bottom: 24px;
+    }
+    .hatenkou-text {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 14px;
+      line-height: 2.2;
+      color: rgba(255,255,255,0.72);
+      margin-bottom: 22px;
+    }
+    .hatenkou-spec {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 11px;
+      color: rgba(255,255,255,0.36);
+      line-height: 1.9;
+      padding: 14px 0;
+      border-top: 0.5px solid rgba(255,255,255,0.12);
+      border-bottom: 0.5px solid rgba(255,255,255,0.12);
+      margin-bottom: 32px;
+    }
+    .hatenkou-cta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .hatenkou-cta-note {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 11px;
+      color: rgba(255,255,255,0.34);
+    }
+
+    .hatenkou-right {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .hatenkou-main-img {
+      aspect-ratio: 4/3;
+      border-radius: 4px;
+      overflow: hidden;
+      background-color: rgba(255,255,255,0.04);
+      position: relative;
+    }
+    .hatenkou-main-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .hatenkou-sub-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .hatenkou-sub-card {
+      background-color: rgba(255,255,255,0.05);
+      border: 0.5px solid rgba(255,255,255,0.12);
+      border-radius: 4px;
+      padding: 20px;
+    }
+    .hatenkou-sub-label {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10px;
+      color: rgba(255,255,255,0.36);
+      margin-bottom: 6px;
+    }
+    .hatenkou-sub-name {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.7;
+    }
+
+    /* ---- 暮らしに香りを ---- */
+    .aroma-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .aroma-card {
+      background-color: #FFFFFF;
+      border: 0.5px solid #E0E0E0;
+      border-radius: 4px;
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .aroma-card:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(0,0,0,0.08); }
+    .aroma-img {
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      background-color: #E8E5DF;
+      position: relative;
+    }
+    .aroma-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+    .aroma-card:hover .aroma-img img { transform: scale(1.05); }
+    .aroma-body { padding: 22px 24px 26px; }
+    .aroma-cat {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #AAAAAA;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .aroma-name {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 18px;
+      font-weight: 500;
+      color: #1A1A1A;
+      margin-bottom: 4px;
+    }
+    .aroma-sub {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 12px;
+      color: #888888;
+      margin-bottom: 10px;
+    }
+    .aroma-desc {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 13px;
+      color: #888888;
+      line-height: 2.0;
+    }
+
+    /* ---- 社会性商品 ---- */
+    .social-intro {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 12px;
+      color: #888888;
+      line-height: 1.9;
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .social-card {
+      background-color: #FFFFFF;
+      border: 0.5px solid #E0E0E0;
+      border-radius: 4px;
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .social-card:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(0,0,0,0.08); }
+    .social-img {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background-color: #E8E5DF;
+      position: relative;
+    }
+    .social-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+    .social-card:hover .social-img img { transform: scale(1.05); }
+    .social-body { padding: 18px 20px 22px; }
+    .social-name {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 18px;
+      font-weight: 500;
+      color: #1A1A1A;
+      margin-bottom: 8px;
+      margin-top: 8px;
+    }
+    .social-desc {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 12px;
+      color: #888888;
+      line-height: 1.8;
+    }
+    .badge-amber {
+      display: inline-block;
+      background-color: #FAEEDA;
+      color: #633806;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      padding: 3px 8px;
+      border-radius: 2px;
+    }
+    .badge-teal {
+      display: inline-block;
+      background-color: #E1F5EE;
+      color: #085041;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      padding: 3px 8px;
+      border-radius: 2px;
+    }
+
+    /* ---- ギフト ---- */
+    .gift-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .gift-card {
+      background-color: #FFFFFF;
+      border: 0.5px solid #E0E0E0;
+      border-radius: 4px;
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .gift-card:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(0,0,0,0.08); }
+    .gift-card-feat { border: 2px solid #3D3D3A; }
+    .gift-img {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background-color: #E8E5DF;
+      position: relative;
+    }
+    .gift-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+    .gift-card:hover .gift-img img { transform: scale(1.05); }
+    .gift-body { padding: 18px 20px 24px; }
+    .gift-badges { margin-bottom: 8px; }
+    .gift-name {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: #1A1A1A;
+      margin-bottom: 4px;
+    }
+    .gift-sub {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 11px;
+      color: #888888;
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+    .gift-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: #1A1A1A;
+    }
+    .gift-note {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 11px;
+      color: #AAAAAA;
+      text-align: center;
+      line-height: 1.9;
+    }
+    .badge-popular {
+      display: inline-block;
+      background-color: #1A1A1A;
+      color: #FFFFFF;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      padding: 3px 8px;
+      border-radius: 2px;
+    }
+
+    /* ---- Placeholder image (X lines) ---- */
+    .ph-img {
+      width: 100%; height: 100%;
+      background-color: #E8E5DF;
+      position: relative;
+      overflow: hidden;
+    }
+    .ph-img::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom right, transparent calc(50% - 0.5px), #C4C0BA calc(50% - 0.5px), #C4C0BA calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+        linear-gradient(to bottom left,  transparent calc(50% - 0.5px), #C4C0BA calc(50% - 0.5px), #C4C0BA calc(50% + 0.5px), transparent calc(50% + 0.5px));
+    }
+
+    /* Dark placeholder */
+    .ph-img-dark {
+      width: 100%; height: 100%;
+      background-color: rgba(255,255,255,0.04);
+      position: relative;
+      overflow: hidden;
+    }
+    .ph-img-dark::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom right, transparent calc(50% - 0.5px), rgba(255,255,255,0.10) calc(50% - 0.5px), rgba(255,255,255,0.10) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+        linear-gradient(to bottom left,  transparent calc(50% - 0.5px), rgba(255,255,255,0.10) calc(50% - 0.5px), rgba(255,255,255,0.10) calc(50% + 0.5px), transparent calc(50% + 0.5px));
+    }
+
+    /* ============================================================
+       RESPONSIVE — Tablet 768–1139px
+       ============================================================ */
+    @media (max-width: 1139px) {
+      .prod-hero { padding: 80px 0 64px; }
+      .prod-hero-h1 { font-size: 34px; }
+      .hatenkou-inner { padding: 80px 48px; gap: 52px; }
+      .hatenkou-h2 { font-size: 30px; }
+    }
+
+    /* ============================================================
+       RESPONSIVE — Mobile ≤767px
+       ============================================================ */
+    @media (max-width: 767px) {
+      .prod-hero { padding: 64px 0 52px; }
+      .prod-hero-h1 { font-size: 24px; }
+      .prod-hero-sub { font-size: 12px; }
+
+      .series-grid { grid-template-columns: 1fr; gap: 8px; }
+      .series-card { display: flex; }
+      .series-card-feat { border: 1.5px solid #3D3D3A; }
+      .series-img { width: 110px; aspect-ratio: 1; flex-shrink: 0; }
+      .series-name { font-size: 18px; }
+      .series-desc { font-size: 12px; margin-bottom: 12px; }
+
+      .hatenkou-inner { grid-template-columns: 1fr; padding: 60px 20px; gap: 36px; }
+      .hatenkou-h2 { font-size: 24px; }
+      .hatenkou-text { font-size: 13px; }
+      .hatenkou-cta { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .hatenkou-cta .btn { width: 100%; justify-content: center; }
+
+      .aroma-grid { grid-template-columns: 1fr; gap: 8px; }
+      .social-grid { grid-template-columns: 1fr; gap: 8px; }
+      .gift-grid { grid-template-columns: 1fr; gap: 8px; }
+    }
+  </style>
 </head>
 <body>
 
+  <!-- ========== HEADER ========== -->
   <header class="site-header" id="siteHeader">
     <div class="header-inner">
       <a href="index.html" class="header-logo">
@@ -33,6 +489,7 @@
     </div>
   </header>
 
+  <!-- Mobile Nav -->
   <div class="mobile-nav" id="mobileNav" aria-hidden="true">
     <div class="mnav-inner">
       <nav class="mnav-links">
@@ -48,21 +505,303 @@
     </div>
   </div>
 
-  <main class="page-stub">
-    <div class="page-stub-inner">
+  <!-- ========== HERO ========== -->
+  <section class="prod-hero">
+    <div class="container">
       <span class="kicker">PRODUCTS</span>
-      <h1>香りのラインアップ</h1>
-      <p>このページは現在制作中です。</p>
+      <h1 class="prod-hero-h1">失敗しない香り選びを、ここで。</h1>
+      <p class="prod-hero-sub">日本の素材と物語を纏う、inimuの香りたち</p>
     </div>
-  </main>
+  </section>
 
+  <!-- ========== SECTION 01: 3層セクション ========== -->
+  <div class="sec-label">
+    <div class="container"><span>SECTION 01 — SERIES / inimuの香り</span></div>
+  </div>
+  <section class="sec-pad">
+    <div class="container">
+      <div class="sec-head">
+        <h2 class="sec-h2">inimuの香り</h2>
+        <p class="sec-sub">あなたの香りとの向き合い方から選んでください</p>
+      </div>
+
+      <div class="series-grid">
+
+        <!-- WANOWA -->
+        <article class="series-card">
+          <div class="series-img">
+            <img src="../document/picture/top_wanowa_handcream_all.png" alt="WANOWA">
+          </div>
+          <div class="series-body">
+            <span class="series-level">入門・日本の産地の香り</span>
+            <p class="series-name">WANOWA</p>
+            <p class="series-desc">日本の森から届く香り。植樹活動を<br>応援しながら、初めての一本に。</p>
+            <div class="series-strength">
+              <span class="series-strength-label">香りの強さ</span>
+              <div class="strength-bar">
+                <span class="strength-dot filled"></span>
+                <span class="strength-dot filled"></span>
+                <span class="strength-dot"></span>
+                <span class="strength-dot"></span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- PERFUMERS -->
+        <article class="series-card">
+          <div class="series-img">
+            <img src="../document/picture/top_perfumers_all.png" alt="PERFUMERS">
+          </div>
+          <div class="series-body">
+            <span class="series-level">中級・調香師の世界</span>
+            <p class="series-name">PERFUMERS</p>
+            <p class="series-desc">調香師の視点で香りを探求する。<br>自分だけの答えを見つける。</p>
+            <div class="series-strength">
+              <span class="series-strength-label">香りの強さ</span>
+              <div class="strength-bar">
+                <span class="strength-dot filled"></span>
+                <span class="strength-dot filled"></span>
+                <span class="strength-dot filled"></span>
+                <span class="strength-dot"></span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 破天荒 -->
+        <article class="series-card series-card-feat">
+          <div class="series-img">
+            <img src="../document/picture/top_hatenko_all.webp" alt="破天荒">
+          </div>
+          <div class="series-body">
+            <div class="series-badges">
+              <span class="badge badge-dark">看板商品</span>
+            </div>
+            <span class="series-level">上級・香りの芸術</span>
+            <p class="series-name">破天荒</p>
+            <p class="series-desc">ここにしかない一本。日本の香りの芸術が、<br>あなただけの物語になる。</p>
+            <div class="series-strength">
+              <span class="series-strength-label">香りの強さ</span>
+              <div class="strength-bar">
+                <span class="strength-dot filled"></span>
+                <span class="strength-dot filled"></span>
+                <span class="strength-dot filled"></span>
+                <span class="strength-dot filled"></span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 02: 破天荒特集（黒背景） ========== -->
+  <div class="sec-label sec-label-dark">
+    <div class="container"><span>SECTION 02 — HATENKOU / 破天荒特集</span></div>
+  </div>
+  <section class="hatenkou-sec">
+    <div class="hatenkou-inner">
+
+      <!-- 左: テキスト -->
+      <div class="hatenkou-body">
+        <span class="hatenkou-kicker">HATENKOU — THE SIGNATURE</span>
+        <h2 class="hatenkou-h2">香りの芸術を、纏う。</h2>
+        <p class="hatenkou-text">日本の香文化の精髄を一本に凝縮した、inimuの象徴的フレグランス。浅草で出会える、唯一無二の香り。</p>
+        <p class="hatenkou-spec">こだわりのボトル：加賀友禅 × 東濃檜の蓋・底面全面印刷</p>
+        <div class="hatenkou-cta">
+          <a href="#" class="btn btn-outline-w">詳細・購入 →</a>
+          <span class="hatenkou-cta-note">EC・店頭にて</span>
+        </div>
+      </div>
+
+      <!-- 右: 商品ビジュアル -->
+      <div class="hatenkou-right">
+        <div class="hatenkou-main-img">
+          <img src="../document/picture/破天荒_イメージ_ロゴあり.webp" alt="破天荒 イメージ">
+        </div>
+        <div class="hatenkou-sub-cards">
+          <div class="hatenkou-sub-card">
+            <p class="hatenkou-sub-label">共通素材</p>
+            <p class="hatenkou-sub-name">伽羅・加子母ひのき葉精油</p>
+          </div>
+          <div class="hatenkou-sub-card">
+            <p class="hatenkou-sub-label">産地</p>
+            <p class="hatenkou-sub-name">国産素材使用</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========== SECTION 03: 暮らしに香りを ========== -->
+  <div class="sec-label">
+    <div class="container"><span>SECTION 03 — AROMA RECOLTE / 暮らしに香りを</span></div>
+  </div>
+  <section class="sec-pad">
+    <div class="container">
+      <div class="sec-head">
+        <h2 class="sec-h2">暮らしに香りを</h2>
+        <p class="sec-sub">アロマレコルト｜ルームフレグランス・ハンドクリーム</p>
+      </div>
+
+      <div class="aroma-grid">
+
+        <!-- Room Fragrance -->
+        <article class="aroma-card">
+          <div class="aroma-img">
+            <div class="ph-img"></div>
+          </div>
+          <div class="aroma-body">
+            <span class="aroma-cat">Room Fragrance</span>
+            <p class="aroma-name">アロマレコルト<br>ルームフレグランス</p>
+            <p class="aroma-sub">空間ごと香りをまとう</p>
+            <p class="aroma-desc">日本素材のアロマで暮らしを整える。</p>
+          </div>
+        </article>
+
+        <!-- Hand Cream -->
+        <article class="aroma-card">
+          <div class="aroma-img">
+            <img src="../document/picture/top_wanowa_handcream_all.png" alt="アロマレコルト ハンドクリーム">
+          </div>
+          <div class="aroma-body">
+            <span class="aroma-cat">Hand Cream</span>
+            <p class="aroma-name">アロマレコルト<br>ハンドクリーム</p>
+            <p class="aroma-sub">手に香りを。使うたびに。</p>
+            <p class="aroma-desc">日本の自然を感じるスキンケア。</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 04: 社会性商品 ========== -->
+  <div class="sec-label">
+    <div class="container"><span>SECTION 04 — SOCIAL PRODUCTS / 社会性のある商品</span></div>
+  </div>
+  <section class="sec-pad">
+    <div class="container">
+      <div class="sec-head">
+        <h2 class="sec-h2">買うことが、応援になる。</h2>
+        <p class="sec-sub">COCKTAIL SAVON・JOY'N・MUSUBI｜inimuが届ける社会性のある商品</p>
+      </div>
+      <p class="social-intro">これらの商品の購入は、障害者自立支援や廃棄資源活用の取り組みを支えています。</p>
+
+      <div class="social-grid">
+
+        <!-- COCKTAIL SAVON -->
+        <article class="social-card">
+          <div class="social-img">
+            <div class="ph-img"></div>
+          </div>
+          <div class="social-body">
+            <span class="badge-amber">自立支援</span>
+            <p class="social-name">COCKTAIL SAVON</p>
+            <p class="social-desc">障害者自立支援事業から生まれた石けん。<br>1アイテム × 10種の香り。</p>
+          </div>
+        </article>
+
+        <!-- JOY'N -->
+        <article class="social-card">
+          <div class="social-img">
+            <div class="ph-img"></div>
+          </div>
+          <div class="social-body">
+            <span class="badge-amber">自立支援</span>
+            <p class="social-name">JOY'N</p>
+            <p class="social-desc">障害者自立支援事業から生まれたサシェ。<br>1アイテム × 3種の香り。</p>
+          </div>
+        </article>
+
+        <!-- MUSUBI -->
+        <article class="social-card">
+          <div class="social-img">
+            <div class="ph-img"></div>
+          </div>
+          <div class="social-body">
+            <span class="badge-teal">廃棄資源活用</span>
+            <p class="social-name">MUSUBI</p>
+            <p class="social-desc">廃棄資源を活かして生まれたルームフレグランス。<br>2アイテム × 2種の香り。</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 05: ギフト ========== -->
+  <div class="sec-label">
+    <div class="container"><span>SECTION 05 — GIFT / 贈る理由のある香り</span></div>
+  </div>
+  <section class="sec-pad">
+    <div class="container">
+      <div class="sec-head">
+        <h2 class="sec-h2">贈る理由のある香り</h2>
+        <p class="sec-sub">誕生日・記念日・浅草土産・特別な手土産に</p>
+      </div>
+
+      <div class="gift-grid">
+
+        <!-- 浅草おみやげセット -->
+        <article class="gift-card">
+          <div class="gift-img">
+            <div class="ph-img"></div>
+          </div>
+          <div class="gift-body">
+            <p class="gift-name">浅草おみやげセット</p>
+            <p class="gift-sub">WANOWA＋PERFUMERS</p>
+            <p class="gift-price">¥5,000〜</p>
+          </div>
+        </article>
+
+        <!-- 記念日・誕生日セット -->
+        <article class="gift-card gift-card-feat">
+          <div class="gift-img">
+            <img src="../document/picture/破天荒_化粧箱イメージ.webp" alt="記念日・誕生日セット">
+          </div>
+          <div class="gift-body">
+            <div class="gift-badges">
+              <span class="badge-popular">人気 No.1</span>
+            </div>
+            <p class="gift-name">記念日・誕生日セット</p>
+            <p class="gift-sub">特別な日のギフト<br>破天荒＋ストーリーカード</p>
+            <p class="gift-price">¥18,000〜</p>
+          </div>
+        </article>
+
+        <!-- 社会貢献ギフト -->
+        <article class="gift-card">
+          <div class="gift-img">
+            <div class="ph-img"></div>
+          </div>
+          <div class="gift-body">
+            <p class="gift-name">社会貢献ギフト</p>
+            <p class="gift-sub">応援セット<br>COCKTAIL SAVON + JOY'N</p>
+            <p class="gift-price">¥2,000〜</p>
+          </div>
+        </article>
+
+      </div>
+
+      <p class="gift-note">ギフトラッピング・熨斗対応・法人ギフト・ホテルアメニティのご相談は<a href="contact.html" style="text-decoration:underline; text-underline-offset:3px; color:#AAAAAA;">CONTACT</a>より</p>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
   <footer class="site-footer">
     <div class="footer-top container">
       <div class="footer-brand">
         <a href="index.html" class="footer-logo">
           <img src="../document/inimu_logo_white_transparent.png" alt="inimu">
         </a>
-        <address class="footer-addr">東京都台東区浅草2丁目1-5<br>営業：火〜日曜 10:30〜18:00（月曜定休）</address>
+        <address class="footer-addr">
+          東京都台東区浅草2丁目1-5<br>
+          営業：火〜日曜 10:30〜18:00（月曜定休）
+        </address>
         <p class="footer-co">運営：株式会社 KARA INNOVATE</p>
       </div>
       <nav class="footer-nav" aria-label="フッターナビゲーション">
@@ -79,6 +818,7 @@
     </div>
   </footer>
 
+  <!-- Mobile Floating CTA -->
   <div class="float-cta">
     <div class="float-cta-inner">
       <div class="float-cta-txt">
