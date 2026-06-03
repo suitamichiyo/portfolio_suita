@@ -9,369 +9,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Sans+JP:wght@400;500&family=Noto+Serif+JP:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  <style>
-    /* ============================================================
-       STORY page — additional styles
-       Background unified: #F7F7F5
-       ============================================================ */
-
-    /* ---- ブランドの始まり（テキストのみ） ---- */
-    .story-begin-text { max-width: 760px; }
-    .story-begin-kicker {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #AAAAAA;
-      display: block;
-      margin-bottom: 20px;
-    }
-    .story-begin-h2 {
-      font-family: 'Noto Serif JP', serif;
-      font-size: 28px;
-      font-weight: 500;
-      line-height: 1.75;
-      color: #1A1A1A;
-      margin-bottom: 32px;
-    }
-    .story-begin-body p {
-      font-family: 'Noto Serif JP', serif;
-      font-size: 14px;
-      line-height: 2.2;
-      color: #555555;
-      margin-bottom: 22px;
-    }
-    .story-begin-body p:last-child { margin-bottom: 0; }
-    /* ---- 素材セクション ---- */
-    .ingredient-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-    .ingredient-card {
-      background-color: #FFFFFF;
-      border: 0.5px solid #E0E0E0;
-      border-radius: 4px;
-      overflow: hidden;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-    .ingredient-card:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(0,0,0,0.08); }
-    .ingredient-img {
-      aspect-ratio: 4/3;
-      overflow: hidden;
-    }
-    .ingredient-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; display: block; }
-    .ingredient-card:hover .ingredient-img img { transform: scale(1.05); }
-    .ingredient-body { padding: 14px 16px 18px; }
-    .ingredient-name {
-      font-family: 'Noto Serif JP', serif;
-      font-size: 15px;
-      font-weight: 500;
-      color: #1A1A1A;
-      margin-bottom: 4px;
-    }
-    .ingredient-region {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 10px;
-      color: #AAAAAA;
-      margin-bottom: 5px;
-      letter-spacing: 0.03em;
-    }
-    .ingredient-note {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 11px;
-      color: #888888;
-      line-height: 1.7;
-    }
-
-    /* ---- 素材説明（伽羅・ヒノキ・ゆず） ---- */
-    .ingredient-descs {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-      border: 0.5px solid #E0E0E0;
-      border-radius: 4px;
-      overflow: hidden;
-      background-color: #FFFFFF;
-      margin-top: 28px;
-    }
-    .ingredient-desc-item {
-      padding: 26px 28px;
-      border-right: 0.5px solid #E0E0E0;
-    }
-    .ingredient-desc-item:last-child { border-right: none; }
-    .ingredient-desc-name {
-      font-family: 'Noto Serif JP', serif;
-      font-size: 15px;
-      font-weight: 500;
-      color: #1A1A1A;
-      margin-bottom: 10px;
-    }
-    .ingredient-desc-text {
-      font-family: 'Noto Serif JP', serif;
-      font-size: 13px;
-      color: #888888;
-      line-height: 2.0;
-    }
-
-    /* ---- OEM実績（dark） ---- */
-    .oem-sec {
-      background-color: #1A1A1A;
-      color: #FFFFFF;
-    }
-    .oem-inner {
-      max-width: 1440px;
-      margin: 0 auto;
-      padding: 72px 160px;
-    }
-    .oem-partners {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-bottom: 52px;
-    }
-    .oem-partners-label {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.30);
-      flex-shrink: 0;
-    }
-    .oem-partners-sep { color: rgba(255,255,255,0.16); font-size: 11px; }
-    .oem-partner-name {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 12px;
-      color: rgba(255,255,255,0.52);
-    }
-    .oem-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-      border: 0.5px solid rgba(255,255,255,0.12);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-    .oem-stat {
-      padding: 40px 24px;
-      border-right: 0.5px solid rgba(255,255,255,0.12);
-      text-align: center;
-    }
-    .oem-stat:last-child { border-right: none; }
-    .oem-stat-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 52px;
-      font-weight: 400;
-      letter-spacing: -0.01em;
-      line-height: 1;
-      color: #FFFFFF;
-      margin-bottom: 10px;
-    }
-    .oem-stat-lbl {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 11px;
-      color: rgba(255,255,255,0.40);
-      line-height: 1.7;
-    }
-
-    /* ---- 植樹活動 ---- */
-    .planting-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-    .planting-text {}
-    .planting-kicker {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #AAAAAA;
-      display: block;
-      margin-bottom: 20px;
-    }
-    .planting-h2 {
-      font-family: 'Noto Serif JP', serif;
-      font-size: 28px;
-      font-weight: 500;
-      line-height: 1.75;
-      color: #1A1A1A;
-      margin-bottom: 28px;
-    }
-    .planting-body p {
-      font-family: 'Noto Serif JP', serif;
-      font-size: 14px;
-      line-height: 2.2;
-      color: #555555;
-      margin-bottom: 22px;
-    }
-    .planting-body p:last-child { margin-bottom: 0; }
-    .planting-cta { margin-top: 32px; }
-    .planting-img {
-      aspect-ratio: 3/4;
-      border-radius: 4px;
-      overflow: hidden;
-      background-color: #E8E5DF;
-    }
-    .planting-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    /* ---- 代表プロフィール ---- */
-    .founder-sec {
-      background-color: #F7F7F5;
-    }
-    .founder-grid {
-      display: grid;
-      grid-template-columns: 400px 1fr;
-      min-height: 600px;
-      gap: 0;
-    }
-    .founder-img {
-      overflow: hidden;
-      background-color: #E8E5DF;
-      border-radius: 4px 0 0 4px;
-    }
-    .founder-img img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
-    .founder-body {
-      padding: 72px 80px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 0;
-      background-color: #FFFFFF;
-      border: 0.5px solid #E0E0E0;
-      border-left: none;
-      border-radius: 0 4px 4px 0;
-    }
-    .founder-kicker {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #AAAAAA;
-      display: block;
-      margin-bottom: 18px;
-    }
-    .founder-name {
-      font-family: 'Noto Serif JP', serif;
-      font-size: 20px;
-      font-weight: 500;
-      color: #1A1A1A;
-      margin-bottom: 4px;
-    }
-    .founder-title {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 11px;
-      color: #AAAAAA;
-      margin-bottom: 32px;
-    }
-    .founder-narrative p {
-      font-family: 'Noto Serif JP', serif;
-      font-size: 14px;
-      line-height: 2.2;
-      color: #555555;
-      margin-bottom: 22px;
-    }
-    .founder-narrative p:last-child {
-      margin-bottom: 0;
-      font-style: italic;
-      color: #888888;
-    }
-
-    /* ---- ページ下部CTA ---- */
-    .story-cta-sec {
-      background-color: #F7F7F5;
-      padding: 100px 0;
-      text-align: center;
-      border-top: 0.5px solid #E0E0E0;
-    }
-    .story-cta-h2 {
-      font-family: 'Noto Serif JP', serif;
-      font-size: 28px;
-      font-weight: 500;
-      line-height: 1.65;
-      color: #1A1A1A;
-      margin-bottom: 12px;
-    }
-    .story-cta-sub {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: 13px;
-      color: #888888;
-      line-height: 1.7;
-      margin-bottom: 36px;
-    }
-    .story-cta-btns {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    /* ---- Placeholder X ---- */
-    .ph-img {
-      width: 100%; height: 100%;
-      background-color: #E8E5DF;
-      position: relative;
-      overflow: hidden;
-    }
-    .ph-img::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(to bottom right, transparent calc(50% - 0.5px), #C4C0BA calc(50% - 0.5px), #C4C0BA calc(50% + 0.5px), transparent calc(50% + 0.5px)),
-        linear-gradient(to bottom left,  transparent calc(50% - 0.5px), #C4C0BA calc(50% - 0.5px), #C4C0BA calc(50% + 0.5px), transparent calc(50% + 0.5px));
-    }
-
-    /* ============================================================
-       RESPONSIVE — Tablet 768–1139px
-       ============================================================ */
-    @media (max-width: 1139px) {
-      .story-begin-h2 { font-size: 24px; }
-      .oem-inner { padding: 60px 48px; }
-      .oem-stat-num { font-size: 44px; }
-      .planting-grid { gap: 52px; }
-      .planting-h2 { font-size: 24px; }
-      .founder-grid { grid-template-columns: 340px 1fr; }
-      .founder-body { padding: 56px 52px; }
-    }
-
-    /* ============================================================
-       RESPONSIVE — Mobile ≤767px
-       ============================================================ */
-    @media (max-width: 767px) {
-      .story-begin-h2 { font-size: 22px; }
-
-      .ingredient-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
-      .ingredient-descs { grid-template-columns: 1fr; }
-      .ingredient-desc-item { border-right: none; border-bottom: 0.5px solid #E0E0E0; }
-      .ingredient-desc-item:last-child { border-bottom: none; }
-
-      .oem-inner { padding: 48px 20px; }
-      .oem-stat-num { font-size: 40px; }
-      .oem-stat { padding: 28px 16px; }
-      .oem-stats { grid-template-columns: 1fr; }
-      .oem-stat { border-right: none; border-bottom: 0.5px solid rgba(255,255,255,0.12); }
-      .oem-stat:last-child { border-bottom: none; }
-
-      .planting-grid { grid-template-columns: 1fr; gap: 36px; }
-      .planting-img { aspect-ratio: 4/3; }
-      .planting-h2 { font-size: 22px; }
-
-      .founder-grid { grid-template-columns: 1fr; min-height: auto; }
-      .founder-img { aspect-ratio: 3/4; max-height: 420px; border-radius: 4px 4px 0 0; }
-      .founder-body { padding: 36px 24px; border-left: 0.5px solid #E0E0E0; border-top: none; border-radius: 0 0 4px 4px; }
-      .founder-name { font-size: 18px; }
-
-      .story-cta-sec { padding: 64px 0; }
-      .story-cta-h2 { font-size: 22px; }
-      .story-cta-btns { flex-direction: column; align-items: stretch; max-width: 280px; margin: 0 auto; }
-      .story-cta-btns .btn { justify-content: center; }
-    }
-  </style>
 </head>
 <body>
 
@@ -416,7 +53,7 @@
   <!-- ========== HERO ========== -->
   <section class="page-hero">
     <figure class="page-hero-bg">
-      <img src="../document/picture/top_brand_story.png" alt="STORY ヒーロービジュアル" class="page-hero-img">
+      <img src="../document/picture/story_hiro.png" alt="STORY ヒーロービジュアル" class="page-hero-img">
       <div class="page-hero-scrim"></div>
     </figure>
     <div class="page-hero-body">
@@ -436,13 +73,18 @@
   </div>
   <section class="sec-pad">
     <div class="container">
-      <div class="story-begin-text">
-        <span class="story-begin-kicker">HOW IT BEGAN</span>
-        <h2 class="story-begin-h2">香りを通じて、<br>日本のものづくりを伝えたかった。</h2>
-        <div class="story-begin-body">
-          <p>2008年、KARA INNOVATEは東京で創業した。はじめは小さな調香の仕事だった。ホテルのロビー、セレクトショップの棚、誰かの大切な贈り物。様々な場で求められる香りを届けようとしていた。</p>
-          <p>そして気づいた。香りは、場所と人の間に静かに宿るものだと。</p>
-          <p>ヒノキの森、ゆずの産地、伽羅の薫り。それは単なる素材ではなく、土地と人と時間が作り出した物語だった。inimuは、その物語を多くの方に届けていくために生まれた。</p>
+      <div class="story-begin-grid">
+        <div class="story-begin-text">
+          <span class="story-begin-kicker">HOW IT BEGAN</span>
+          <h2 class="story-begin-h2">香りを通じて、<br>日本のものづくりを伝えたかった。</h2>
+          <div class="story-begin-body">
+            <p>2008年、KARA INNOVATEは東京で創業した。はじめは小さな調香の仕事だった。ホテルのロビー、セレクトショップの棚、誰かの大切な贈り物。様々な場で求められる香りを届けようとしていた。</p>
+            <p>そして気づいた。香りは、場所と人の間に静かに宿るものだと。</p>
+            <p>ヒノキの森、ゆずの産地、伽羅の薫り。それは単なる素材ではなく、土地と人と時間が作り出した物語だった。inimuは、その物語を多くの方に届けていくために生まれた。</p>
+          </div>
+        </div>
+        <div class="story-begin-img">
+          <img src="../document/picture/story_section1.png" alt="inimu ブランドの始まり">
         </div>
       </div>
     </div>
@@ -459,93 +101,30 @@
         <p class="sec-sub">WANOWAが使う香りの素材は、すべて産地と作り手が見えるものを選んでいる。<br>石川県能美市の国造ゆず、岐阜県中津川市の加子母ひのき、そして希少な国産の伽羅。<br>ひとつひとつの素材に、その土地の時間と気候が宿っている。</p>
       </div>
 
-      <!-- 素材グリッド（6種） -->
-      <div class="ingredient-grid">
+      <!-- 地図 + 素材カード 3種 -->
+      <div class="material-grid">
 
-        <article class="ingredient-card">
-          <div class="ingredient-img">
-            <img src="../document/picture/HakkaHokkaido.webp" alt="和薄荷">
-          </div>
-          <div class="ingredient-body">
-            <p class="ingredient-name">和薄荷</p>
-            <p class="ingredient-region">北海道 中川町</p>
-            <p class="ingredient-note">国産和薄荷</p>
-          </div>
-        </article>
-
-        <article class="ingredient-card">
-          <div class="ingredient-img">
-            <img src="../document/picture/YuzuIshikawa.webp" alt="ゆず">
-          </div>
-          <div class="ingredient-body">
-            <p class="ingredient-name">ゆず</p>
-            <p class="ingredient-region">石川県 能美市 国造地区</p>
-            <p class="ingredient-note">有機栽培30年以上の国造ゆず</p>
-          </div>
-        </article>
-
-        <article class="ingredient-card">
-          <div class="ingredient-img">
-            <img src="../document/picture/HinokiGifu.webp" alt="ヒノキ">
-          </div>
-          <div class="ingredient-body">
-            <p class="ingredient-name">ヒノキ</p>
-            <p class="ingredient-region">岐阜県 中津川市 加子母</p>
-            <p class="ingredient-note">国産ひのき葉精油</p>
-          </div>
-        </article>
-
-        <article class="ingredient-card">
-          <div class="ingredient-img">
-            <img src="../document/picture/WANOWA_ChaKyoto.webp" alt="和束茶">
-          </div>
-          <div class="ingredient-body">
-            <p class="ingredient-name">和束茶</p>
-            <p class="ingredient-region">京都府 和束町</p>
-            <p class="ingredient-note">宇治茶の産地で育った茶葉</p>
-          </div>
-        </article>
-
-        <article class="ingredient-card">
-          <div class="ingredient-img">
-            <img src="../document/picture/BuntanTosa.webp" alt="土佐文旦">
-          </div>
-          <div class="ingredient-body">
-            <p class="ingredient-name">土佐文旦</p>
-            <p class="ingredient-region">高知県</p>
-            <p class="ingredient-note">高知産の柑橘</p>
-          </div>
-        </article>
-
-        <article class="ingredient-card">
-          <div class="ingredient-img">
-            <img src="../document/picture/TachibanaNara.webp" alt="大和橘">
-          </div>
-          <div class="ingredient-body">
-            <p class="ingredient-name">大和橘</p>
-            <p class="ingredient-region">奈良県</p>
-            <p class="ingredient-note">日本固有の柑橘</p>
-          </div>
-        </article>
-
-      </div>
-
-      <!-- 素材説明（3種） -->
-      <div class="ingredient-descs">
-
-        <div class="ingredient-desc-item">
-          <p class="ingredient-desc-name">伽羅（きゃら）</p>
-          <p class="ingredient-desc-text">香木の王。深みとやわらかさを持つ、日本が誇る最高級素材。</p>
+        <div class="material-map">
+          <img src="../document/picture/story_section3_map.png" alt="日本素材 産地マップ">
         </div>
 
-        <div class="ingredient-desc-item">
-          <p class="ingredient-desc-name">ヒノキ</p>
-          <p class="ingredient-desc-text">森の清潔感。雨上がりの山道を思わせる、日本人が最も親しむ香り。</p>
-        </div>
+        <div class="material-cards">
 
-        <div class="ingredient-desc-item">
-          <p class="ingredient-desc-name">ゆず</p>
-          <p class="ingredient-desc-text">冬至の記憶。柑橘の明るさの中に、日本の暮らしの温もりがある。</p>
+          <div class="material-card-item">
+            <p class="material-card-name">伽羅（きゃら）</p>
+            <p class="material-card-text">香木の王。深みとやわらかさを持つ、日本が誇る最高級素材。</p>
+          </div>
+
+          <div class="material-card-item">
+            <p class="material-card-name">ヒノキ</p>
+            <p class="material-card-text">森の清潔感。雨上がりの山道を思わせる、日本人が最も親しむ香り。</p>
+          </div>
+
+          <div class="material-card-item">
+            <p class="material-card-name">ゆず</p>
+            <p class="material-card-text">冬至の記憶。柑橘の明るさの中に、日本の暮らしの温もりがある。</p>
+          </div>
+
         </div>
 
       </div>
@@ -559,74 +138,51 @@
   <section class="oem-sec">
     <div class="oem-inner">
 
-      <div class="oem-partners">
-        <span class="oem-partners-label">COLLABORATION PARTNERS</span>
-        <span class="oem-partner-name">ACTUS</span>
-        <span class="oem-partners-sep">|</span>
-        <span class="oem-partner-name">青山フラワーマーケット</span>
-        <span class="oem-partners-sep">|</span>
-        <span class="oem-partner-name">TRUNK HOTEL</span>
-        <span class="oem-partners-sep">|</span>
-        <span class="oem-partner-name">その他多数</span>
+      <div class="oem-col-text">
+        <div class="oem-partners">
+          <span class="oem-partners-label">COLLABORATION PARTNERS</span>
+          <span class="oem-partner-name">ACTUS</span>
+          <span class="oem-partners-sep">|</span>
+          <span class="oem-partner-name">青山フラワーマーケット</span>
+          <span class="oem-partners-sep">|</span>
+          <span class="oem-partner-name">TRUNK HOTEL</span>
+          <span class="oem-partners-sep">|</span>
+          <span class="oem-partner-name">その他多数</span>
+        </div>
+
+        <div class="oem-stats">
+          <div class="oem-stat">
+            <p class="oem-stat-num">19</p>
+            <p class="oem-stat-lbl">年の実績</p>
+          </div>
+          <div class="oem-stat">
+            <p class="oem-stat-num">539</p>
+            <p class="oem-stat-lbl">年間 WS 参加者</p>
+          </div>
+          <div class="oem-stat">
+            <p class="oem-stat-num">4.9</p>
+            <p class="oem-stat-lbl">Google 評価（238件）</p>
+          </div>
+        </div>
       </div>
 
-      <div class="oem-stats">
-        <div class="oem-stat">
-          <p class="oem-stat-num">19</p>
-          <p class="oem-stat-lbl">年の実績</p>
-        </div>
-        <div class="oem-stat">
-          <p class="oem-stat-num">539</p>
-          <p class="oem-stat-lbl">年間 WS 参加者</p>
-        </div>
-        <div class="oem-stat">
-          <p class="oem-stat-num">4.9</p>
-          <p class="oem-stat-lbl">Google 評価（238件）</p>
-        </div>
+      <div class="oem-col-img">
+        <img src="../document/picture/story_section4_corabolation.png" alt="OEM実績・協業パートナー">
       </div>
 
     </div>
   </section>
 
-  <!-- ========== SECTION 04: 植樹活動 ========== -->
+  <!-- ========== SECTION 04: 代表プロフィール ========== -->
   <div class="sec-label">
-    <div class="container"><span>SECTION 04 — WANOWA GIVING BACK / 植樹活動</span></div>
-  </div>
-  <section class="sec-pad">
-    <div class="container">
-      <div class="planting-grid">
-
-        <div class="planting-text">
-          <span class="planting-kicker">WANOWA — GIVING BACK</span>
-          <h2 class="planting-h2">香りを買うことが、<br>森を育てることになる。</h2>
-          <div class="planting-body">
-            <p>WANOWAが生まれたとき、その中心にひとつの問いがあった。香りを作ることで、誰かの未来に貢献できるだろうか。</p>
-            <p>私たちは香りの原料を育む森を守ることで、次の世代にも同じ香りを届けたいと思っている。売上の一部は、国内の植樹活動に寄付される。</p>
-            <p>あなたがWANOWAを手に取るとき、その選択はどこかの山の、一本の木につながっている。</p>
-          </div>
-          <div class="planting-cta">
-            <a href="products.html" class="btn btn-secondary">WANOWAの活動を詳しく見る →</a>
-          </div>
-        </div>
-
-        <div class="planting-img">
-          <img src="../document/picture/WANOWA_HIBA.jpg" alt="WANOWA 植樹活動">
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== SECTION 05: 代表プロフィール ========== -->
-  <div class="sec-label">
-    <div class="container"><span>SECTION 05 — FOUNDER / 代表プロフィール</span></div>
+    <div class="container"><span>SECTION 04 — FOUNDER / 代表プロフィール</span></div>
   </div>
   <section class="founder-sec sec-pad">
     <div class="container">
       <div class="founder-grid">
 
         <div class="founder-img">
-          <img src="../document/picture/清水社長.webp" alt="清水 篤 / 株式会社KARA INNOVATE 代表取締役">
+          <img src="../document/picture/story_section4_founder.png" alt="清水 篤 / 株式会社KARA INNOVATE 代表取締役">
         </div>
 
         <div class="founder-body">
@@ -641,21 +197,6 @@
           </div>
         </div>
 
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== SECTION 06: ページ下部CTA ========== -->
-  <div class="sec-label">
-    <div class="container"><span>SECTION 06 — CTA / 物語を体験に昇華する</span></div>
-  </div>
-  <section class="story-cta-sec">
-    <div class="container">
-      <h2 class="story-cta-h2">物語を体験に昇華する。</h2>
-      <p class="story-cta-sub">inimuの香りは、浅草の店頭で試せます。（月曜日定休）</p>
-      <div class="story-cta-btns">
-        <a href="workshop.html" class="btn btn-primary">体験を予約する →</a>
-        <a href="products.html" class="btn btn-secondary">商品を見る →</a>
       </div>
     </div>
   </section>

@@ -927,6 +927,522 @@ address { font-style: normal; }
 .ws-sns-hashtags { font-family: var(--ff-sans); font-size: 12px; color: var(--clr-gray); letter-spacing: 0.05em; }
 
 /* ============================================================
+   PLACEHOLDER IMAGE  (X-line pattern)
+   ============================================================ */
+.ph-img {
+  width: 100%; height: 100%;
+  background-color: #E8E5DF;
+  position: relative;
+  overflow: hidden;
+}
+.ph-img::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom right, transparent calc(50% - 0.5px), #C4C0BA calc(50% - 0.5px), #C4C0BA calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+    linear-gradient(to bottom left,  transparent calc(50% - 0.5px), #C4C0BA calc(50% - 0.5px), #C4C0BA calc(50% + 0.5px), transparent calc(50% + 0.5px));
+}
+
+/* ============================================================
+   STORY — MATERIAL MAP  (地図 + 素材カード3枚)
+   ============================================================ */
+.material-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.material-map {
+  border-radius: var(--r-card);
+  overflow: hidden;
+}
+.material-map img { width: 100%; height: auto; display: block; border-radius: var(--r-card); }
+
+.material-cards {
+  border: 0.5px solid var(--clr-border);
+  border-radius: var(--r-card);
+  overflow: hidden;
+  background-color: var(--clr-white);
+}
+
+.material-card-item {
+  padding: 28px 32px;
+  border-bottom: 0.5px solid var(--clr-border);
+}
+.material-card-item:last-child { border-bottom: none; }
+
+.material-card-name {
+  font-family: var(--ff-serif);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--clr-black);
+  margin-bottom: 10px;
+}
+
+.material-card-text {
+  font-family: var(--ff-serif);
+  font-size: 13px;
+  color: var(--clr-gray);
+  line-height: 2.0;
+}
+
+/* ============================================================
+   STORY — HOW IT BEGAN
+   ============================================================ */
+.story-begin-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.story-begin-text {}
+
+.story-begin-img {
+  border-radius: var(--r-card);
+  overflow: hidden;
+}
+.story-begin-img img { width: 100%; height: auto; display: block; }
+
+.story-begin-kicker {
+  font-family: var(--ff-en);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--clr-lgray);
+  display: block;
+  margin-bottom: 20px;
+}
+
+.story-begin-h2 {
+  font-family: var(--ff-serif);
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.75;
+  color: var(--clr-black);
+  margin-bottom: 32px;
+}
+
+.story-begin-body p {
+  font-family: var(--ff-serif);
+  font-size: 14px;
+  line-height: 2.2;
+  color: #555555;
+  margin-bottom: 22px;
+}
+.story-begin-body p:last-child { margin-bottom: 0; }
+
+/* ============================================================
+   STORY — INGREDIENTS
+   ============================================================ */
+.ingredient-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.ingredient-card {
+  background-color: var(--clr-white);
+  border: 0.5px solid var(--clr-border);
+  border-radius: var(--r-card);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.ingredient-card:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(0,0,0,0.08); }
+
+.ingredient-img { aspect-ratio: 4/3; overflow: hidden; }
+.ingredient-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; display: block; }
+.ingredient-card:hover .ingredient-img img { transform: scale(1.05); }
+
+.ingredient-body { padding: 14px 16px 18px; }
+
+.ingredient-name {
+  font-family: var(--ff-serif);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--clr-black);
+  margin-bottom: 4px;
+}
+
+.ingredient-region {
+  font-family: var(--ff-sans);
+  font-size: 10px;
+  color: var(--clr-lgray);
+  margin-bottom: 5px;
+  letter-spacing: 0.03em;
+}
+
+.ingredient-note {
+  font-family: var(--ff-sans);
+  font-size: 11px;
+  color: var(--clr-gray);
+  line-height: 1.7;
+}
+
+.ingredient-descs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 0.5px solid var(--clr-border);
+  border-radius: var(--r-card);
+  overflow: hidden;
+  background-color: var(--clr-white);
+  margin-top: 28px;
+}
+
+.ingredient-desc-item {
+  padding: 26px 28px;
+  border-right: 0.5px solid var(--clr-border);
+}
+.ingredient-desc-item:last-child { border-right: none; }
+
+.ingredient-desc-name {
+  font-family: var(--ff-serif);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--clr-black);
+  margin-bottom: 10px;
+}
+
+.ingredient-desc-text {
+  font-family: var(--ff-serif);
+  font-size: 13px;
+  color: var(--clr-gray);
+  line-height: 2.0;
+}
+
+/* ============================================================
+   STORY — OEM実績（dark）
+   ============================================================ */
+.oem-sec {
+  background-color: var(--clr-black);
+  color: var(--clr-white);
+  overflow: hidden;
+}
+
+.oem-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 55fr 45fr;
+  overflow: hidden;
+}
+
+.oem-col-text {
+  padding: 72px 48px 72px var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.oem-col-img {
+  overflow: hidden;
+  position: relative;
+}
+.oem-col-img img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.oem-partners {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 52px;
+}
+
+.oem-partners-label {
+  font-family: var(--ff-en);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.30);
+  flex-shrink: 0;
+}
+.oem-partners-sep { color: rgba(255,255,255,0.16); font-size: 11px; }
+
+.oem-partner-name {
+  font-family: var(--ff-sans);
+  font-size: 12px;
+  color: rgba(255,255,255,0.52);
+}
+
+.oem-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 0.5px solid rgba(255,255,255,0.12);
+  border-radius: var(--r-card);
+  overflow: hidden;
+}
+
+.oem-stat {
+  padding: 40px 24px;
+  border-right: 0.5px solid rgba(255,255,255,0.12);
+  text-align: center;
+}
+.oem-stat:last-child { border-right: none; }
+
+.oem-stat-num {
+  font-family: var(--ff-en);
+  font-size: 52px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  color: var(--clr-white);
+  margin-bottom: 10px;
+}
+
+.oem-stat-lbl {
+  font-family: var(--ff-sans);
+  font-size: 11px;
+  color: rgba(255,255,255,0.40);
+  line-height: 1.7;
+}
+
+/* ============================================================
+   STORY — 植樹活動
+   ============================================================ */
+.planting-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.planting-kicker {
+  font-family: var(--ff-en);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--clr-lgray);
+  display: block;
+  margin-bottom: 20px;
+}
+
+.planting-h2 {
+  font-family: var(--ff-serif);
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.75;
+  color: var(--clr-black);
+  margin-bottom: 28px;
+}
+
+.planting-body p {
+  font-family: var(--ff-serif);
+  font-size: 14px;
+  line-height: 2.2;
+  color: #555555;
+  margin-bottom: 22px;
+}
+.planting-body p:last-child { margin-bottom: 0; }
+.planting-cta { margin-top: 32px; }
+
+.planting-img {
+  aspect-ratio: 3/4;
+  border-radius: var(--r-card);
+  overflow: hidden;
+  background-color: #E8E5DF;
+}
+.planting-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ============================================================
+   STORY — 代表プロフィール
+   ============================================================ */
+.founder-grid {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  min-height: 600px;
+}
+
+.founder-img {
+  overflow: hidden;
+  background-color: #E8E5DF;
+  border-radius: var(--r-card) 0 0 var(--r-card);
+}
+.founder-img img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+
+.founder-body {
+  padding: 72px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--clr-white);
+  border: 0.5px solid var(--clr-border);
+  border-left: none;
+  border-radius: 0 var(--r-card) var(--r-card) 0;
+}
+
+.founder-kicker {
+  font-family: var(--ff-en);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--clr-lgray);
+  display: block;
+  margin-bottom: 18px;
+}
+
+.founder-name {
+  font-family: var(--ff-serif);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--clr-black);
+  margin-bottom: 4px;
+}
+
+.founder-title {
+  font-family: var(--ff-sans);
+  font-size: 11px;
+  color: var(--clr-lgray);
+  margin-bottom: 32px;
+}
+
+.founder-narrative p {
+  font-family: var(--ff-serif);
+  font-size: 14px;
+  line-height: 2.2;
+  color: #555555;
+  margin-bottom: 22px;
+}
+.founder-narrative p:last-child {
+  margin-bottom: 0;
+  font-style: italic;
+  color: var(--clr-gray);
+}
+
+/* ============================================================
+   WANOWA — Series Top  (lineup grid)
+   Story section reuses .planting-* classes from STORY
+   ============================================================ */
+.lineup-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.lineup-card {
+  background-color: var(--clr-white);
+  border: 0.5px solid var(--clr-border);
+  border-radius: var(--r-card);
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--clr-black);
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+.lineup-card:hover {
+  border-color: var(--clr-border-e);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 32px rgba(0,0,0,0.08);
+}
+
+.lineup-card-img {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background-color: #E8E5DF;
+  flex-shrink: 0;
+}
+.lineup-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; display: block; }
+.lineup-card:hover .lineup-card-img img { transform: scale(1.05); }
+
+.lineup-card-body {
+  padding: 18px 20px 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.lineup-card-region {
+  font-family: var(--ff-sans);
+  font-size: 10px;
+  color: var(--clr-lgray);
+  letter-spacing: 0.03em;
+  margin-bottom: 4px;
+}
+
+.lineup-card-name {
+  font-family: var(--ff-serif);
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--clr-black);
+  margin-bottom: 4px;
+}
+
+.lineup-card-tag {
+  font-family: var(--ff-sans);
+  font-size: 10px;
+  color: var(--clr-gray);
+  margin-bottom: 12px;
+}
+
+.lineup-card-desc {
+  font-family: var(--ff-serif);
+  font-size: 13px;
+  color: var(--clr-gray);
+  line-height: 1.9;
+  flex: 1;
+  margin-bottom: 16px;
+}
+
+.lineup-card-link {
+  font-family: var(--ff-sans);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--clr-black);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border-bottom: 0.5px solid var(--clr-border-e);
+  padding-bottom: 2px;
+  align-self: flex-start;
+  transition: opacity 0.2s;
+}
+.lineup-card-link:hover { opacity: 0.6; }
+
+/* ============================================================
+   STORY — ページ下部CTA
+   ============================================================ */
+.story-cta-sec {
+  padding: 100px 0;
+  text-align: center;
+  border-top: 0.5px solid var(--clr-border);
+}
+
+.story-cta-h2 {
+  font-family: var(--ff-serif);
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.65;
+  color: var(--clr-black);
+  margin-bottom: 12px;
+}
+
+.story-cta-sub {
+  font-family: var(--ff-sans);
+  font-size: 13px;
+  color: var(--clr-gray);
+  line-height: 1.7;
+  margin-bottom: 36px;
+}
+
+.story-cta-btns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ============================================================
    RESPONSIVE — Tablet 768–1139px
    ============================================================ */
 @media (max-width: 1139px) {
@@ -936,6 +1452,19 @@ address { font-style: normal; }
   .story-body { padding: 64px 48px 64px 56px; }
   .story-h2 { font-size: 28px; }
   .stat-num { font-size: 40px; }
+
+  /* WANOWA */
+  .lineup-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* STORY */
+  .story-begin-grid { gap: 48px; }
+  .story-begin-h2 { font-size: 24px; }
+  .oem-col-text { padding-top: 60px; padding-bottom: 60px; }
+  .oem-stat-num { font-size: 44px; }
+  .planting-grid { gap: 52px; }
+  .planting-h2 { font-size: 24px; }
+  .founder-grid { grid-template-columns: 340px 1fr; }
+  .founder-body { padding: 56px 52px; }
 }
 
 /* ============================================================
@@ -1040,4 +1569,36 @@ address { font-style: normal; }
   /* Floating CTA */
   .float-cta { display: block; }
   body { padding-bottom: 64px; }
+
+  /* WANOWA */
+  .lineup-grid { grid-template-columns: 1fr; }
+
+  /* STORY — material map */
+  .material-grid { grid-template-columns: 1fr; gap: 28px; }
+
+  /* STORY */
+  .story-begin-grid { grid-template-columns: 1fr; gap: 36px; }
+  .story-begin-img { order: -1; }
+  .story-begin-h2 { font-size: 22px; }
+  .ingredient-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .ingredient-descs { grid-template-columns: 1fr; }
+  .ingredient-desc-item { border-right: none; border-bottom: 0.5px solid var(--clr-border); }
+  .ingredient-desc-item:last-child { border-bottom: none; }
+  .oem-inner { grid-template-columns: 1fr; }
+  .oem-col-text { padding: 48px 20px; }
+  .oem-col-img { min-height: 260px; }
+  .oem-stats { grid-template-columns: 1fr; }
+  .oem-stat { padding: 28px 16px; border-right: none; border-bottom: 0.5px solid rgba(255,255,255,0.12); }
+  .oem-stat:last-child { border-bottom: none; }
+  .planting-grid { grid-template-columns: 1fr; gap: 36px; }
+  .planting-img { aspect-ratio: 4/3; }
+  .planting-h2 { font-size: 22px; }
+  .founder-grid { grid-template-columns: 1fr; min-height: auto; }
+  .founder-img { aspect-ratio: 3/4; max-height: 420px; border-radius: var(--r-card) var(--r-card) 0 0; }
+  .founder-body { padding: 36px 24px; border-left: 0.5px solid var(--clr-border); border-top: none; border-radius: 0 0 var(--r-card) var(--r-card); }
+  .founder-name { font-size: 18px; }
+  .story-cta-sec { padding: 64px 0; }
+  .story-cta-h2 { font-size: 22px; }
+  .story-cta-btns { flex-direction: column; align-items: stretch; max-width: 280px; margin: 0 auto; }
+  .story-cta-btns .btn { justify-content: center; }
 }
