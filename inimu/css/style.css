@@ -1446,6 +1446,399 @@ address { font-style: normal; }
 }
 
 /* ============================================================
+   RESERVE FORM — 予約フォーム
+   ============================================================ */
+.reserve-form-wrap {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.form-group { margin-bottom: 22px; }
+
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-label {
+  display: block;
+  font-family: var(--ff-sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--clr-black);
+  margin-bottom: 7px;
+}
+
+.form-required { color: #CC4444; margin-left: 2px; }
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  background-color: var(--clr-white);
+  border: 0.5px solid #CCCCCC;
+  border-radius: var(--r-card);
+  padding: 10px 12px;
+  font-family: var(--ff-sans);
+  font-size: 13px;
+  color: var(--clr-black);
+  outline: none;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border: 1px solid var(--clr-black);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder { color: var(--clr-lgray); }
+
+.form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+  cursor: pointer;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 96px;
+  line-height: 1.75;
+}
+
+.form-note {
+  font-family: var(--ff-sans);
+  font-size: 11px;
+  color: var(--clr-lgray);
+  margin-top: 6px;
+  line-height: 1.7;
+}
+
+.form-divider {
+  border: none;
+  border-top: 0.5px solid var(--clr-border);
+  margin: 28px 0;
+}
+
+.form-submit-area { margin-top: 8px; }
+
+.form-submit-btn {
+  width: 100%;
+  justify-content: center;
+  padding: 14px 24px;
+  font-size: 14px;
+}
+
+.form-submit-note {
+  font-family: var(--ff-sans);
+  font-size: 11px;
+  color: var(--clr-gray);
+  margin-top: 14px;
+  line-height: 1.85;
+  text-align: center;
+}
+
+.cancel-policy {
+  background-color: var(--clr-white);
+  border: 0.5px solid var(--clr-border);
+  border-radius: var(--r-card);
+  padding: 20px 24px;
+  margin-top: 28px;
+}
+
+.cancel-policy-title {
+  font-family: var(--ff-sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--clr-black);
+  margin-bottom: 10px;
+}
+
+.cancel-policy-text {
+  font-family: var(--ff-sans);
+  font-size: 11px;
+  color: var(--clr-gray);
+  line-height: 2.0;
+}
+
+/* ============================================================
+   VISIT — アクセスルートカード
+   ============================================================ */
+.route-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.route-card {
+  background-color: var(--clr-white);
+  border: 0.5px solid var(--clr-border);
+  border-radius: var(--r-card);
+  padding: 28px 24px;
+}
+
+.route-card-from {
+  font-family: var(--ff-sans);
+  font-size: 11px;
+  color: var(--clr-lgray);
+  margin-bottom: 8px;
+}
+
+.route-card-time {
+  font-family: var(--ff-en);
+  font-size: 40px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  color: var(--clr-black);
+}
+
+.route-card-unit {
+  font-family: var(--ff-sans);
+  font-size: 12px;
+  color: var(--clr-lgray);
+  margin-left: 4px;
+}
+
+.route-card-desc {
+  font-family: var(--ff-sans);
+  font-size: 12px;
+  color: var(--clr-gray);
+  line-height: 1.85;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 0.5px solid var(--clr-border);
+}
+
+/* ---- 多言語テキスト帯 ---- */
+.lang-band {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 24px;
+  background-color: var(--clr-white);
+  border: 0.5px solid var(--clr-border);
+  border-radius: var(--r-card);
+  flex-wrap: wrap;
+}
+
+.lang-band-langs {
+  font-family: var(--ff-en);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--clr-black);
+  letter-spacing: 0.06em;
+  flex-shrink: 0;
+}
+
+.lang-band-note {
+  font-family: var(--ff-sans);
+  font-size: 11px;
+  color: var(--clr-lgray);
+}
+
+/* ============================================================
+   VISIT — カレンダー
+   ============================================================ */
+.visit-cal {
+  background-color: var(--clr-white);
+  border: 0.5px solid var(--clr-border);
+  border-radius: var(--r-card);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.visit-cal-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 0.5px solid var(--clr-border);
+}
+
+.visit-cal-month {
+  font-family: var(--ff-en);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--clr-black);
+}
+
+.visit-cal-btn {
+  font-family: var(--ff-sans);
+  font-size: 12px;
+  color: var(--clr-gray);
+  background: none;
+  border: 0.5px solid var(--clr-border);
+  border-radius: var(--r-btn);
+  cursor: pointer;
+  padding: 5px 12px;
+}
+
+.visit-cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); }
+
+.visit-cal-head {
+  text-align: center;
+  padding: 10px 0;
+  font-family: var(--ff-sans);
+  font-size: 10px;
+  color: var(--clr-lgray);
+  border-bottom: 0.5px solid var(--clr-border);
+  letter-spacing: 0.04em;
+}
+
+.visit-cal-day {
+  text-align: center;
+  padding: 12px 4px;
+  font-family: var(--ff-en);
+  font-size: 13px;
+  color: var(--clr-black);
+  border-bottom: 0.5px solid var(--clr-border);
+  border-right: 0.5px solid var(--clr-border);
+}
+.visit-cal-day:nth-child(7n) { border-right: none; }
+.visit-cal-day.empty { color: transparent; pointer-events: none; }
+.visit-cal-day.closed { color: var(--clr-lgray); }
+.visit-cal-day.ws {
+  background-color: var(--clr-black);
+  color: var(--clr-white);
+  font-weight: 500;
+}
+a.visit-cal-day {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+a.visit-cal-day.ws { cursor: pointer; }
+a.visit-cal-day.ws:hover { opacity: 0.72; }
+
+.visit-cal-legend {
+  display: flex;
+  gap: 24px;
+  font-family: var(--ff-sans);
+  font-size: 11px;
+  color: var(--clr-gray);
+  flex-wrap: wrap;
+}
+
+.visit-cal-legend-item { display: flex; align-items: center; gap: 7px; }
+
+.visit-cal-legend-dot {
+  width: 12px; height: 12px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.visit-cal-legend-dot.ws { background-color: var(--clr-black); }
+.visit-cal-legend-dot.open { background-color: var(--clr-white); border: 0.5px solid var(--clr-border); }
+
+/* ---- カレンダーセクション背景 ---- */
+.bg-visit-beige { background-color: #F2EFE8; }
+
+/* ============================================================
+   VISIT — レビューヘッダー（3列）
+   ============================================================ */
+.visit-review-top {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 40px;
+  align-items: center;
+  margin-bottom: 36px;
+}
+
+.visit-review-score {}
+
+.visit-review-score-num {
+  font-family: var(--ff-en);
+  font-size: 80px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--clr-black);
+}
+
+.visit-review-score-stars {
+  font-size: 22px;
+  color: var(--clr-black);
+  letter-spacing: 0.04em;
+  margin-top: 4px;
+}
+
+.visit-review-score-src {
+  font-family: var(--ff-sans);
+  font-size: 12px;
+  color: var(--clr-gray);
+  margin-top: 6px;
+}
+
+/* ============================================================
+   VISIT — 口コミキーワード
+   ============================================================ */
+.review-keywords {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 36px;
+}
+
+.review-keyword {
+  font-family: var(--ff-sans);
+  font-size: 12px;
+  color: var(--clr-black);
+  background-color: var(--clr-white);
+  border: 0.5px solid var(--clr-border);
+  border-radius: var(--r-btn);
+  padding: 6px 16px;
+}
+
+/* ============================================================
+   VISIT — 下部CTA（2カラム）
+   ============================================================ */
+.visit-cta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.visit-cta-card {
+  border-radius: var(--r-card);
+  padding: 40px 44px;
+}
+
+.visit-cta-card-light {
+  background-color: var(--clr-white);
+  border: 0.5px solid var(--clr-border);
+}
+
+.visit-cta-card-dark { background-color: var(--clr-black); }
+
+.visit-cta-h3 {
+  font-family: var(--ff-serif);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--clr-black);
+  margin-bottom: 10px;
+}
+
+.visit-cta-desc {
+  font-family: var(--ff-sans);
+  font-size: 12px;
+  color: var(--clr-gray);
+  line-height: 1.9;
+  margin-bottom: 24px;
+}
+
+.visit-cta-card-dark .visit-cta-h3 { color: var(--clr-white); }
+.visit-cta-card-dark .visit-cta-desc { color: rgba(255,255,255,0.56); }
+
+/* ============================================================
    RESPONSIVE — Tablet 768–1139px
    ============================================================ */
 @media (max-width: 1139px) {
@@ -1455,6 +1848,16 @@ address { font-style: normal; }
   .story-body { padding: 64px 48px 64px 56px; }
   .story-h2 { font-size: 28px; }
   .stat-num { font-size: 40px; }
+
+  /* RESERVE FORM */
+  .form-row-2 { grid-template-columns: 1fr; }
+
+  /* VISIT */
+  .route-cards { grid-template-columns: 1fr 1fr; }
+  .visit-review-top { gap: 24px; }
+  .visit-review-score-num { font-size: 60px; }
+  .visit-cta-grid { gap: 10px; }
+  .visit-cta-card { padding: 32px 32px; }
 
   /* WANOWA */
   .lineup-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1572,6 +1975,13 @@ address { font-style: normal; }
   /* Floating CTA */
   .float-cta { display: block; }
   body { padding-bottom: 64px; }
+
+  /* VISIT */
+  .route-cards { grid-template-columns: 1fr; }
+  .visit-review-top { grid-template-columns: 1fr; gap: 20px; }
+  .visit-cta-grid { grid-template-columns: 1fr; }
+  .visit-cta-card { padding: 28px 24px; }
+  .visit-cal-day { padding: 9px 2px; font-size: 12px; }
 
   /* WANOWA */
   .lineup-grid { grid-template-columns: 1fr; }
