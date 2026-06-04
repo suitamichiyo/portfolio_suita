@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CONTACT — inimu</title>
-  <meta name="description" content="inimuへのお問い合わせ。OEM・イベント出展・メディア掲載等のご相談もこちら。">
+  <title>CONTACT — inimu | お問い合わせ</title>
+  <meta name="description" content="inimu へのお問い合わせ。ワークショップ・商品・ギフト・法人OEMのご相談はこちら。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Sans+JP:wght@400;500&family=Noto+Serif+JP:wght@400;500&display=swap" rel="stylesheet">
@@ -12,6 +12,7 @@
 </head>
 <body>
 
+  <!-- ========== HEADER ========== -->
   <header class="site-header" id="siteHeader">
     <div class="header-inner">
       <a href="index.html" class="header-logo">
@@ -25,6 +26,7 @@
         <a href="story.html"    class="hnav-link">STORY</a>
         <a href="visit.html"    class="hnav-link">VISIT</a>
         <a href="online.html"   class="hnav-link">ONLINE</a>
+        <a href="contact.html"  class="hnav-link is-active">CONTACT</a>
       </nav>
       <a href="workshop.html" class="btn btn-primary header-btn">予約する</a>
       <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
@@ -33,6 +35,7 @@
     </div>
   </header>
 
+  <!-- Mobile Nav -->
   <div class="mobile-nav" id="mobileNav" aria-hidden="true">
     <div class="mnav-inner">
       <nav class="mnav-links">
@@ -48,21 +51,158 @@
     </div>
   </div>
 
-  <main class="page-stub">
-    <div class="page-stub-inner">
-      <span class="kicker">CONTACT</span>
-      <h1>お問い合わせ</h1>
-      <p>このページは現在制作中です。</p>
+  <!-- ========== SEC01: PAGE HEADER ========== -->
+  <section class="contact-page-hero" id="sec-header">
+    <div class="container">
+      <span class="kicker" style="margin-bottom:16px;">CONTACT</span>
+      <h1 class="contact-page-h1">お問い合わせ</h1>
+      <p class="contact-page-sub">ご質問・ご相談はこちらから</p>
     </div>
-  </main>
+  </section>
 
+  <!-- ========== SEC02: CATEGORY SELECT ========== -->
+  <div class="sec-label" style="background-color:#F2EFE8; border-top-color:#DDD9D2;">
+    <div class="container"><span>SECTION 01 — CATEGORY / お問い合わせの種類</span></div>
+  </div>
+  <section class="sec-pad bg-visit-beige" id="sec-category">
+    <div class="container">
+      <div class="sec-head">
+        <h2 class="sec-h2">お問い合わせの種類を選んでください</h2>
+        <p class="sec-sub">選択内容によって担当者に振り分けられます</p>
+      </div>
+      <div class="category-grid">
+        <button class="category-btn is-selected" onclick="selectCategory('general', this)">
+          <span class="cat-name">一般のお問い合わせ</span>
+          <span class="cat-desc">商品・サービスへのご質問</span>
+        </button>
+        <button class="category-btn" onclick="selectCategory('workshop', this)">
+          <span class="cat-name">ワークショップについて</span>
+          <span class="cat-desc">予約・内容・団体ご利用など</span>
+        </button>
+        <button class="category-btn" onclick="selectCategory('gift', this)">
+          <span class="cat-name">ギフト・法人注文</span>
+          <span class="cat-desc">ノベルティ・ホテルアメニティ</span>
+        </button>
+        <button class="category-btn" onclick="selectCategory('oem', this)">
+          <span class="cat-name">OEM・商品開発のご相談</span>
+          <span class="cat-desc">香り・製品のオリジナル開発</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SEC03: INPUT FORM ========== -->
+  <div class="sec-label">
+    <div class="container"><span>SECTION 02 — FORM / お問い合わせ内容</span></div>
+  </div>
+  <section class="sec-pad" id="sec-form">
+    <div class="container">
+      <div class="sec-head">
+        <h2 class="sec-h2">お問い合わせ内容を入力してください</h2>
+      </div>
+
+      <div class="contact-form-wrap">
+        <form onsubmit="showComplete(); return false;" novalidate>
+
+          <div class="form-row-2" style="margin-bottom:0;">
+            <div class="form-group">
+              <label class="form-label" for="cnt-name">お名前 <span class="form-required">*</span></label>
+              <input type="text" id="cnt-name" class="form-input" placeholder="山田 花子" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="cnt-company">会社名（法人の方）</label>
+              <input type="text" id="cnt-company" class="form-input" placeholder="株式会社〇〇">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="cnt-email">メールアドレス <span class="form-required">*</span></label>
+            <input type="email" id="cnt-email" class="form-input" placeholder="example@email.com" required>
+          </div>
+
+          <div class="form-group extra-field" id="extra-workshop">
+            <label class="form-label" for="cnt-ws">ご希望日・人数</label>
+            <input type="text" id="cnt-ws" class="form-input" placeholder="例：6月14日（土）2名">
+          </div>
+
+          <div class="form-group extra-field" id="extra-gift">
+            <label class="form-label" for="cnt-gift">ご注文の種類</label>
+            <select id="cnt-gift" class="form-select">
+              <option value="">選択してください</option>
+              <option>ギフトラッピング</option>
+              <option>法人ノベルティ</option>
+              <option>ホテルアメニティ</option>
+              <option>その他</option>
+            </select>
+          </div>
+
+          <div class="form-group extra-field" id="extra-oem">
+            <label class="form-label" for="cnt-oem">開発のご希望</label>
+            <input type="text" id="cnt-oem" class="form-input" placeholder="例：フレグランス・ハンドクリーム・ルームスプレーなど">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="cnt-message">お問い合わせ内容 <span class="form-required">*</span></label>
+            <textarea id="cnt-message" class="form-textarea" style="min-height:160px;" placeholder="お問い合わせ内容をご入力ください" required></textarea>
+          </div>
+
+          <p class="contact-submit-note">
+            送信されてから、3営業日（火〜日）以内にご返信させていただきます。<br>
+            自動返信メールをお送りします。
+          </p>
+
+          <button type="submit" class="btn-contact-submit">送信する</button>
+
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SEC04: OEM INFO ========== -->
+  <div class="sec-label sec-label-dark">
+    <div class="container"><span>SECTION 03 — OEM / 法人・OEMご相談</span></div>
+  </div>
+  <section class="contact-oem-sec sec-pad" id="sec-oem">
+    <div class="container">
+      <div class="contact-oem-wrap">
+        <span class="contact-oem-kicker">OEM / BtoB</span>
+        <h2 class="contact-oem-h2">法人・OEM相談は<br>専任担当者が対応します。</h2>
+        <p class="contact-oem-body">
+          ホテルアメニティ・ノベルティ・ブランドOEM。<br>
+          2008年創業・19年の実績で対応します。
+        </p>
+        <a href="https://kyarainnovate.jp/" target="_blank" rel="noopener" class="btn-oem">OEMについて →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SEC05: COMPLETE（送信後に表示） ========== -->
+  <section class="contact-complete-sec" id="sec-complete">
+    <div class="container">
+      <div class="complete-icon">✓</div>
+      <h2 class="complete-title">お問い合わせを受け付けました</h2>
+      <p class="complete-body">
+        自動返信メールをお送りしました。<br>
+        3営業日（火〜日）以内にご返信します。
+      </p>
+      <div class="complete-btns">
+        <a href="index.html" class="btn btn-primary">TOPページへ →</a>
+        <a href="products.html" class="btn btn-secondary">商品を見る →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
   <footer class="site-footer">
     <div class="footer-top container">
       <div class="footer-brand">
         <a href="index.html" class="footer-logo">
           <img src="../document/inimu_logo_white_transparent.png" alt="inimu">
         </a>
-        <address class="footer-addr">東京都台東区浅草2丁目1-5<br>営業：火〜日曜 10:30〜18:00（月曜定休）</address>
+        <address class="footer-addr">
+          東京都台東区浅草2丁目1-5<br>
+          営業：火〜日曜 10:30〜18:00（月曜定休）
+        </address>
         <p class="footer-co">運営：株式会社 KARA INNOVATE</p>
       </div>
       <nav class="footer-nav" aria-label="フッターナビゲーション">
@@ -79,6 +219,44 @@
     </div>
   </footer>
 
+  <!-- Mobile Floating CTA -->
+  <div class="float-cta">
+    <div class="float-cta-inner">
+      <div class="float-cta-txt">
+        <span class="float-cta-main">自分だけの香りを作る</span>
+        <span class="float-cta-sub">体験は土日祝のみ・¥5,500（税込）</span>
+      </div>
+      <a href="workshop.html" class="btn btn-primary">体験を予約する</a>
+    </div>
+  </div>
+
   <script src="js/main.js"></script>
+  <script>
+    function selectCategory(category, btn) {
+      document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('is-selected'));
+      btn.classList.add('is-selected');
+      document.querySelectorAll('.extra-field').forEach(f => f.classList.remove('visible'));
+      const extra = document.getElementById('extra-' + category);
+      if (extra) extra.classList.add('visible');
+      document.getElementById('sec-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function showComplete() {
+      const name    = document.getElementById('cnt-name').value.trim();
+      const email   = document.getElementById('cnt-email').value.trim();
+      const message = document.getElementById('cnt-message').value.trim();
+      if (!name || !email || !message) {
+        alert('必須項目（*）をご入力ください。');
+        return;
+      }
+      ['sec-header', 'sec-category', 'sec-form', 'sec-oem'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+      });
+      document.querySelectorAll('.sec-label').forEach(el => el.style.display = 'none');
+      document.getElementById('sec-complete').classList.add('visible');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
 </body>
 </html>
