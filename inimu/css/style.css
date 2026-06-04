@@ -1839,6 +1839,250 @@ a.visit-cal-day.ws:hover { opacity: 0.72; }
 .visit-cta-card-dark .visit-cta-desc { color: rgba(255,255,255,0.56); }
 
 /* ============================================================
+   RESERVE — 予約ページ
+   ============================================================ */
+
+/* ---- ページヘッダー ---- */
+.reserve-page-hero {
+  margin-top: 64px;
+  padding: 52px 0 44px;
+  background-color: #F7F7F5;
+  border-bottom: 0.5px solid var(--clr-border);
+  text-align: center;
+}
+.reserve-page-h1 {
+  font-family: var(--ff-serif);
+  font-size: 30px;
+  font-weight: 500;
+  color: var(--clr-black);
+  margin-bottom: 10px;
+}
+.reserve-page-meta {
+  font-family: var(--ff-sans);
+  font-size: 12px;
+  color: var(--clr-gray);
+}
+
+/* ---- カレンダーグリッド ---- */
+.reserve-cal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+  max-width: 960px;
+  margin: 0 auto;
+}
+.cal-col-label {
+  font-family: var(--ff-sans);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--clr-gray);
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+}
+.cal-wrap {
+  background-color: var(--clr-white);
+  border: 0.5px solid var(--clr-border);
+  border-radius: var(--r-card);
+  padding: 20px;
+}
+.cal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.cal-nav {
+  background: none;
+  border: 0.5px solid var(--clr-border);
+  font-family: var(--ff-sans);
+  font-size: 11px;
+  padding: 5px 12px;
+  border-radius: var(--r-btn);
+  cursor: pointer;
+  color: var(--clr-black);
+  transition: all 0.2s;
+}
+.cal-nav:hover { background-color: var(--clr-black); color: var(--clr-white); border-color: var(--clr-black); }
+.cal-month { font-family: var(--ff-serif); font-size: 15px; font-weight: 500; }
+.cal-weekday-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+.cal-weekday {
+  font-family: var(--ff-sans);
+  font-size: 10px;
+  color: var(--clr-gray);
+  text-align: center;
+  padding: 6px 0;
+  font-weight: 500;
+}
+.cal-days-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; margin-top: 3px; }
+.cal-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--ff-sans);
+  font-size: 12px;
+  border-radius: var(--r-btn);
+  cursor: default;
+  transition: all 0.15s;
+}
+.cal-day.empty { background: transparent; }
+.cal-day.open { background-color: var(--clr-black); color: var(--clr-white); cursor: pointer; }
+.cal-day.open:hover { background-color: #333; }
+.cal-day.open.selected { background-color: var(--clr-black); color: var(--clr-white); outline: 2px solid var(--clr-black); outline-offset: 2px; }
+.cal-day.regular { background-color: var(--clr-white); color: var(--clr-black); border: 0.5px solid var(--clr-border); }
+.cal-day.closed { background-color: #E8E8E8; color: var(--clr-lgray); text-decoration: line-through; }
+.cal-legend { display: flex; gap: 16px; margin-top: 12px; flex-wrap: wrap; }
+.legend-item { display: flex; align-items: center; gap: 5px; font-family: var(--ff-sans); font-size: 10px; color: var(--clr-gray); }
+.legend-dot { width: 11px; height: 11px; border-radius: 1px; flex-shrink: 0; }
+.legend-dot.open { background-color: var(--clr-black); }
+.legend-dot.regular { background-color: var(--clr-white); border: 0.5px solid var(--clr-border); }
+.legend-dot.closed { background-color: #E8E8E8; }
+
+/* ---- タイムスロット ---- */
+.timeslot-list { display: flex; flex-direction: column; gap: 8px; }
+.timeslot {
+  background-color: var(--clr-white);
+  border: 1.5px solid var(--clr-border);
+  border-radius: var(--r-card);
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.timeslot:hover:not(.disabled) { border-color: var(--clr-border-e); }
+.timeslot.selected { border-color: var(--clr-black); background-color: var(--clr-black); }
+.timeslot.selected .slot-time,
+.timeslot.selected .slot-remain { color: var(--clr-white); }
+.timeslot.disabled { opacity: 0.4; cursor: not-allowed; background-color: #F0F0F0; }
+.slot-time { font-family: var(--ff-serif); font-size: 16px; font-weight: 500; }
+.slot-remain { font-family: var(--ff-sans); font-size: 11px; color: var(--clr-gray); }
+.slot-dot { width: 10px; height: 10px; border-radius: 50%; background-color: var(--clr-black); flex-shrink: 0; }
+.timeslot.selected .slot-dot { background-color: var(--clr-white); }
+.timeslot.disabled .slot-dot { background-color: var(--clr-lgray); }
+.slot-meta { font-family: var(--ff-sans); font-size: 11px; color: var(--clr-gray); margin-top: 12px; }
+.no-date-msg { font-family: var(--ff-sans); font-size: 12px; color: var(--clr-gray); text-align: center; padding: 40px 0; }
+
+/* ---- プランと人数 ---- */
+.reserve-plan-wrap { max-width: 800px; margin: 0 auto; }
+.plan-table thead td {
+  background-color: var(--clr-black);
+  color: var(--clr-white);
+  font-family: var(--ff-sans);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 12px 16px;
+}
+.plan-table tbody td { padding: 20px 16px; border-top: 0.5px solid var(--clr-border); vertical-align: top; }
+.plan-price-num { font-family: var(--ff-en); font-size: 28px; font-weight: 500; }
+.people-row {
+  background-color: #F2EFE8;
+  border: 0.5px solid var(--clr-border);
+  border-radius: var(--r-card);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+.people-label { font-family: var(--ff-sans); font-size: 13px; font-weight: 500; white-space: nowrap; }
+.people-select {
+  background-color: var(--clr-white);
+  border: 0.5px solid var(--clr-border);
+  border-radius: var(--r-btn);
+  padding: 9px 14px;
+  font-family: var(--ff-sans);
+  font-size: 13px;
+  cursor: pointer;
+  min-width: 160px;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.people-hint { font-family: var(--ff-sans); font-size: 11px; color: var(--clr-gray); }
+
+/* ---- お客様情報フォーム ---- */
+.reserve-form-wrap { max-width: 800px; margin: 0 auto; }
+.form-note-small { font-family: var(--ff-sans); font-size: 11px; color: var(--clr-gray); margin-top: 4px; }
+
+/* ---- 予約内容確認 ---- */
+.reserve-confirm-wrap { max-width: 800px; margin: 0 auto; }
+.confirm-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--clr-white);
+  border: 0.5px solid var(--clr-border);
+  border-radius: var(--r-card);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.confirm-table tr { border-bottom: 0.5px solid var(--clr-border); }
+.confirm-table tr:last-child { border-bottom: none; }
+.confirm-table td { padding: 16px 20px; font-family: var(--ff-sans); font-size: 13px; }
+.confirm-label { color: var(--clr-gray); width: 120px; font-size: 12px; }
+.confirm-value { font-weight: 500; }
+.confirm-value.price { font-family: var(--ff-en); font-size: 22px; }
+.confirm-policy {
+  font-family: var(--ff-sans);
+  font-size: 11px;
+  color: var(--clr-gray);
+  line-height: 1.9;
+  margin-bottom: 24px;
+  text-align: center;
+}
+.btn-confirm {
+  display: block;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  background-color: var(--clr-black);
+  color: var(--clr-white);
+  font-family: var(--ff-sans);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 16px;
+  border: none;
+  border-radius: var(--r-btn);
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: opacity 0.2s;
+  text-align: center;
+}
+.btn-confirm:hover { opacity: 0.75; }
+
+/* ---- サンクスページ ---- */
+.thanks-sec {
+  display: none;
+  padding: var(--sec-y) 0;
+  text-align: center;
+  min-height: 500px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.thanks-sec.visible { display: flex; }
+.thanks-icon {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  border: 1.5px solid var(--clr-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  font-size: 24px;
+  color: var(--clr-black);
+}
+.thanks-title { font-family: var(--ff-serif); font-size: 26px; font-weight: 500; color: var(--clr-black); margin-bottom: 12px; }
+.thanks-body { font-family: var(--ff-sans); font-size: 13px; color: var(--clr-gray); line-height: 1.9; margin-bottom: 48px; }
+.thanks-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-width: 800px; width: 100%; }
+.thanks-card { background-color: var(--clr-white); border: 0.5px solid var(--clr-border); border-radius: var(--r-card); padding: 24px 20px; text-align: center; }
+.thanks-card-title { font-family: var(--ff-sans); font-size: 12px; font-weight: 500; color: var(--clr-black); margin-bottom: 6px; }
+.thanks-card-desc { font-family: var(--ff-sans); font-size: 11px; color: var(--clr-gray); margin-bottom: 14px; line-height: 1.7; }
+.thanks-card-link { font-family: var(--ff-sans); font-size: 11px; font-weight: 500; color: var(--clr-black); text-decoration: underline; text-underline-offset: 2px; }
+
+/* ============================================================
    CONTACT PAGE
    ============================================================ */
 
@@ -2036,6 +2280,10 @@ a.visit-cal-day.ws:hover { opacity: 0.72; }
   .story-body { padding: 64px 48px 64px 56px; }
   .story-h2 { font-size: 28px; }
   .stat-num { font-size: 40px; }
+
+  /* RESERVE */
+  .reserve-cal-grid { grid-template-columns: 1fr; }
+  .thanks-cards { grid-template-columns: 1fr; }
 
   /* RESERVE FORM & CONTACT */
   .form-row-2 { grid-template-columns: 1fr; }

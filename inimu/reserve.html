@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RESERVE — inimu | ワークショップを予約する</title>
+  <meta name="description" content="inimu ワークショップ予約ページ。土日祝のみ開催・¥5,500（税込）/ 名・所要約60分。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@400;500&family=Noto+Sans+JP:wght@400;500&family=Noto+Serif+JP:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <a href="index.html" class="header-logo">
+        <img src="../document/inimu_logo_white_transparent.png" class="logo-w" alt="inimu">
+        <img src="../document/inimuロゴ.png" class="logo-b" alt="inimu">
+      </a>
+      <nav class="header-nav">
+        <a href="index.html"    class="hnav-link">TOP</a>
+        <a href="workshop.html" class="hnav-link">WORKSHOP</a>
+        <a href="products.html" class="hnav-link">PRODUCTS</a>
+        <a href="story.html"    class="hnav-link">STORY</a>
+        <a href="visit.html"    class="hnav-link">VISIT</a>
+        <a href="online.html"   class="hnav-link">ONLINE</a>
+        <a href="contact.html"  class="hnav-link">CONTACT</a>
+      </nav>
+      <a href="reserve.html" class="btn btn-primary header-btn" style="background-color:#3D3D3A;">予約する</a>
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+    <div class="mnav-inner">
+      <nav class="mnav-links">
+        <a href="index.html">TOP</a>
+        <a href="workshop.html">WORKSHOP</a>
+        <a href="products.html">PRODUCTS</a>
+        <a href="story.html">STORY</a>
+        <a href="visit.html">VISIT</a>
+        <a href="online.html">ONLINE</a>
+        <a href="contact.html">CONTACT</a>
+      </nav>
+      <a href="reserve.html" class="btn btn-primary mnav-cta">体験を予約する</a>
+    </div>
+  </div>
+
+  <!-- ========== MAIN（送信後に非表示）========== -->
+  <div id="reserve-main">
+
+    <!-- SEC01: PAGE HEADER -->
+    <section class="reserve-page-hero" id="sec-header">
+      <div class="container">
+        <span class="kicker" style="margin-bottom:14px;">WORKSHOP RESERVE</span>
+        <h1 class="reserve-page-h1">ワークショップを予約する</h1>
+        <p class="reserve-page-meta">土日祝のみ開催・¥5,500（税込）/ 名・所要約60分</p>
+      </div>
+    </section>
+
+    <!-- SEC02: CALENDAR + TIMESLOT -->
+    <div class="sec-label" style="background-color:#F2EFE8; border-top-color:#DDD9D2;">
+      <div class="container"><span>SECTION 01 — DATE / 日程と時間帯を選ぶ</span></div>
+    </div>
+    <section class="sec-pad bg-visit-beige" id="sec-cal">
+      <div class="container">
+        <div class="sec-head">
+          <h2 class="sec-h2">日程と時間帯を選んでください</h2>
+          <p class="sec-sub">土曜・日曜・祝日のみ開催しています</p>
+        </div>
+        <div class="reserve-cal-grid">
+
+          <!-- カレンダー -->
+          <div>
+            <p class="cal-col-label">開催日を選ぶ</p>
+            <div class="cal-wrap">
+              <div class="cal-header">
+                <button class="cal-nav" id="cal-prev">← 前月</button>
+                <div class="cal-month" id="cal-month-label">2026年 6月</div>
+                <button class="cal-nav" id="cal-next">次月 →</button>
+              </div>
+              <div class="cal-weekday-grid">
+                <div class="cal-weekday">月</div>
+                <div class="cal-weekday">火</div>
+                <div class="cal-weekday">水</div>
+                <div class="cal-weekday">木</div>
+                <div class="cal-weekday">金</div>
+                <div class="cal-weekday" style="color:var(--clr-black); font-weight:500;">土</div>
+                <div class="cal-weekday" style="color:var(--clr-black); font-weight:500;">日</div>
+              </div>
+              <div class="cal-days-grid" id="cal-days"></div>
+              <div class="cal-legend">
+                <div class="legend-item"><div class="legend-dot open"></div><span>開催日（土日祝）</span></div>
+                <div class="legend-item"><div class="legend-dot regular"></div><span>営業日</span></div>
+                <div class="legend-item"><div class="legend-dot closed"></div><span>定休日</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- タイムスロット -->
+          <div>
+            <p class="cal-col-label" id="timeslot-label">時間帯を選ぶ</p>
+            <div id="timeslot-area">
+              <div class="no-date-msg">← 開催日を選択してください</div>
+            </div>
+            <p class="slot-meta">所要時間：約60分（開催：土日祝のみ）</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SEC03: PLAN + PEOPLE -->
+    <div class="sec-label">
+      <div class="container"><span>SECTION 02 — PLAN / プランと人数</span></div>
+    </div>
+    <section class="sec-pad" id="sec-plan">
+      <div class="container">
+        <div class="sec-head">
+          <h2 class="sec-h2">プランと人数</h2>
+        </div>
+        <div class="reserve-plan-wrap">
+          <div class="plan-table-wrap">
+            <table class="plan-table">
+              <thead>
+                <tr>
+                  <td>プラン内容</td>
+                  <td style="width:100px; text-align:center;">定員</td>
+                  <td style="width:140px; text-align:right;">料金（税込）</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <p class="plan-name">オリジナル香水づくり</p>
+                    <p class="plan-detail">10ml × 4種の香り・ボトル付き・所要約60分</p>
+                  </td>
+                  <td style="text-align:center;">1〜10名</td>
+                  <td style="text-align:right;">
+                    <p class="plan-price-num">¥5,500</p>
+                    <span class="plan-price-unit">/ 名（税込）</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="people-row">
+            <span class="people-label">参加人数</span>
+            <select class="people-select" id="people-select" onchange="updatePeople()">
+              <option value="1">1名（¥5,500）</option>
+              <option value="2" selected>2名（¥11,000）</option>
+              <option value="3">3名（¥16,500）</option>
+              <option value="4">4名（¥22,000）</option>
+              <option value="5">5名（¥27,500）</option>
+              <option value="6">6名（¥33,000）</option>
+              <option value="7">7名（¥38,500）</option>
+              <option value="8">8名（¥44,000）</option>
+              <option value="9">9名（¥49,500）</option>
+              <option value="10">10名（¥55,000）</option>
+            </select>
+            <span class="people-hint">2名がデフォルト（WS予約の82.2%が2名）</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEC04: CUSTOMER INFO -->
+    <div class="sec-label" style="background-color:#F2EFE8; border-top-color:#DDD9D2;">
+      <div class="container"><span>SECTION 03 — CUSTOMER / お客様情報</span></div>
+    </div>
+    <section class="sec-pad bg-visit-beige" id="sec-customer">
+      <div class="container">
+        <div class="sec-head">
+          <h2 class="sec-h2">お客様情報を入力してください</h2>
+          <p class="sec-sub">ご予約の確認メールをお送りします</p>
+        </div>
+        <div class="reserve-form-wrap">
+
+          <div class="form-row-2" style="margin-bottom:0;">
+            <div class="form-group">
+              <label class="form-label" for="input-name">お名前 <span class="form-required">*</span></label>
+              <input type="text" id="input-name" class="form-input" placeholder="山田 花子" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="input-kana">ふりがな <span class="form-required">*</span></label>
+              <input type="text" id="input-kana" class="form-input" placeholder="やまだ はなこ" required>
+            </div>
+          </div>
+
+          <div class="form-row-2" style="margin-bottom:0;">
+            <div class="form-group">
+              <label class="form-label" for="input-email">メールアドレス <span class="form-required">*</span></label>
+              <input type="email" id="input-email" class="form-input" placeholder="example@email.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="input-tel">電話番号 <span class="form-required">*</span></label>
+              <input type="tel" id="input-tel" class="form-input" placeholder="090-0000-0000" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="input-note">備考（アレルギー・ご要望など）</label>
+            <textarea id="input-note" class="form-textarea" placeholder="香りのアレルギーや特別なご要望があればご記入ください"></textarea>
+            <span class="form-note-small">* は必須でお願いいたします。</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SEC05: CONFIRM -->
+    <div class="sec-label">
+      <div class="container"><span>SECTION 04 — CONFIRM / 予約内容の確認</span></div>
+    </div>
+    <section class="sec-pad" id="sec-confirm">
+      <div class="container">
+        <div class="sec-head">
+          <h2 class="sec-h2">予約内容の確認</h2>
+        </div>
+        <div class="reserve-confirm-wrap">
+          <table class="confirm-table">
+            <tr>
+              <td class="confirm-label">日程</td>
+              <td class="confirm-value" id="confirm-date">— 日程を選択してください —</td>
+            </tr>
+            <tr>
+              <td class="confirm-label">時間帯</td>
+              <td class="confirm-value" id="confirm-time">— 時間帯を選択してください —</td>
+            </tr>
+            <tr>
+              <td class="confirm-label">人数</td>
+              <td class="confirm-value" id="confirm-people">2名</td>
+            </tr>
+            <tr>
+              <td class="confirm-label">料金合計</td>
+              <td class="confirm-value price" id="confirm-price">¥11,000（税込）</td>
+            </tr>
+          </table>
+          <p class="confirm-policy">体験日前日19:00までキャンセル無料です。自動返信メールをお送りいたしますのでご確認ください。</p>
+          <button class="btn-confirm" onclick="showThanks()">この内容で予約する</button>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /#reserve-main -->
+
+  <!-- SEC06: THANKS（送信後に表示） -->
+  <section class="thanks-sec" id="sec-thanks">
+    <div class="container">
+      <div class="thanks-icon">✓</div>
+      <h2 class="thanks-title">ご予約ありがとうございます</h2>
+      <p class="thanks-body">確認メールをお送りしました。当日お待ちしております。</p>
+      <div class="thanks-cards">
+        <div class="thanks-card">
+          <p class="thanks-card-title">LINE登録</p>
+          <p class="thanks-card-desc">次回来店特典・新着情報をお届け</p>
+          <a href="#" target="_blank" rel="noopener" class="thanks-card-link">LINE登録はこちら →</a>
+        </div>
+        <div class="thanks-card">
+          <p class="thanks-card-title">口コミ投稿</p>
+          <p class="thanks-card-desc">Googleマップで評価する</p>
+          <a href="https://search.google.com/local/writereview" target="_blank" rel="noopener" class="thanks-card-link">口コミを書く →</a>
+        </div>
+        <div class="thanks-card">
+          <p class="thanks-card-title">アクセス確認</p>
+          <p class="thanks-card-desc">浅草寺から徒歩3分</p>
+          <a href="visit.html" class="thanks-card-link">Googleマップ →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="site-footer">
+    <div class="footer-top container">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo">
+          <img src="../document/inimu_logo_white_transparent.png" alt="inimu">
+        </a>
+        <address class="footer-addr">
+          東京都台東区浅草2丁目1-5<br>
+          営業：火〜日曜 10:30〜18:00（月曜定休）
+        </address>
+        <p class="footer-co">運営：株式会社 KARA INNOVATE</p>
+      </div>
+      <nav class="footer-nav" aria-label="フッターナビゲーション">
+        <a href="workshop.html">WORKSHOP</a>
+        <a href="products.html">PRODUCTS</a>
+        <a href="story.html">STORY</a>
+        <a href="visit.html">VISIT</a>
+        <a href="online.html">ONLINE</a>
+        <a href="contact.html">CONTACT</a>
+      </nav>
+    </div>
+    <div class="footer-btm container">
+      <p class="footer-copy">© 2024 KARA INNOVATE Inc.</p>
+    </div>
+  </footer>
+
+  <!-- Mobile Floating CTA -->
+  <div class="float-cta">
+    <div class="float-cta-inner">
+      <div class="float-cta-txt">
+        <span class="float-cta-main">自分だけの香りを作る</span>
+        <span class="float-cta-sub">体験は土日祝のみ・¥5,500（税込）</span>
+      </div>
+      <a href="reserve.html" class="btn btn-primary">体験を予約する</a>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+    // ─── 祝日リスト ───
+    const HOLIDAYS = [
+      '2025-01-01','2025-01-13','2025-02-11','2025-02-23','2025-02-24',
+      '2025-03-20','2025-04-29','2025-05-03','2025-05-04','2025-05-05','2025-05-06',
+      '2025-07-21','2025-08-11','2025-09-15','2025-09-22','2025-09-23',
+      '2025-10-13','2025-11-03','2025-11-23','2025-11-24','2025-12-23',
+      '2026-01-01','2026-01-12','2026-02-11','2026-02-23','2026-03-20',
+      '2026-04-29','2026-05-03','2026-05-04','2026-05-05','2026-05-06',
+      '2026-07-20','2026-08-11','2026-09-21','2026-09-22','2026-09-23',
+      '2026-10-12','2026-11-03','2026-11-23','2026-12-23'
+    ];
+
+    function pad(n) { return String(n).padStart(2,'0'); }
+    function toStr(y,m,d) { return `${y}-${pad(m)}-${pad(d)}`; }
+    function isHoliday(s) { return HOLIDAYS.includes(s); }
+
+    let currentYear, currentMonth, selectedDate = null, selectedTime = null;
+    const now = new Date();
+    currentYear = now.getFullYear();
+    currentMonth = now.getMonth() + 1;
+
+    const slots = {
+      default: [
+        { time: '11:00 〜 12:00', remain: 3 },
+        { time: '13:00 〜 14:00', remain: 5 },
+        { time: '15:00 〜 16:00', remain: 0 }
+      ]
+    };
+
+    function renderCalendar(y, m) {
+      document.getElementById('cal-month-label').textContent = `${y}年 ${m}月`;
+      const grid = document.getElementById('cal-days');
+      grid.innerHTML = '';
+      const first = new Date(y, m-1, 1);
+      const offset = (first.getDay() + 6) % 7;
+      const total = new Date(y, m, 0).getDate();
+
+      for (let i = 0; i < offset; i++) {
+        const el = document.createElement('div');
+        el.className = 'cal-day empty';
+        grid.appendChild(el);
+      }
+      for (let d = 1; d <= total; d++) {
+        const el = document.createElement('div');
+        const date = new Date(y, m-1, d);
+        const dow = date.getDay();
+        const ds = toStr(y, m, d);
+        const holiday = isHoliday(ds);
+        const isOpen = dow === 0 || dow === 6 || holiday;
+        const isClosed = dow === 1 && !holiday;
+
+        if (isOpen) {
+          el.className = 'cal-day open' + (ds === selectedDate ? ' selected' : '');
+          el.onclick = () => selectDate(ds, el, y, m, d);
+        } else if (isClosed) {
+          el.className = 'cal-day closed';
+        } else {
+          el.className = 'cal-day regular';
+        }
+        el.textContent = d;
+        grid.appendChild(el);
+      }
+    }
+
+    function selectDate(ds, el, y, m, d) {
+      document.querySelectorAll('.cal-day.selected').forEach(e => e.classList.remove('selected'));
+      el.classList.add('selected');
+      selectedDate = ds;
+      selectedTime = null;
+
+      const dow = ['日','月','火','水','木','金','土'][new Date(y,m-1,d).getDay()];
+      document.getElementById('timeslot-label').textContent =
+        `時間帯を選ぶ（${y}年${m}月${d}日（${dow}）の空き）`;
+
+      const slotData = slots.default;
+      const area = document.getElementById('timeslot-area');
+      area.innerHTML = '<div class="timeslot-list">' +
+        slotData.map(s => {
+          const disabled = s.remain === 0;
+          return `<div class="timeslot${disabled ? ' disabled' : ''}" onclick="${disabled ? '' : `selectTime('${s.time}', this)`}">
+            <div>
+              <div class="slot-time">${s.time}</div>
+              <div class="slot-remain">${disabled ? '満席' : `残り ${s.remain} 枠`}</div>
+            </div>
+            <div class="slot-dot"></div>
+          </div>`;
+        }).join('') + '</div>';
+
+      updateConfirm();
+    }
+
+    function selectTime(time, el) {
+      document.querySelectorAll('.timeslot').forEach(e => e.classList.remove('selected'));
+      el.classList.add('selected');
+      selectedTime = time;
+      updateConfirm();
+    }
+
+    function updatePeople() { updateConfirm(); }
+
+    function updateConfirm() {
+      const people = parseInt(document.getElementById('people-select').value);
+      const price = people * 5500;
+
+      if (selectedDate) {
+        const d = new Date(selectedDate);
+        const dow = ['日','月','火','水','木','金','土'][d.getDay()];
+        document.getElementById('confirm-date').textContent =
+          `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日（${dow}）`;
+      } else {
+        document.getElementById('confirm-date').textContent = '— 日程を選択してください —';
+      }
+      document.getElementById('confirm-time').textContent = selectedTime || '— 時間帯を選択してください —';
+      document.getElementById('confirm-people').textContent = `${people}名`;
+      document.getElementById('confirm-price').textContent = `¥${price.toLocaleString()}（税込）`;
+    }
+
+    function showThanks() {
+      if (!selectedDate) { alert('開催日を選択してください。'); return; }
+      if (!selectedTime) { alert('時間帯を選択してください。'); return; }
+      const name  = document.getElementById('input-name').value.trim();
+      const kana  = document.getElementById('input-kana').value.trim();
+      const email = document.getElementById('input-email').value.trim();
+      const tel   = document.getElementById('input-tel').value.trim();
+      if (!name || !kana || !email || !tel) { alert('必須項目（*）をご入力ください。'); return; }
+
+      document.getElementById('reserve-main').style.display = 'none';
+      document.querySelectorAll('.sec-label').forEach(el => el.style.display = 'none');
+      document.getElementById('sec-thanks').classList.add('visible');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.getElementById('cal-prev').addEventListener('click', () => {
+      currentMonth--;
+      if (currentMonth < 1) { currentMonth = 12; currentYear--; }
+      renderCalendar(currentYear, currentMonth);
+    });
+    document.getElementById('cal-next').addEventListener('click', () => {
+      currentMonth++;
+      if (currentMonth > 12) { currentMonth = 1; currentYear++; }
+      renderCalendar(currentYear, currentMonth);
+    });
+
+    renderCalendar(currentYear, currentMonth);
+    updateConfirm();
+  </script>
+</body>
+</html>

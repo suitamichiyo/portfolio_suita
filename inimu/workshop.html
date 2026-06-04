@@ -170,9 +170,6 @@
         </div>
       </div>
 
-      <div class="sec-cta-c">
-        <a href="#ws-reserve" class="btn btn-primary">予約する →</a>
-      </div>
     </div>
   </section>
 
@@ -331,168 +328,9 @@
     </div>
   </section>
 
-  <!-- ========== SECTION 07: マップ・アクセス ========== -->
+  <!-- ========== SECTION 07: SNSシェア ========== -->
   <div class="sec-label">
-    <div class="container"><span>SECTION 07 — MAP & INFORMATION / 店舗情報・アクセス</span></div>
-  </div>
-  <section class="sec-pad">
-    <div class="container">
-      <div class="access-grid">
-
-        <div>
-          <div class="access-map">
-            <iframe
-              src="https://maps.google.com/maps?q=東京都台東区浅草2丁目1-5&hl=ja&z=15&output=embed"
-              width="100%" height="100%"
-              style="border:0; filter:grayscale(100%);" allowfullscreen loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              title="inimu 浅草店 アクセスマップ">
-            </iframe>
-          </div>
-          <div style="display:flex; gap:10px; margin-top:14px;">
-            <a href="https://maps.google.com/maps?q=東京都台東区浅草2丁目1-5" target="_blank" rel="noopener" class="btn btn-primary" style="font-size:12px; padding:9px 18px;">Googleマップで見る →</a>
-            <a href="https://maps.google.com/maps?daddr=東京都台東区浅草2丁目1-5" target="_blank" rel="noopener" class="btn btn-secondary" style="font-size:12px; padding:9px 18px;">ルートを検索 →</a>
-          </div>
-        </div>
-
-        <div class="access-info">
-          <span class="kicker">INFORMATION</span>
-          <dl class="access-dl">
-            <div class="access-row">
-              <dt>営業日</dt>
-              <dd>火〜日曜<br><span style="font-size:11px; color:#AAAAAA;">月曜祝日の場合は火曜振替休日<br>ワークショップは土日祝のみ開催</span></dd>
-            </div>
-            <div class="access-row">
-              <dt>営業時間</dt>
-              <dd>10:30 – 18:00<br><span style="font-size:11px; color:#AAAAAA;">WS最終受付は前日19:00まで</span></dd>
-            </div>
-            <div class="access-row">
-              <dt>住所</dt>
-              <dd>東京都台東区浅草2丁目1-5<br><span style="font-size:11px; color:#AAAAAA;">〒111-0032</span></dd>
-            </div>
-            <div class="access-row">
-              <dt>最寄り駅</dt>
-              <dd>各線浅草駅より徒歩6分</dd>
-            </div>
-            <div class="access-row">
-              <dt>電話</dt>
-              <dd>070-7401-3069</dd>
-            </div>
-          </dl>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== SECTION 08: 予約フォーム ========== -->
-  <div class="sec-label">
-    <div class="container"><span>SECTION 08 — RESERVE / 予約フォーム</span></div>
-  </div>
-  <section class="sec-pad" id="ws-reserve">
-    <div class="container">
-      <div class="sec-head">
-        <span class="kicker" style="text-align:center; display:block;">RESERVATION</span>
-        <h2 class="sec-h2">体験を予約する</h2>
-        <p class="sec-sub">希望日・参加人数・お名前・連絡先をご入力ください</p>
-      </div>
-
-      <div class="reserve-form-wrap">
-        <form class="reserve-form" onsubmit="window.location.href='contact.html'; return false;" novalidate>
-
-          <!-- 希望日 + 時間帯 -->
-          <div class="form-row-2">
-            <div class="form-group">
-              <label class="form-label" for="rsv-date">希望日 <span class="form-required">*</span></label>
-              <input type="date" id="rsv-date" class="form-input" required>
-              <p class="form-note">土曜・日曜・祝日のみ</p>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="rsv-time">希望時間帯 <span class="form-required">*</span></label>
-              <select id="rsv-time" class="form-select" required>
-                <option value="">選択してください</option>
-                <option value="11">11:00〜12:00</option>
-                <option value="13">13:00〜14:00</option>
-                <option value="15">15:00〜16:00</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- 参加人数 -->
-          <div class="form-group">
-            <label class="form-label" for="rsv-num">参加人数 <span class="form-required">*</span></label>
-            <select id="rsv-num" class="form-select" required>
-              <option value="">選択してください</option>
-              <option value="1">1名</option>
-              <option value="2">2名</option>
-              <option value="3">3名</option>
-              <option value="4">4名</option>
-              <option value="5">5名</option>
-              <option value="6">6〜10名（グループ）</option>
-            </select>
-            <p class="form-note">1〜10名まで。10名以上はCONTACTよりご相談ください。</p>
-          </div>
-
-          <hr class="form-divider">
-
-          <!-- お名前 -->
-          <div class="form-group">
-            <label class="form-label" for="rsv-name">お名前 <span class="form-required">*</span></label>
-            <input type="text" id="rsv-name" class="form-input" placeholder="山田 花子" required>
-          </div>
-
-          <!-- メールアドレス -->
-          <div class="form-group">
-            <label class="form-label" for="rsv-email">メールアドレス <span class="form-required">*</span></label>
-            <input type="email" id="rsv-email" class="form-input" placeholder="example@email.com" required>
-          </div>
-
-          <!-- ご要望 -->
-          <div class="form-group">
-            <label class="form-label" for="rsv-note">ご要望・ご質問（任意）</label>
-            <textarea id="rsv-note" class="form-textarea" placeholder="アレルギーや特別なご希望があればお知らせください"></textarea>
-          </div>
-
-          <!-- 送信ボタン -->
-          <div class="form-submit-area">
-            <button type="submit" class="btn btn-primary form-submit-btn">送信する →</button>
-            <p class="form-submit-note">
-              ※ 現在Webフォームは準備中です。送信するとCONTACTページへご案内します。<br>
-              お電話（070-7401-3069）または Instagram（@inimu_fragrance）でもご予約いただけます。
-            </p>
-          </div>
-
-        </form>
-
-        <!-- キャンセルポリシー -->
-        <div class="cancel-policy">
-          <p class="cancel-policy-title">キャンセルポリシー</p>
-          <p class="cancel-policy-text">
-            ・体験前日 19:00 まで：無料でキャンセル可能<br>
-            ・体験前日 19:01 以降：キャンセル料（全額）が発生します<br>
-            ・当日キャンセル・無断キャンセル：キャンセル料（全額）が発生します
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== SECTION 09: 予約CTA（黒背景）========== -->
-  <div class="sec-label sec-label-dark">
-    <div class="container"><span>SECTION 09 — CTA / ご予約の確認</span></div>
-  </div>
-  <section class="ws-cta-sec bg-dark">
-    <div class="container">
-      <h2 class="sec-h2">週末だけの特別体験を予約する</h2>
-      <p class="ws-cta-sub">土日祝のみ開催・¥5,500 / 名・当日空きありの場合のみ当日予約OK</p>
-      <a href="#ws-reserve" class="btn btn-white ws-cta-btn">フォームへ進む →</a>
-      <p class="ws-cta-note">自社サイト予約は確認メール・LINE連携・次回来店特典あり</p>
-    </div>
-  </section>
-
-  <!-- ========== SECTION 10: SNSシェア ========== -->
-  <div class="sec-label">
-    <div class="container"><span>SECTION 10 — SNS撮影スポット / シェアしよう</span></div>
+    <div class="container"><span>SECTION 07 — SNS撮影スポット / シェアしよう</span></div>
   </div>
   <section class="sec-pad">
     <div class="container">
@@ -511,6 +349,19 @@
           <p class="ws-sns-hashtags">#inimu_fragrance　　#浅草香り体験</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ========== SECTION 08: 予約CTA（黒背景）========== -->
+  <div class="sec-label sec-label-dark">
+    <div class="container"><span>SECTION 08 — CTA / 予約する</span></div>
+  </div>
+  <section class="ws-cta-sec bg-dark" id="ws-reserve">
+    <div class="container">
+      <h2 class="sec-h2">週末だけの特別体験を予約する</h2>
+      <p class="ws-cta-sub">土日祝のみ開催・¥5,500 / 名・当日空きありの場合のみ当日予約OK</p>
+      <a href="reserve.html" class="btn btn-white ws-cta-btn">予約ページへ →</a>
+      <p class="ws-cta-note">自社サイト予約は確認メール・LINE連携・次回来店特典あり</p>
     </div>
   </section>
 
