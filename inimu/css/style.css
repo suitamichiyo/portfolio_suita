@@ -1865,6 +1865,9 @@ body.page-hatenko { background-color: var(--clr-black); }
     rgba(255,255,255,0.015) 60px, rgba(255,255,255,0.015) 61px
   );
 }
+.hatenko-hero-bg { position: absolute; inset: 0; margin: 0; }
+.hatenko-hero-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hatenko-hero-scrim { position: absolute; inset: 0; background: rgba(0,0,0,0.55); }
 .hatenko-hero-content { position: relative; z-index: 1; max-width: 700px; }
 .hatenko-hero-kicker {
   font-family: var(--ff-en);
