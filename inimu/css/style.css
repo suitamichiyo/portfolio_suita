@@ -1839,6 +1839,194 @@ a.visit-cal-day.ws:hover { opacity: 0.72; }
 .visit-cta-card-dark .visit-cta-desc { color: rgba(255,255,255,0.56); }
 
 /* ============================================================
+   CONTACT PAGE
+   ============================================================ */
+
+/* ---- ページヘッダー ---- */
+.contact-page-hero {
+  margin-top: 64px;
+  padding: 72px 0 60px;
+  background-color: #F7F7F5;
+  border-bottom: 0.5px solid var(--clr-border);
+  text-align: center;
+}
+.contact-page-h1 {
+  font-family: var(--ff-serif);
+  font-size: 36px;
+  font-weight: 500;
+  color: var(--clr-black);
+  margin-bottom: 12px;
+}
+.contact-page-sub {
+  font-family: var(--ff-sans);
+  font-size: 13px;
+  color: var(--clr-gray);
+}
+
+/* ---- カテゴリー選択 ---- */
+.category-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.category-btn {
+  background-color: var(--clr-white);
+  border: 1.5px solid var(--clr-border);
+  border-radius: var(--r-card);
+  padding: 22px 24px;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.2s, background-color 0.2s;
+  display: block;
+  width: 100%;
+}
+.category-btn:hover { border-color: var(--clr-border-e); }
+.category-btn.is-selected {
+  border-color: var(--clr-black);
+  background-color: var(--clr-black);
+}
+.category-btn.is-selected .cat-name { color: var(--clr-white); }
+.category-btn.is-selected .cat-desc { color: rgba(255,255,255,0.60); }
+.cat-name {
+  font-family: var(--ff-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--clr-black);
+  margin-bottom: 4px;
+  display: block;
+}
+.cat-desc {
+  font-family: var(--ff-sans);
+  font-size: 11px;
+  color: var(--clr-gray);
+}
+
+/* ---- コンタクトフォーム ---- */
+.contact-form-wrap {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.extra-field { display: none; }
+.extra-field.visible { display: block; }
+.contact-submit-note {
+  font-family: var(--ff-sans);
+  font-size: 11px;
+  color: var(--clr-gray);
+  line-height: 1.85;
+  margin-bottom: 24px;
+  text-align: center;
+}
+.btn-contact-submit {
+  display: block;
+  width: 100%;
+  background-color: var(--clr-black);
+  color: var(--clr-white);
+  font-family: var(--ff-sans);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 16px;
+  border: none;
+  border-radius: var(--r-btn);
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: opacity 0.2s;
+}
+.btn-contact-submit:hover { opacity: 0.75; }
+
+/* ---- OEM セクション（黒背景） ---- */
+.contact-oem-sec {
+  background-color: var(--clr-black);
+  color: var(--clr-white);
+}
+.contact-oem-wrap {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.contact-oem-kicker {
+  font-family: var(--ff-en);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.36);
+  display: block;
+  margin-bottom: 16px;
+}
+.contact-oem-h2 {
+  font-family: var(--ff-serif);
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--clr-white);
+  line-height: 1.55;
+  margin-bottom: 16px;
+}
+.contact-oem-body {
+  font-family: var(--ff-sans);
+  font-size: 13px;
+  color: rgba(255,255,255,0.60);
+  line-height: 1.9;
+  margin-bottom: 28px;
+}
+.btn-oem {
+  display: inline-block;
+  background-color: transparent;
+  color: var(--clr-white);
+  border: 0.5px solid rgba(255,255,255,0.40);
+  font-family: var(--ff-sans);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 12px 24px;
+  border-radius: var(--r-btn);
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+.btn-oem:hover { background-color: rgba(255,255,255,0.10); }
+
+/* ---- 送信完了 ---- */
+.contact-complete-sec {
+  display: none;
+  padding: var(--sec-y) 0;
+  text-align: center;
+  min-height: 440px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.contact-complete-sec.visible { display: flex; }
+.complete-icon {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  border: 1.5px solid var(--clr-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  font-size: 22px;
+  color: var(--clr-black);
+}
+.complete-title {
+  font-family: var(--ff-serif);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--clr-black);
+  margin-bottom: 12px;
+}
+.complete-body {
+  font-family: var(--ff-sans);
+  font-size: 13px;
+  color: var(--clr-gray);
+  line-height: 1.9;
+  margin-bottom: 36px;
+}
+.complete-btns {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ============================================================
    RESPONSIVE — Tablet 768–1139px
    ============================================================ */
 @media (max-width: 1139px) {
@@ -1849,8 +2037,10 @@ a.visit-cal-day.ws:hover { opacity: 0.72; }
   .story-h2 { font-size: 28px; }
   .stat-num { font-size: 40px; }
 
-  /* RESERVE FORM */
+  /* RESERVE FORM & CONTACT */
   .form-row-2 { grid-template-columns: 1fr; }
+  .category-grid { grid-template-columns: 1fr; }
+  .complete-btns { flex-direction: column; align-items: stretch; }
 
   /* VISIT */
   .route-cards { grid-template-columns: 1fr 1fr; }
