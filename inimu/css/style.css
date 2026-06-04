@@ -1126,7 +1126,7 @@ address { font-style: normal; }
   max-width: var(--max-w);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 55fr 45fr;
+  grid-template-columns: 60fr 40fr;
   overflow: hidden;
 }
 
@@ -1135,6 +1135,8 @@ address { font-style: normal; }
   display: flex;
   flex-direction: column;
   justify-content: center;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .oem-col-img {
@@ -1979,7 +1981,7 @@ body.page-hatenko { background-color: var(--clr-black); }
 }
 .hatenko-lineup-card:hover { border-color: rgba(255,255,255,0.30); }
 .hatenko-lineup-card-img {
-  aspect-ratio: 4/3;
+  height: 220px;
   overflow: hidden;
   background-color: rgba(255,255,255,0.06);
   position: relative;
