@@ -315,6 +315,12 @@ address { font-style: normal; }
   gap: 12px;
   margin-bottom: 36px;
 }
+.prod-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
 .prod-card {
   border-radius: var(--r-card);
   border: 0.5px solid var(--clr-border);
