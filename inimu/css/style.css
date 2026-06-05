@@ -1324,6 +1324,29 @@ address { font-style: normal; }
 }
 
 /* ============================================================
+   WANOWA — GIVING BACK（セクション1右カラム画像）
+   .planting-* はstory.htmlと共用のため、wanowa-giving-backでスコープ
+   ============================================================ */
+.wanowa-giving-back .planting-grid {
+  align-items: stretch;
+}
+.wanowa-giving-back .planting-img {
+  align-self: center;
+  aspect-ratio: 1.2 / 1;
+  width: 100%;
+  max-width: 560px;
+  height: unset;
+  overflow: hidden;
+}
+.wanowa-giving-back .planting-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* ============================================================
    WANOWA — Series Top  (lineup grid)
    Story section reuses .planting-* classes from STORY
    ============================================================ */
