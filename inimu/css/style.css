@@ -1437,6 +1437,179 @@ address { font-style: normal; }
 .lineup-card-link:hover { opacity: 0.6; }
 
 /* ============================================================
+   WANOWA — 商品詳細ページ
+   ============================================================ */
+
+/* Breadcrumb */
+.breadcrumb-wrap {
+  padding: 14px 0;
+  border-bottom: 0.5px solid var(--clr-border);
+}
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--ff-sans);
+  font-size: 11px;
+  color: var(--clr-lgray);
+}
+.breadcrumb a {
+  color: var(--clr-lgray);
+}
+.breadcrumb a:hover { color: var(--clr-black); }
+.breadcrumb-sep { color: var(--clr-lgray); }
+
+/* Product Detail Grid */
+.product-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.product-main-img {
+  aspect-ratio: 3/4;
+  border-radius: var(--r-card);
+  overflow: hidden;
+  background-color: #E8E5DF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.product-main-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.product-main-img span {
+  font-family: var(--ff-sans);
+  font-size: 10px;
+  color: rgba(0,0,0,0.3);
+  letter-spacing: 0.1em;
+  text-align: center;
+  line-height: 1.8;
+}
+.spec-region {
+  font-family: var(--ff-en);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--clr-lgray);
+  display: block;
+  margin-bottom: 12px;
+}
+.spec-name-ja {
+  font-family: var(--ff-serif);
+  font-size: 36px;
+  font-weight: 500;
+  color: var(--clr-black);
+  line-height: 1.3;
+  margin-bottom: 32px;
+}
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 36px;
+}
+.spec-table tr { border-bottom: 0.5px solid var(--clr-border); }
+.spec-table th {
+  font-family: var(--ff-sans);
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--clr-lgray);
+  text-align: left;
+  padding: 12px 0;
+  width: 30%;
+  vertical-align: top;
+}
+.spec-table td {
+  font-family: var(--ff-sans);
+  font-size: 13px;
+  color: var(--clr-black);
+  padding: 12px 0;
+  line-height: 1.6;
+}
+
+/* Origin Story */
+.origin-inner { max-width: 600px; }
+.origin-h2 {
+  font-family: var(--ff-serif);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--clr-black);
+  line-height: 1.5;
+  margin-bottom: 28px;
+}
+.origin-body p {
+  font-family: var(--ff-serif);
+  font-size: 14px;
+  line-height: 2.3;
+  color: var(--clr-black);
+  margin-bottom: 18px;
+}
+.origin-body p:last-child { margin-bottom: 0; }
+
+/* Series Scroll */
+.series-scroll {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  scrollbar-width: thin;
+}
+.series-scroll::-webkit-scrollbar { height: 4px; }
+.series-scroll::-webkit-scrollbar-track { background: transparent; }
+.series-scroll::-webkit-scrollbar-thumb { background: var(--clr-border); border-radius: 2px; }
+.series-item {
+  flex-shrink: 0;
+  width: 180px;
+  border: 0.5px solid var(--clr-border);
+  border-radius: var(--r-card);
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--clr-black);
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s ease;
+}
+a.series-item:hover { border-color: var(--clr-border-e); }
+.series-item.current { border-color: var(--clr-border-e); cursor: default; }
+.series-item-img {
+  aspect-ratio: 1/1;
+  background-color: #E8E5DF;
+  overflow: hidden;
+}
+.series-item-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+a.series-item:hover .series-item-img img { transform: scale(1.05); }
+.series-item-body {
+  padding: 12px 14px 14px;
+}
+.series-item-badge {
+  font-family: var(--ff-sans);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  background-color: var(--clr-black);
+  color: var(--clr-white);
+  padding: 2px 7px;
+  border-radius: 1px;
+  display: inline-block;
+  margin-bottom: 7px;
+}
+.series-item-name {
+  font-family: var(--ff-serif);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--clr-black);
+  display: block;
+}
+
+/* ============================================================
    STORY — ページ下部CTA
    ============================================================ */
 .story-cta-sec {
@@ -2693,6 +2866,10 @@ body.page-hatenko { background-color: var(--clr-black); }
   .pfm-hero-img { min-height: 300px; }
   .pfm-narrative-grid { grid-template-columns: 1fr; gap: 40px; }
   .pfm-collection-grid { grid-template-columns: 1fr; }
+
+  /* WANOWA 商品詳細 */
+  .product-detail-grid { grid-template-columns: 1fr; gap: 40px; }
+  .spec-name-ja { font-size: 28px; }
 }
 
 /* ============================================================
@@ -2834,6 +3011,10 @@ body.page-hatenko { background-color: var(--clr-black); }
   .pfm-hero-h1 { font-size: 26px; }
   .pfm-collection-card { grid-template-columns: 1fr; }
   .pfm-collection-card-img { min-height: 200px; }
+
+  /* WANOWA 商品詳細 */
+  .spec-name-ja { font-size: 24px; }
+  .series-item { width: 140px; }
   .founder-grid { grid-template-columns: 1fr; min-height: auto; }
   .founder-img { aspect-ratio: 3/4; max-height: 420px; border-radius: var(--r-card) var(--r-card) 0 0; }
   .founder-body { padding: 36px 24px; border-left: 0.5px solid var(--clr-border); border-top: none; border-radius: 0 0 var(--r-card) var(--r-card); }
