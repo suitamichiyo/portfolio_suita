@@ -2497,6 +2497,143 @@ body.page-hatenko { background-color: var(--clr-black); }
 }
 
 /* ============================================================
+   PERFUMERS — Series Top
+   ============================================================ */
+
+/* Hero（左:画像 / 右:テキスト） */
+.pfm-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 480px;
+}
+.pfm-hero-img {
+  overflow: hidden;
+  background-color: #D8D4CC;
+}
+.pfm-hero-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+.pfm-hero-content {
+  background-color: var(--clr-beige);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 64px;
+}
+.pfm-hero-h1 {
+  font-family: var(--ff-serif);
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--clr-black);
+  margin-bottom: 16px;
+}
+.pfm-hero-sub {
+  font-family: var(--ff-sans);
+  font-size: 14px;
+  color: var(--clr-lgray);
+  line-height: 1.9;
+}
+
+/* Narrative（左:テキスト / 右:画像） */
+.pfm-narrative-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.pfm-narrative-body p {
+  font-family: var(--ff-serif);
+  font-size: 14px;
+  line-height: 2.3;
+  color: var(--clr-black);
+  margin-bottom: 18px;
+}
+.pfm-narrative-body p:last-child {
+  margin-bottom: 0;
+  font-style: italic;
+}
+.pfm-narrative-img {
+  aspect-ratio: 4/3;
+  border-radius: var(--r-card);
+  overflow: hidden;
+  background-color: #E8E5DF;
+}
+.pfm-narrative-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Collection Grid（2×2） */
+.pfm-collection-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+.pfm-collection-card {
+  background-color: var(--clr-white);
+  border: 0.5px solid var(--clr-border);
+  border-radius: var(--r-card);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  transition: border-color 0.2s ease;
+  text-decoration: none;
+  color: var(--clr-black);
+}
+.pfm-collection-card:hover {
+  border-color: var(--clr-border-e);
+}
+.pfm-collection-card-img {
+  background-color: #E8E5DF;
+  overflow: hidden;
+  min-height: 160px;
+}
+.pfm-collection-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.pfm-collection-card-body {
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.pfm-collection-cat {
+  font-family: var(--ff-en);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--clr-lgray);
+  display: block;
+  margin-bottom: 6px;
+}
+.pfm-collection-name {
+  font-family: var(--ff-serif);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--clr-black);
+  margin-bottom: 10px;
+}
+.pfm-collection-desc {
+  font-family: var(--ff-serif);
+  font-size: 13px;
+  color: var(--clr-gray);
+  line-height: 1.9;
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+/* ============================================================
    RESPONSIVE — Tablet 768–1139px
    ============================================================ */
 @media (max-width: 1139px) {
@@ -2550,6 +2687,12 @@ body.page-hatenko { background-color: var(--clr-black); }
   .hatenko-lineup-grid { grid-template-columns: repeat(2, 1fr); }
   .hatenko-narrative-grid { gap: 40px; }
   .hatenko-narrative-title { font-size: 22px; }
+
+  /* PERFUMERS */
+  .pfm-hero { grid-template-columns: 1fr; }
+  .pfm-hero-img { min-height: 300px; }
+  .pfm-narrative-grid { grid-template-columns: 1fr; gap: 40px; }
+  .pfm-collection-grid { grid-template-columns: 1fr; }
 }
 
 /* ============================================================
@@ -2685,6 +2828,12 @@ body.page-hatenko { background-color: var(--clr-black); }
   .planting-grid { grid-template-columns: 1fr; gap: 36px; }
   .planting-img { aspect-ratio: 4/3; }
   .planting-h2 { font-size: 22px; }
+
+  /* PERFUMERS */
+  .pfm-hero-content { padding: 48px 20px; }
+  .pfm-hero-h1 { font-size: 26px; }
+  .pfm-collection-card { grid-template-columns: 1fr; }
+  .pfm-collection-card-img { min-height: 200px; }
   .founder-grid { grid-template-columns: 1fr; min-height: auto; }
   .founder-img { aspect-ratio: 3/4; max-height: 420px; border-radius: var(--r-card) var(--r-card) 0 0; }
   .founder-body { padding: 36px 24px; border-left: 0.5px solid var(--clr-border); border-top: none; border-radius: 0 0 var(--r-card) var(--r-card); }
