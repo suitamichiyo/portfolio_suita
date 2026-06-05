@@ -1529,6 +1529,33 @@ address { font-style: normal; }
   line-height: 1.6;
 }
 
+/* Product Image Gallery */
+.product-main-img-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.product-thumbs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.product-thumb {
+  aspect-ratio: 1/1;
+  border-radius: var(--r-card);
+  overflow: hidden;
+  background-color: #E8E5DF;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition: border-color 0.2s ease;
+}
+.product-thumb:first-child {
+  border-color: var(--clr-black);
+}
+.product-thumb:hover {
+  border-color: var(--clr-border-e);
+}
+
 /* Origin Story */
 .origin-inner { max-width: 600px; }
 .origin-h2 {

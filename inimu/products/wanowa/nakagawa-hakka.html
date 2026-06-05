@@ -72,8 +72,24 @@
     <div class="container">
       <div class="product-detail-grid">
 
-        <div class="product-main-img">
-          <span>商品メイン画像<br>中川町和薄荷ハンドクリーム</span>
+        <div class="product-main-img-wrap">
+          <div class="product-main-img">
+            <img id="main-img" src="../../../document/picture/WANOWA_Hakka_Handcream.png" alt="中川町和薄荷" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </div>
+          <div class="product-thumbs">
+            <div class="product-thumb">
+              <img src="../../../document/picture/WANOWA_Hakka_Handcream.png" alt="中川町和薄荷" style="width:100%;height:100%;object-fit:cover;display:block;">
+            </div>
+            <div class="product-thumb">
+              <img src="../../../document/picture/wanowa_hakka_image.png" alt="中川町和薄荷" style="width:100%;height:100%;object-fit:cover;display:block;">
+            </div>
+            <div class="product-thumb">
+              <img src="../../../document/picture/wanowa_hakka_product.webp" alt="中川町和薄荷" style="width:100%;height:100%;object-fit:cover;display:block;">
+            </div>
+            <div class="product-thumb">
+              <img src="../../../document/picture/wanowa_hakka_useImage.png" alt="中川町和薄荷" style="width:100%;height:100%;object-fit:cover;display:block;">
+            </div>
+          </div>
         </div>
 
         <div class="product-spec">
@@ -223,5 +239,24 @@
   </div>
 
   <script src="../../js/main.js"></script>
+  <script>
+  const thumbs = document.querySelectorAll('.product-thumb');
+  const mainImg = document.getElementById('main-img');
+  const srcs = [
+    thumbs[0]?.querySelector('img')?.src,
+    thumbs[1]?.querySelector('img')?.src,
+    thumbs[2]?.querySelector('img')?.src,
+    thumbs[3]?.querySelector('img')?.src,
+  ];
+  thumbs.forEach((thumb, i) => {
+    thumb.addEventListener('click', () => {
+      mainImg.src = srcs[i];
+      thumbs.forEach(t => t.style.borderColor = '');
+      thumb.style.borderColor = 'var(--black)';
+      thumb.style.borderWidth = '2px';
+      thumb.style.borderStyle = 'solid';
+    });
+  });
+  </script>
 </body>
 </html>
