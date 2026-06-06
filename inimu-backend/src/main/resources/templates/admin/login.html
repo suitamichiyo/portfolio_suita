@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>管理者ログイン | inimu</title>
+  <style>
+    body { font-family: 'Noto Sans JP', sans-serif; background: #F7F7F5;
+           display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+    .login-box { background: white; padding: 48px; border-radius: 4px;
+                 border: 0.5px solid #E0E0E0; width: 360px; }
+    h1 { font-size: 20px; margin-bottom: 32px; text-align: center; }
+    label { display: block; font-size: 12px; color: #888; margin-bottom: 6px; }
+    input { width: 100%; padding: 12px; border: 0.5px solid #E0E0E0;
+            border-radius: 2px; font-size: 14px; margin-bottom: 16px;
+            box-sizing: border-box; }
+    button { width: 100%; background: #1A1A1A; color: white; padding: 14px;
+             border: none; border-radius: 2px; font-size: 14px; cursor: pointer; }
+    .error { color: #c00; font-size: 12px; margin-bottom: 16px; }
+  </style>
+</head>
+<body>
+<div class="login-box">
+  <h1>inimu 管理画面</h1>
+  <p class="error" th:if="${param.error}">IDまたはパスワードが正しくありません</p>
+  <p class="error" th:if="${param.logout}">ログアウトしました</p>
+  <form th:action="@{/admin/login}" method="post">
+    <label>ユーザーID</label>
+    <input type="text" name="username" required>
+    <label>パスワード</label>
+    <input type="password" name="password" required>
+    <button type="submit">ログイン</button>
+  </form>
+</div>
+</body>
+</html>

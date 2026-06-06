@@ -232,23 +232,19 @@
 
   <script src="js/main.js"></script>
   <script>
+    let selectedCategory = 'general';
+
     function selectCategory(category, btn) {
       document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('is-selected'));
       btn.classList.add('is-selected');
+      selectedCategory = category;
       document.querySelectorAll('.extra-field').forEach(f => f.classList.remove('visible'));
       const extra = document.getElementById('extra-' + category);
       if (extra) extra.classList.add('visible');
       document.getElementById('sec-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    function showComplete() {
-      const name    = document.getElementById('cnt-name').value.trim();
-      const email   = document.getElementById('cnt-email').value.trim();
-      const message = document.getElementById('cnt-message').value.trim();
-      if (!name || !email || !message) {
-        alert('必須項目（*）をご入力ください。');
-        return;
-      }
+    function displayComplete() {
       ['sec-header', 'sec-category', 'sec-form', 'sec-oem'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.style.display = 'none';
@@ -256,6 +252,49 @@
       document.querySelectorAll('.sec-label').forEach(el => el.style.display = 'none');
       document.getElementById('sec-complete').classList.add('visible');
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    async function showComplete() {
+      const name    = document.getElementById('cnt-name').value.trim();
+      const email   = document.getElementById('cnt-email').value.trim();
+      const message = document.getElementById('cnt-message').value.trim();
+      if (!name || !email || !message) {
+        alert('必須項目（*）をご入力ください。');
+        return;
+      }
+
+      const payload = {
+        category: selectedCategory,
+        name: name,
+        company: document.getElementById('cnt-company').value.trim() || null,
+        email: email,
+        message: message
+      };
+
+      const btn = document.querySelector('.btn-contact-submit');
+      btn.textContent = '送信中...';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch('/api/v1/contacts', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+
+        if (res.ok) {
+          displayComplete();
+        } else {
+          alert('送信に失敗しました。もう一度お試しください。');
+          btn.textContent = '送信する';
+          btn.disabled = false;
+        }
+      } catch (e) {
+        alert('通信エラーが発生しました。もう一度お試しください。');
+        btn.textContent = '送信する';
+        btn.disabled = false;
+      }
     }
   </script>
 </body>

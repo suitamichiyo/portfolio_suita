@@ -4,6 +4,7 @@ import com.karainnovate.inimu.mapper.ReservationMapper;
 import com.karainnovate.inimu.mapper.WorkshopSlotMapper;
 import com.karainnovate.inimu.model.Reservation;
 import com.karainnovate.inimu.model.WorkshopSlot;
+import com.karainnovate.inimu.service.MailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,7 @@ public class ReservationController {
 
     private final WorkshopSlotMapper slotMapper;
     private final ReservationMapper reservationMapper;
+    private final MailService mailService;
 
     @GetMapping("/reservations/slots")
     public ResponseEntity<List<WorkshopSlot>> getSlots(
@@ -43,6 +45,8 @@ public class ReservationController {
         }
         reservationMapper.insert(reservation);
         slotMapper.incrementReservedCount(slot.getId(), reservation.getNumPeople());
+        mailService.sendReservationConfirmation(reservation, slot);
+        mailService.sendReservationNotification(reservation, slot);
         return ResponseEntity.ok(Map.of(
             "message", "予約が完了しました",
             "reservationId", reservation.getId()
