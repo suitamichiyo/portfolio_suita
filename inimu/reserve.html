@@ -317,6 +317,11 @@
   <script>
     const API_BASE = 'https://inimu-backend.onrender.com';
 
+    // ─── 振替休日（定休日扱い）───
+    const CLOSED_DATES = [
+      '2026-05-07', '2026-07-21', '2026-09-24'
+    ];
+
     // ─── 祝日リスト ───
     const HOLIDAYS = [
       '2025-01-01','2025-01-13','2025-02-11','2025-02-23','2025-02-24',
@@ -365,8 +370,9 @@
         const dow = date.getDay();
         const ds = toStr(y, m, d);
         const holiday = isHoliday(ds);
-        const isOpen = dow === 0 || dow === 6 || holiday;
-        const isClosed = dow === 1 && !holiday;
+        const isClosedDate = CLOSED_DATES.includes(ds);
+        const isOpen = (dow === 0 || dow === 6 || holiday) && !isClosedDate;
+        const isClosed = (dow === 1 && !holiday) || isClosedDate;
 
         if (isOpen) {
           el.className = 'cal-day open' + (ds === selectedDate ? ' selected' : '');
