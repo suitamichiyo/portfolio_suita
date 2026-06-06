@@ -2541,6 +2541,8 @@ body.page-hatenko { background-color: var(--clr-black); }
 .thanks-card-title { font-family: var(--ff-sans); font-size: 12px; font-weight: 500; color: var(--clr-black); margin-bottom: 6px; }
 .thanks-card-desc { font-family: var(--ff-sans); font-size: 11px; color: var(--clr-gray); margin-bottom: 14px; line-height: 1.7; }
 .thanks-card-link { font-family: var(--ff-sans); font-size: 11px; font-weight: 500; color: var(--clr-black); text-decoration: underline; text-underline-offset: 2px; }
+.thanks-repeat { margin-top: 48px; text-align: center; }
+.thanks-repeat-text { font-family: var(--ff-sans); font-size: 13px; color: var(--clr-gray); margin-bottom: 20px; }
 
 /* ============================================================
    CONTACT PAGE
