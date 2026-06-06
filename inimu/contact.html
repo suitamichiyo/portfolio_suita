@@ -232,6 +232,8 @@
 
   <script src="js/main.js"></script>
   <script>
+    const API_BASE = 'https://inimu-backend.onrender.com';
+
     let selectedCategory = 'general';
 
     function selectCategory(category, btn) {
@@ -276,7 +278,7 @@
       btn.disabled = true;
 
       try {
-        const res = await fetch('/api/v1/contacts', {
+        const res = await fetch(`${API_BASE}/api/v1/contacts`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)

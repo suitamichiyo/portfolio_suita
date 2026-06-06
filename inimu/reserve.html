@@ -315,6 +315,8 @@
 
   <script src="js/main.js"></script>
   <script>
+    const API_BASE = 'https://inimu-backend.onrender.com';
+
     // ─── 祝日リスト ───
     const HOLIDAYS = [
       '2025-01-01','2025-01-13','2025-02-11','2025-02-23','2025-02-24',
@@ -394,7 +396,7 @@
       area.innerHTML = '<div class="no-date-msg">読み込み中...</div>';
 
       try {
-        const res = await fetch(`/api/v1/reservations/slots?from=${ds}&to=${ds}`);
+        const res = await fetch(`${API_BASE}/api/v1/reservations/slots?from=${ds}&to=${ds}`);
         if (!res.ok) throw new Error('API error');
         const apiSlots = await res.json();
 
@@ -473,7 +475,7 @@
       btn.disabled = true;
 
       try {
-        const res = await fetch('/api/v1/reservations', {
+        const res = await fetch(`${API_BASE}/api/v1/reservations`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
