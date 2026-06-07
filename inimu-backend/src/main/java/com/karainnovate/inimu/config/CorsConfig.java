@@ -14,7 +14,8 @@ public class CorsConfig implements WebMvcConfigurer {
                 "http://localhost:5500",
                 "http://127.0.0.1:5500",
                 "http://localhost:3000",
-                "https://inimu.jp"
+                "https://inimu.jp",
+                "https://portfolio-suita-2.onrender.com"
             )
             .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
             .allowedHeaders("*")
