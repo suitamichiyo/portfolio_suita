@@ -58,9 +58,6 @@ inimu.jp/
 ├── /visit ............................................. VISIT｜アクセス・店舗案内
 │     営業日カレンダー・Googleマップ・口コミ誘導
 │
-├── /online ............................................ ONLINE｜オンラインショップ
-│     WS体験後のEC再購入・遠方ファン向け購買導線
-│
 └── /contact ........................................... CONTACT｜お問い合わせ（F2）
       一般 / WS / ギフト・法人 / OEM開発の4カテゴリ
       └── /contact/complete .......................... 送信完了ページ
@@ -73,11 +70,11 @@ inimu.jp/
 | 階層 | ページ数 | 内容 |
 |---|---|---|
 | L1（ルート） | 1 | TOP |
-| L2（メインナビ） | 7 | WORKSHOP / PRODUCTS / STORY / VISIT / ONLINE / RESERVE / CONTACT |
+| L2（メインナビ） | 6 | WORKSHOP / PRODUCTS / STORY / VISIT / RESERVE / CONTACT |
 | L3（シリーズトップ） | 3 | 破天荒 / PERFUMERS / WANOWA シリーズトップ |
 | L4（商品詳細） | 6 | WANOWA ハンドクリーム詳細×6 |
 | サブページ | 2 | 予約完了 / 問い合わせ完了 |
-| **合計** | **19ページ** | |
+| **合計** | **18ページ** | |
 
 ---
 
@@ -86,13 +83,13 @@ inimu.jp/
 ### グローバルナビ（全ページ共通・固定ヘッダー）
 
 ```
-inimu [ロゴ]　　　WORKSHOP　PRODUCTS　STORY　VISIT　ONLINE　　[予約する]
+inimu [ロゴ]　　　WORKSHOP　PRODUCTS　STORY　VISIT　CONTACT　　[予約する]
 ```
 
 ### フッターナビ（全ページ共通）
 
 ```
-WORKSHOP　PRODUCTS　STORY　VISIT　ONLINE　CONTACT
+WORKSHOP　PRODUCTS　STORY　VISIT　CONTACT
 ```
 
 ### モバイル固定フローティングCTA（全ページ）

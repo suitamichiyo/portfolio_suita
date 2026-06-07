@@ -44,7 +44,6 @@ inimu.jp/
 │         └── /products/wanowa/yamato-tachibana  大和橘
 ├── /story                               STORY
 ├── /visit                               VISIT
-├── /online                              ONLINE
 ├── /contact                             CONTACT（F2）
 │   └── /contact/complete                送信完了
 └── /error                               エラーページ（404 / 500）

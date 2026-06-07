@@ -7,7 +7,7 @@
 
 ---
 
-## メインページ（8ページ）
+## メインページ（7ページ）
 
 | # | ページ名 | URL | WFファイル | フェーズ |
 |---|---|---|---|---|
@@ -16,9 +16,8 @@
 | 3 | PRODUCTS｜商品一覧 | /products | inimu_PRODUCTS_WF | F1 |
 | 4 | STORY｜ブランドストーリー | /story | inimu_STORY_WF | F1 |
 | 5 | VISIT｜アクセス・店舗案内 | /visit | inimu_VISIT_WF | F1 |
-| 6 | ONLINE｜オンラインショップ | /online | inimu_ONLINE_WF | F1 |
-| 7 | RESERVE｜予約フォーム | /workshop/reserve | inimu_RESERVE_WF | F2 |
-| 8 | CONTACT｜お問い合わせ | /contact | inimu_CONTACT_WF | F2 |
+| 6 | RESERVE｜予約フォーム | /workshop/reserve | inimu_RESERVE_WF | F2 |
+| 7 | CONTACT｜お問い合わせ | /contact | inimu_CONTACT_WF | F2 |
 
 ---
 
@@ -26,10 +25,10 @@
 
 | # | ページ名 | URL | WFファイル | フェーズ |
 |---|---|---|---|---|
-| 9 | 破天荒 シリーズトップ | /products/hatenko | inimu_SERIES_TOP_WF1 | F1 |
-| 10 | PERFUMERS シリーズトップ | /products/perfumers | inimu_PERFUMERS_TOP_WF_1 | F1 |
-| 11 | WANOWA シリーズトップ | /products/wanowa | inimu_WANOWA_TOP_WF_1 | F1 |
-| 12〜17 | WANOWA ハンドクリーム詳細（×6） | /products/wanowa/{scent} | inimu_WANOWA_DETAIL_WF1 | F1 |
+| 8 | 破天荒 シリーズトップ | /products/hatenko | inimu_SERIES_TOP_WF1 | F1 |
+| 9 | PERFUMERS シリーズトップ | /products/perfumers | inimu_PERFUMERS_TOP_WF_1 | F1 |
+| 10 | WANOWA シリーズトップ | /products/wanowa | inimu_WANOWA_TOP_WF_1 | F1 |
+| 11〜16 | WANOWA ハンドクリーム詳細（×6） | /products/wanowa/{scent} | inimu_WANOWA_DETAIL_WF1 | F1 |
 
 ### WANOWA詳細ページ 対象6種
 
@@ -113,19 +112,7 @@
 
 ---
 
-### 6. ONLINE｜オンラインショップページ
-
-- **目的：** WS体験後のEC再購入・遠方ファン向けの購買導線。体験→EC再購入の循環を設計する
-- **主要コンテンツ：**
-  1. EC商品一覧（カテゴリタブ絞り込み）
-  2. 「体験した香りをもう一度」セクション（処方レシピQR連携）
-  3. 破天荒を中央強調（看板商品）
-  4. ギフトラッピング・熨斗対応案内
-  5. LINE公式アカウント登録CTA（リピート促進）
-
----
-
-### 7. RESERVE｜予約フォームページ（F2）
+### 6. RESERVE｜予約フォームページ（F2）
 
 - **目的：** じゃらん依存脱却の核機能。顧客データ取得・LINE連携・リピート設計の起点
 - **主要コンテンツ：**
@@ -138,7 +125,7 @@
 
 ---
 
-### 8. CONTACT｜お問い合わせページ（F2）
+### 7. CONTACT｜お問い合わせページ（F2）
 
 - **目的：** 一般問い合わせ・法人・OEM相談の受け口。法人・ホテル向けBtoBリード獲得にも活用する
 - **主要コンテンツ：**
@@ -150,7 +137,7 @@
 
 ---
 
-### 9. 破天荒 シリーズトップ
+### 8. 破天荒 シリーズトップ
 
 - **目的：** ブランド紹介の掴みのみ。個別商品は現行HPへリンク。WSへの誘導CTAなし
 - **主要コンテンツ：**
@@ -162,7 +149,7 @@
 
 ---
 
-### 10. PERFUMERS シリーズトップ
+### 9. PERFUMERS シリーズトップ
 
 - **目的：** コレクション別ブランド紹介の掴みのみ。個別商品は現行HPへリンク。WSへの誘導CTAなし
 - **主要コンテンツ：**
@@ -173,7 +160,7 @@
 
 ---
 
-### 11. WANOWA シリーズトップ
+### 10. WANOWA シリーズトップ
 
 - **目的：** 植樹活動のブランドストーリーと6種のハンドクリームを産地別ストーリーと共に紹介する。WSへの誘導CTAなし
 - **主要コンテンツ：**
@@ -184,7 +171,7 @@
 
 ---
 
-### 12〜17. WANOWA ハンドクリーム詳細（×6）
+### 11〜16. WANOWA ハンドクリーム詳細（×6）
 
 - **目的：** 1ページ＝1香り。産地ストーリー中心の設計。購入は現行HPへリンク。WSへの誘導CTAなし
 - **主要コンテンツ：**
