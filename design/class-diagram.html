@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+いる<!DOCTYPE html>
 <html lang="ja">
 
 <head>
@@ -523,52 +523,40 @@ FormからEntityへの変換処理：
             <div class="fill-content">
               <div class="ascii-diagram">
                 <pre>
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                           Spring Boot クラス間依存関係                       │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│ [Controller層]                                                              │
-│   TaskController --------------------------┐                                │
-│      │                                     │ @Autowired                     │
-│      │ uses                                ▼                                │
-│      ├──── TaskForm                   TaskService                           │
-│      │    （入力フォーム）                 │                                │
-│      │                                     │ @Autowired                     │
-│      │                                     ▼                                │
-│      │                                TaskMapper                            │
-│      │                                     │                                │
-│      │                                     │ maps                           │
-│      │                                     ▼                                │
-│      │                             Task / Category                          │
-│      │                                     │                                │
-│      │                                     ▼                                │
-│      │                                  Database                            │
-│      │                                  （MySQL）                           │
-│      │                                                                      │
-│   UserController --------------------------┐                                │
-│                                            │ @Autowired                     │
-│                                            ▼                                │
-│                                        UserService                          │
-│                                            │                                │
-│                                            │ @Autowired                     │
-│                                            ▼                                │
-│                                        UserMapper                           │
-│                                            │                                │
-│                                            │ maps                           │
-│                                            ▼                                │
-│                                           User                              │
-│                                            │                                │
-│                                            ▼                                │
-│                                         Database                            │
-│                                         （MySQL）                           │
-│                                                                             │
-│ DIコンテナによる注入関係：                                                  │
-│   - TaskController  --@Autowired--> TaskService                             │
-│   - UserController  --@Autowired--> UserService                             │
-│   - TaskService     --@Autowired--> TaskMapper                              │
-│   - UserService     --@Autowired--> UserMapper                              │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────┐
+│                        依存関係図                                  │
+├──────────────────────────────────────────────────────────────────┤
+│                                                                   │
+│   ┌────────────────┐         ┌────────────────┐                  │
+│   │ TaskController │────────▶│  TaskService   │                  │
+│   │ UserController │────────▶│  UserService   │                  │
+│   └────────────────┘         └────────────────┘                  │
+│          │                          │                             │
+│          │ @Autowired               │ @Autowired                  │
+│          ▼                          ▼                             │
+│   ┌────────────────┐         ┌────────────────┐                  │
+│   │   TaskForm     │         │   TaskMapper   │                  │
+│   │   (入力)       │         │   UserMapper   │                  │
+│   └────────────────┘         └────────────────┘                  │
+│                                     │                             │
+│                                     │ MyBatis                     │
+│                                     ▼                             │
+│                              ┌────────────────┐                   │
+│                              │     Task       │                   │
+│                              │     User       │                   │
+│                              │   Category     │                   │
+│                              │   (Entity)     │                   │
+│                              └────────────────┘                   │
+│                                     │                             │
+│                                     ▼                             │
+│                              ┌────────────────┐                   │
+│                              │   Database     │                   │
+│                              │   (MySQL)      │                   │
+│                              └────────────────┘                   │
+│                                                                   │
+└──────────────────────────────────────────────────────────────────┘
+
+（上記を参考に編集してください）
                 </pre>
               </div>
             </div>
