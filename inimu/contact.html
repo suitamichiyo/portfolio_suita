@@ -25,7 +25,6 @@
         <a href="products.html" class="hnav-link">PRODUCTS</a>
         <a href="story.html"    class="hnav-link">STORY</a>
         <a href="visit.html"    class="hnav-link">VISIT</a>
-        <a href="online.html"   class="hnav-link">ONLINE</a>
         <a href="contact.html"  class="hnav-link is-active">CONTACT</a>
       </nav>
       <a href="workshop.html" class="btn btn-primary header-btn">予約する</a>
@@ -44,7 +43,6 @@
         <a href="products.html">PRODUCTS</a>
         <a href="story.html">STORY</a>
         <a href="visit.html">VISIT</a>
-        <a href="online.html">ONLINE</a>
         <a href="contact.html">CONTACT</a>
       </nav>
       <a href="workshop.html" class="btn btn-primary mnav-cta">体験を予約する</a>
@@ -171,7 +169,7 @@
           ホテルアメニティ・ノベルティ・ブランドOEM。<br>
           2008年創業・19年の実績で対応します。
         </p>
-        <a href="https://kyarainnovate.jp/" target="_blank" rel="noopener" class="btn-oem">OEMについて →</a>
+        <a href="https://kyarainnovate.jp/oem-procedure/" target="_blank" rel="noopener" class="btn-oem">OEMについて →</a>
       </div>
     </div>
   </section>
@@ -210,7 +208,6 @@
         <a href="products.html">PRODUCTS</a>
         <a href="story.html">STORY</a>
         <a href="visit.html">VISIT</a>
-        <a href="online.html">ONLINE</a>
         <a href="contact.html">CONTACT</a>
       </nav>
     </div>
@@ -232,23 +229,21 @@
 
   <script src="js/main.js"></script>
   <script>
+    const API_BASE = 'https://inimu-backend.onrender.com';
+
+    let selectedCategory = 'general';
+
     function selectCategory(category, btn) {
       document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('is-selected'));
       btn.classList.add('is-selected');
+      selectedCategory = category;
       document.querySelectorAll('.extra-field').forEach(f => f.classList.remove('visible'));
       const extra = document.getElementById('extra-' + category);
       if (extra) extra.classList.add('visible');
       document.getElementById('sec-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    function showComplete() {
-      const name    = document.getElementById('cnt-name').value.trim();
-      const email   = document.getElementById('cnt-email').value.trim();
-      const message = document.getElementById('cnt-message').value.trim();
-      if (!name || !email || !message) {
-        alert('必須項目（*）をご入力ください。');
-        return;
-      }
+    function displayComplete() {
       ['sec-header', 'sec-category', 'sec-form', 'sec-oem'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.style.display = 'none';
@@ -256,6 +251,49 @@
       document.querySelectorAll('.sec-label').forEach(el => el.style.display = 'none');
       document.getElementById('sec-complete').classList.add('visible');
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    async function showComplete() {
+      const name    = document.getElementById('cnt-name').value.trim();
+      const email   = document.getElementById('cnt-email').value.trim();
+      const message = document.getElementById('cnt-message').value.trim();
+      if (!name || !email || !message) {
+        alert('必須項目（*）をご入力ください。');
+        return;
+      }
+
+      const payload = {
+        category: selectedCategory,
+        name: name,
+        company: document.getElementById('cnt-company').value.trim() || null,
+        email: email,
+        message: message
+      };
+
+      const btn = document.querySelector('.btn-contact-submit');
+      btn.textContent = '送信中...';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch(`${API_BASE}/api/v1/contacts`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+
+        if (res.ok) {
+          displayComplete();
+        } else {
+          alert('送信に失敗しました。もう一度お試しください。');
+          btn.textContent = '送信する';
+          btn.disabled = false;
+        }
+      } catch (e) {
+        alert('通信エラーが発生しました。もう一度お試しください。');
+        btn.textContent = '送信する';
+        btn.disabled = false;
+      }
     }
   </script>
 </body>

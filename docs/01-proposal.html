@@ -20,8 +20,8 @@
         <div class="doc-category">DOCUMENT 01</div>
         <h1 class="doc-title">企画提案書</h1>
         <div class="doc-meta">
-          <span><span class="material-symbols-outlined icon-sm">calendar_today</span> 作成日：2026-XX-XX</span>
-          <span><span class="material-symbols-outlined icon-sm">person</span> 作成者：（氏名を入力）</span>
+          <span><span class="material-symbols-outlined icon-sm">calendar_today</span> 作成日：2026年6月5日</span>
+          <span><span class="material-symbols-outlined icon-sm">person</span> 作成者：吹田道代</span>
           <span><span class="material-symbols-outlined icon-sm">push_pin</span> Ver 1.0</span>
         </div>
       </header>
@@ -200,15 +200,14 @@
             <p><strong>公開サイトのページ構成</strong></p>
             <p><strong>1. TOP</strong><br>ブランドの第一印象をつくる入口ページ。香り・ワークショップ・ブランド背景への導線を集約し、ファーストビュー、主なCTA、最新情報、Instagram導線、営業日確認導線を配置する。</p>
             <p><strong>2. WORKSHOP</strong><br>ワークショップの概要説明ページ。体験内容、参加の流れ、FAQ、予約への導線をまとめ、初めて訪れるユーザーが不安なく予約へ進める構成とする。</p>
-            <p><strong>3. WORKSHOP / RESERVE</strong><br>予約フォームページ。カレンダーから空き枠を選択し、日時・人数・顧客情報を入力して送信する。送信後は予約完了ページへ遷移する。</p>
+            <p><strong>3. RESERVE</strong><br>予約フォームページ。カレンダーから空き枠を選択し、日時・人数・顧客情報を入力して送信する。送信後は同一ページ内の予約完了セクションを表示する。</p>
             <p><strong>4. PRODUCTS</strong><br>商品一覧ページ。取扱シリーズの概要を一覧化し、各シリーズ詳細ページへの導線を設ける。</p>
-            <p><strong>5. 商品シリーズ詳細</strong><br>「破天荒」「PERFUMERS」「WANOWA」の各シリーズ詳細を掲載する。WANOWA はさらに香りごとの個別詳細ページを持ち、商品情報を段階的に紹介する。</p>
+            <p><strong>5. 商品シリーズ詳細</strong><br>「破天荒」「PERFUMERS」「WANOWA」の各シリーズ詳細を掲載する。破天荒は <code>hatenko-top.html</code>、PERFUMERS は <code>products/perfumers/index.html</code>、WANOWA は <code>products/wanowa/index.html</code> と香りごとの個別詳細ページで、商品情報を段階的に紹介する。</p>
             <p><strong>6. STORY</strong><br>inimu の背景、30代女性に向けて伝える世界観、日本原料やOEM開発などの文脈を紹介するブランドストーリーページ。</p>
             <p><strong>7. VISIT</strong><br>店舗案内ページ。所在地、営業時間、営業日、Google Map、来店前の補足情報を掲載する。</p>
-            <p><strong>8. ONLINE</strong><br>EC・オンライン購入導線ページ。外部購入先へのリンクや商品購入補足情報を整理する。</p>
-            <p><strong>9. CONTACT</strong><br>問い合わせフォームページ。一般問い合わせ、WS、ギフト、法人・OEM などの相談を受け付け、送信後は完了ページへ遷移する。</p>
-            <p><strong>10. 共通ページ</strong><br>予約完了、問い合わせ完了、エラーページ、ヘッダー・フッター・ナビゲーションなど、全ページ共通で使用するUIも制作範囲に含める。</p>
-            <p><strong>ページ一覧補足</strong><br>`/`、`/workshop`、`/workshop/reserve`、`/workshop/reserve/complete`、`/products`、`/products/hatenko`、`/products/perfumers`、`/products/wanowa`、`/products/wanowa/*`、`/story`、`/visit`、`/online`、`/contact`、`/contact/complete`、`/error` を基本構成とする。</p>
+            <p><strong>8. CONTACT</strong><br>問い合わせフォームページ。一般問い合わせ、WS、ギフト、法人・OEM などの相談を受け付け、送信後は同一ページ内の完了セクションを表示する。</p>
+            <p><strong>9. 共通UI</strong><br>ヘッダー、モバイルナビ、フッター、固定予約CTA、予約完了セクション、問い合わせ完了セクションなど、全ページ共通または主要ページ共通で使用するUIも制作範囲に含める。</p>
+            <p><strong>実装ファイル一覧補足</strong><br><code>index.html</code>、<code>workshop.html</code>、<code>reserve.html</code>、<code>products.html</code>、<code>hatenko-top.html</code>、<code>products/perfumers/index.html</code>、<code>products/wanowa/index.html</code>、<code>products/wanowa/*.html</code>、<code>story.html</code>、<code>visit.html</code>、<code>contact.html</code> を基本構成とする。</p>
           </div>
         </div>
         <div class="fill-block">

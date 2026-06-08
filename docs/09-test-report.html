@@ -20,8 +20,8 @@
         <div class="doc-category">DOCUMENT 09</div>
         <h1 class="doc-title">テスト結果報告</h1>
         <div class="doc-meta">
-          <span><span class="material-symbols-outlined icon-sm">calendar_today</span> 作成日: 2026-05-20</span>
-          <span><span class="material-symbols-outlined icon-sm">person</span> 作成者: 学校課題チーム</span>
+          <span><span class="material-symbols-outlined icon-sm">calendar_today</span> 作成日：2026年6月5日</span>
+          <span><span class="material-symbols-outlined icon-sm">person</span> 作成者：吹田道代</span>
           <span><span class="material-symbols-outlined icon-sm">push_pin</span> Ver 1.0</span>
         </div>
       </header>
@@ -66,6 +66,7 @@
               <p>inimu_website のテスト計画は、仕様書で定義した機能が要件どおりに動作し、主要ブラウザで安定して利用できることを確認することを目的とする。</p>
               <p>機能一覧: F-001 ログイン認証、F-002 予約一覧表示、F-003 予約新規登録、F-004 予約詳細表示、F-005 予約編集、F-006 問い合わせ管理、F-007 顧客管理、F-008 バリデーション、F-009 検索機能、F-010 ソート機能、F-011 ページネーション、F-012 CSV出力、F-013 ファイルアップロード、F-014 メール通知。</p>
               <p>テスト対象の範囲: 上記機能に関する画面表示、入力チェック、データ登録・更新・検索・出力処理、および画面遷移を対象とする。外部メール送信や本番インフラ監視など、運用環境に依存する項目は本テストの対象外とする。</p>
+              <p>公開サイト画面テスト対象: <code>index.html</code>、<code>workshop.html</code>、<code>reserve.html</code>、<code>products.html</code>、<code>hatenko-top.html</code>、<code>products/perfumers/index.html</code>、<code>products/wanowa/index.html</code>、<code>products/wanowa/*.html</code>、<code>story.html</code>、<code>visit.html</code>、<code>contact.html</code>。予約完了は <code>reserve.html#sec-thanks</code>、問い合わせ完了は <code>contact.html#sec-complete</code> の同一ページ内表示を確認対象とする。</p>
               <p>テスト種別: 機能テストでは各機能の正常系・異常系を確認する。画面テストではレイアウト崩れ、レスポンシブ表示、操作導線、エラーメッセージ表示を確認する。セキュリティテストでは認証・認可、未ログイン時アクセス制御、入力値の不正送信に対する基本的な防御を確認する。</p>
               <p>テスト環境: ブラウザは Google Chrome、Microsoft Edge、Mozilla Firefox、Safari を使用する。OSは Windows 11、macOS、iOS を対象とする。</p>
               <p>テスト期間: 2026年5月20日から2026年5月27日までを予定し、前半で機能テスト、後半で画面テストおよびセキュリティテストを実施する。</p>

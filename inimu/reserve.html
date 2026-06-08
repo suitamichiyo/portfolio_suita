@@ -25,7 +25,6 @@
         <a href="products.html" class="hnav-link">PRODUCTS</a>
         <a href="story.html"    class="hnav-link">STORY</a>
         <a href="visit.html"    class="hnav-link">VISIT</a>
-        <a href="online.html"   class="hnav-link">ONLINE</a>
         <a href="contact.html"  class="hnav-link">CONTACT</a>
       </nav>
       <a href="reserve.html" class="btn btn-primary header-btn" style="background-color:#3D3D3A;">予約する</a>
@@ -44,7 +43,6 @@
         <a href="products.html">PRODUCTS</a>
         <a href="story.html">STORY</a>
         <a href="visit.html">VISIT</a>
-        <a href="online.html">ONLINE</a>
         <a href="contact.html">CONTACT</a>
       </nav>
       <a href="reserve.html" class="btn btn-primary mnav-cta">体験を予約する</a>
@@ -258,19 +256,23 @@
       <div class="thanks-cards">
         <div class="thanks-card">
           <p class="thanks-card-title">LINE登録</p>
-          <p class="thanks-card-desc">次回来店特典・新着情報をお届け</p>
-          <a href="#" target="_blank" rel="noopener" class="thanks-card-link">LINE登録はこちら →</a>
+          <p class="thanks-card-desc">次回来店特典・新着情報をLINEでお届けします</p>
+          <a href="https://lin.ee/XXXXXXX" target="_blank" rel="noopener noreferrer" class="thanks-card-link">LINE公式アカウントを登録する →</a>
         </div>
         <div class="thanks-card">
           <p class="thanks-card-title">口コミ投稿</p>
           <p class="thanks-card-desc">Googleマップで評価する</p>
-          <a href="https://search.google.com/local/writereview" target="_blank" rel="noopener" class="thanks-card-link">口コミを書く →</a>
+          <a href="https://search.google.com/local/writereview?placeid=0x60188fd83bdaa54d:0xc4bdde8a61e6a484" target="_blank" rel="noopener noreferrer" class="thanks-card-link">口コミを書く →</a>
         </div>
         <div class="thanks-card">
           <p class="thanks-card-title">アクセス確認</p>
           <p class="thanks-card-desc">浅草寺から徒歩3分</p>
-          <a href="visit.html" class="thanks-card-link">Googleマップ →</a>
+          <a href="https://www.google.com/maps/place/inimu/@35.713114,139.7972468,17z/data=!3m1!4b1!4m6!3m5!1s0x60188fd83bdaa54d:0xc4bdde8a61e6a484!8m2!3d35.713114!4d139.7972468!16s%2Fg%2F11l1jhysjc" target="_blank" rel="noopener noreferrer" class="thanks-card-link">Googleマップ →</a>
         </div>
+      </div>
+      <div class="thanks-repeat">
+        <p class="thanks-repeat-text">またのご体験をお待ちしております。</p>
+        <a href="reserve.html" class="btn btn-primary">もう一度予約する</a>
       </div>
     </div>
   </section>
@@ -293,7 +295,6 @@
         <a href="products.html">PRODUCTS</a>
         <a href="story.html">STORY</a>
         <a href="visit.html">VISIT</a>
-        <a href="online.html">ONLINE</a>
         <a href="contact.html">CONTACT</a>
       </nav>
     </div>
@@ -315,6 +316,13 @@
 
   <script src="js/main.js"></script>
   <script>
+    const API_BASE = 'https://inimu-backend.onrender.com';
+
+    // ─── 振替休日（定休日扱い）───
+    const CLOSED_DATES = [
+      '2026-05-07', '2026-07-21', '2026-09-24'
+    ];
+
     // ─── 祝日リスト ───
     const HOLIDAYS = [
       '2025-01-01','2025-01-13','2025-02-11','2025-02-23','2025-02-24',
@@ -331,7 +339,7 @@
     function toStr(y,m,d) { return `${y}-${pad(m)}-${pad(d)}`; }
     function isHoliday(s) { return HOLIDAYS.includes(s); }
 
-    let currentYear, currentMonth, selectedDate = null, selectedTime = null;
+    let currentYear, currentMonth, selectedDate = null, selectedTime = null, selectedSlotId = null;
     const now = new Date();
     currentYear = now.getFullYear();
     currentMonth = now.getMonth() + 1;
@@ -363,8 +371,9 @@
         const dow = date.getDay();
         const ds = toStr(y, m, d);
         const holiday = isHoliday(ds);
-        const isOpen = dow === 0 || dow === 6 || holiday;
-        const isClosed = dow === 1 && !holiday;
+        const isClosedDate = CLOSED_DATES.includes(ds);
+        const isOpen = (dow === 0 || dow === 6 || holiday) && !isClosedDate;
+        const isClosed = (dow === 1 && !holiday) || isClosedDate;
 
         if (isOpen) {
           el.className = 'cal-day open' + (ds === selectedDate ? ' selected' : '');
@@ -379,29 +388,45 @@
       }
     }
 
-    function selectDate(ds, el, y, m, d) {
+    async function selectDate(ds, el, y, m, d) {
       document.querySelectorAll('.cal-day.selected').forEach(e => e.classList.remove('selected'));
       el.classList.add('selected');
       selectedDate = ds;
       selectedTime = null;
+      selectedSlotId = null;
 
       const dow = ['日','月','火','水','木','金','土'][new Date(y,m-1,d).getDay()];
       document.getElementById('timeslot-label').textContent =
         `時間帯を選ぶ（${y}年${m}月${d}日（${dow}）の空き）`;
 
-      const slotData = slots.default;
       const area = document.getElementById('timeslot-area');
-      area.innerHTML = '<div class="timeslot-list">' +
-        slotData.map(s => {
-          const disabled = s.remain === 0;
-          return `<div class="timeslot${disabled ? ' disabled' : ''}" onclick="${disabled ? '' : `selectTime('${s.time}', this)`}">
-            <div>
-              <div class="slot-time">${s.time}</div>
-              <div class="slot-remain">${disabled ? '満席' : `残り ${s.remain} 枠`}</div>
-            </div>
-            <div class="slot-dot"></div>
-          </div>`;
-        }).join('') + '</div>';
+      area.innerHTML = '<div class="no-date-msg">読み込み中...</div>';
+
+      try {
+        const res = await fetch(`${API_BASE}/api/v1/reservations/slots?from=${ds}&to=${ds}`);
+        if (!res.ok) throw new Error('API error');
+        const apiSlots = await res.json();
+
+        if (apiSlots.length === 0) {
+          area.innerHTML = '<div class="no-date-msg">この日のスロットはありません</div>';
+        } else {
+          area.innerHTML = '<div class="timeslot-list">' +
+            apiSlots.map(s => {
+              const remain = s.capacity - s.reservedCount;
+              const disabled = remain === 0;
+              const timeStr = `${s.startTime.slice(0,5)} 〜 ${s.endTime.slice(0,5)}`;
+              return `<div class="timeslot${disabled ? ' disabled' : ''}" data-slot-id="${s.id}" onclick="${disabled ? '' : `selectTime('${timeStr}', this)`}">
+                <div>
+                  <div class="slot-time">${timeStr}</div>
+                  <div class="slot-remain">${disabled ? '満席' : `残り ${remain} 枠`}</div>
+                </div>
+                <div class="slot-dot"></div>
+              </div>`;
+            }).join('') + '</div>';
+        }
+      } catch (e) {
+        area.innerHTML = '<div class="no-date-msg">スロット情報の取得に失敗しました</div>';
+      }
 
       updateConfirm();
     }
@@ -410,6 +435,7 @@
       document.querySelectorAll('.timeslot').forEach(e => e.classList.remove('selected'));
       el.classList.add('selected');
       selectedTime = time;
+      selectedSlotId = parseInt(el.dataset.slotId);
       updateConfirm();
     }
 
@@ -432,19 +458,52 @@
       document.getElementById('confirm-price').textContent = `¥${price.toLocaleString()}（税込）`;
     }
 
-    function showThanks() {
+    async function showThanks() {
       if (!selectedDate) { alert('開催日を選択してください。'); return; }
-      if (!selectedTime) { alert('時間帯を選択してください。'); return; }
+      if (!selectedTime || !selectedSlotId) { alert('時間帯を選択してください。'); return; }
       const name  = document.getElementById('input-name').value.trim();
       const kana  = document.getElementById('input-kana').value.trim();
       const email = document.getElementById('input-email').value.trim();
       const tel   = document.getElementById('input-tel').value.trim();
       if (!name || !kana || !email || !tel) { alert('必須項目（*）をご入力ください。'); return; }
 
-      document.getElementById('reserve-main').style.display = 'none';
-      document.querySelectorAll('.sec-label').forEach(el => el.style.display = 'none');
-      document.getElementById('sec-thanks').classList.add('visible');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const payload = {
+        slotId: selectedSlotId,
+        name: name,
+        nameKana: kana,
+        email: email,
+        phone: tel,
+        numPeople: parseInt(document.getElementById('people-select').value),
+        allergyNote: document.getElementById('input-note').value.trim() || null
+      };
+
+      const btn = document.querySelector('.btn-confirm');
+      btn.textContent = '送信中...';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch(`${API_BASE}/api/v1/reservations`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+
+        if (res.ok) {
+          document.getElementById('reserve-main').style.display = 'none';
+          document.querySelectorAll('.sec-label').forEach(el => el.style.display = 'none');
+          document.getElementById('sec-thanks').classList.add('visible');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          alert(data.error || '予約に失敗しました。もう一度お試しください。');
+          btn.textContent = 'この内容で予約する';
+          btn.disabled = false;
+        }
+      } catch (e) {
+        alert('通信エラーが発生しました。もう一度お試しください。');
+        btn.textContent = 'この内容で予約する';
+        btn.disabled = false;
+      }
     }
 
     document.getElementById('cal-prev').addEventListener('click', () => {

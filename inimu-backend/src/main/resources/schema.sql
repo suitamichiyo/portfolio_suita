@@ -1,0 +1,39 @@
+DROP TABLE IF EXISTS reservations;
+DROP TABLE IF EXISTS workshop_slots;
+DROP TABLE IF EXISTS contacts;
+
+CREATE TABLE IF NOT EXISTS workshop_slots (
+    id BIGSERIAL PRIMARY KEY,
+    slot_date DATE NOT NULL,
+    start_time TIME NOT NULL,
+    end_time TIME NOT NULL,
+    capacity INT NOT NULL DEFAULT 10,
+    reserved_count INT NOT NULL DEFAULT 0,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS reservations (
+    id BIGSERIAL PRIMARY KEY,
+    slot_id BIGINT NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    name_kana VARCHAR(100) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    num_people INT NOT NULL DEFAULT 2,
+    allergy_note VARCHAR(500),
+    status VARCHAR(20) NOT NULL DEFAULT 'CONFIRMED',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (slot_id) REFERENCES workshop_slots(id)
+);
+
+CREATE TABLE IF NOT EXISTS contacts (
+    id BIGSERIAL PRIMARY KEY,
+    category VARCHAR(50) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    company VARCHAR(100),
+    email VARCHAR(255) NOT NULL,
+    message TEXT NOT NULL,
+    status VARCHAR(20) NOT NULL DEFAULT 'UNREAD',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
